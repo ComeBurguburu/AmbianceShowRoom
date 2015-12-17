@@ -1,0 +1,6 @@
+/*global io*/
+var socket = io.connect();
+/**
+ * Envoi d'un message
+ */
+socket.emit('Event','message test');
