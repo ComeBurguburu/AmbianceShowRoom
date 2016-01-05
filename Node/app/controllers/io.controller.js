@@ -43,6 +43,10 @@ controller.listen = function (server) {
 			}
 		});
 
+		socket.on('identification', function () {
+			this.emit("identification", mapSocket.indexOf(this));
+		})
+
 		socket.on('register', function (data) {
 			var json = "";
 
@@ -56,16 +60,13 @@ controller.listen = function (server) {
 
 			}
 
-			if (mapSocket.indexOf(this) != -1) {
-				this.emit("identification", mapSocket.indexOf(this));
-
-			} else {
+			if (mapSocket.indexOf(this) == -1) {
 				var index = getFirstEmpty();
 				mapSocket[index] = this;
-				this.emit("identification", mapSocket.indexOf(this));
 				mapInfo[index] = json;
 				mapInfo[index].id = index;
 			}
+			this.emit("identification", mapSocket.indexOf(this));
 			updateList();
 
 

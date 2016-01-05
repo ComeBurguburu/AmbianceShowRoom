@@ -15,13 +15,12 @@ socket.on('connection', function (msg) {
 });
 socket.on('disconnect', function () {
 	$("#error,#info").hide();
-	$("#error").text("server is offline").show();;
+	$("#error").text("server is offline").show();
 });
 socket.emit('Event', 'message test');
-/*$("#identify").click(function(){
-	var 
-	socket.emit("register",JSON.stringify())
-});*/
+$("#identify").click(function () {
+	socket.emit("identification", JSON.stringify())
+});
 $("#disconnect").click(function () {
 	socket.emit("remove", $("#number").val());
 });
