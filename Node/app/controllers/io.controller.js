@@ -81,10 +81,16 @@ controller.listen = function (server) {
 		socket.on("remove", function (number) {
 			if (isNaN(number) || mapSocket[number] === undefined || mapSocket[number] === null) {
 				console.log(number);
+				return;
 			}
 			mapSocket[number].emit("EventError", "you have been disconnected");
 			mapSocket[number] = null;
+			mapInfo[number] = null
 			updateList();
+		});
+
+		socket.on("image", function (obj) {
+			mapSocket[obj.id].emit("image", obj);
 		})
 
 	});

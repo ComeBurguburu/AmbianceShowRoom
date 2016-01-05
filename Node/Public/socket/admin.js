@@ -10,7 +10,6 @@ socket.on('connection', function (msg) {
 		browser: navigator.appCodeName,
 		plateform: navigator.platform,
 		version: parseInt(navigator.appVersion, 10)
-
 	}
 	socket.emit("register", JSON.stringify(info));
 });
@@ -31,14 +30,22 @@ socket.on("list", function (data) {
 	console.info(json);
 	$("ul").empty();
 	for (i = 0; i < json.length; i++) {
-		$("ul").append($(document.createElement("li")).text(convert(json[i])));
+		$("ul").append(convert(json[i]));
 	}
 });
 
 function convert(obj) {
 	var a, str = "";
+	if (obj == null) {
+		return null;
+	}
 	for (a in obj) {
 		str = str + a + " : " + obj[a] + "\n";
 	}
-	return str;
+	return $(document.createElement("li")).text(str);
+}
+
+function send(id, obj) {
+	obj.id = id;
+	socket.emit("image", obj);
 }
