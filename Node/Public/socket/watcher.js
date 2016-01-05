@@ -12,7 +12,9 @@ socket.on('connection', function (msg) {
 		height: window.innerHeight,
 		browser: navigator.appCodeName,
 		plateform: navigator.platform,
-		version: parseInt(navigator.appVersion, 10)
+		version: parseInt(navigator.appVersion, 10),
+		X: screenX,
+		Y: screenY
 	}
 	socket.emit("register", JSON.stringify(info));
 });
