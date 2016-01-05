@@ -36,4 +36,7 @@ socket.on('disconnect', function () {
 });
 socket.on("image", function (obj) {
 	console.log(obj);
-})
+});
+window.onbeforeunload = function () {
+	socket.emit("disconnect");
+}

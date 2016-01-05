@@ -72,8 +72,11 @@ controller.listen = function (server) {
 		});
 
 		socket.on('disconnect', function () {
+			console.log('disconnect');
+
 			var id = mapSocket.indexOf(this);
 			mapSocket[id] = null;
+			mapInfo[id] = null;
 		});
 
 

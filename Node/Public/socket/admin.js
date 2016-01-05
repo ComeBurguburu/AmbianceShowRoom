@@ -49,3 +49,6 @@ function send(id, obj) {
 	obj.id = id;
 	socket.emit("image", obj);
 }
+window.onbeforeunload = function () {
+	socket.emit("disconnect");
+}
