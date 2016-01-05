@@ -7,3 +7,4 @@ socket.on('disconnect', function(){
 	alert("server is offline");
 });
 socket.emit('Event','message test');
+//socket.on

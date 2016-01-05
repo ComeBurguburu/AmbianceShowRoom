@@ -47,7 +47,8 @@ controller.listen = function (server) {
 			}
 			
 			if (mapSocket.indexOf(this) == -1) {
-				mapSocket.push(this);
+				var index = getFirstEmpty();
+				mapSocket[index]=this;
 				console.log(Object.keys(mapSocket).length);
 				socket.emit("identification",mapSocket.indexOf(this));
 				
@@ -57,9 +58,20 @@ controller.listen = function (server) {
 		
 		socket.on('disconnect', function(){
 			var id = mapSocket.indexOf(this);
-			mapSocket[id]=undefined;
+			mapSocket[id]=null;
 		});
 
 	});
+	
+	function getFirstEmpty(){
+		var i;
+		for(i=0;i<mapSocket.length;i++){
+			if(mapSocket[i]==null){
+				return i;
+			}
+			return mapSocket.length;
+		}
+		
+	}
 }
 module.exports = controller;
