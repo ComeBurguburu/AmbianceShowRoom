@@ -23,6 +23,8 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact){
 			alert(ret.list);
 			console.log(ret.list.length);*/
 			$scope.$apply();
+			console.log("$scope.info" + ret.info);
+			console.log("$scope.list" + ret.list);
 		}
 		sockserv.init(callback);
 	}
@@ -52,6 +54,53 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact){
 
 	$scope.NbParallelScreen = 2;
 	$scope.NbPerpendicularScreen = 4;
+
+	$scope.addWatcher = function(information) {
+
+		var arraySize = $scope.screenList.length;
+		console.log("arraySize = " + arraySize);
+
+		$scope.screenList[arraySize] = {
+											width: information.width,
+											height: information.height,
+											X: 0,
+											Y: 0
+										};
+		/*
+		var imgDisposition = [];
+		var numberCurrentScreen = 0;
+		var heightMax = 0; //= screenlist[numberCurrentScreen].height - screenlist[numberCurrentScreen].Y;
+		var widthMax = 0;
+		var ligne = 0, colonne = 0;
+		var numberCurrentScreenParallele = 0;
+		var numberCurrentScreenPerpendiculaire = 0;
+		console.log("dans le service");
+
+		for(ligne=0; ligne < nbscreenparallele; ligne++){
+			for(colonne=0; colonne < nbscreenperpendiculaire; colonne++){
+				if (screenlistfact[numberCurrentScreen] != undefined){
+					imgDisposition[numberCurrentScreen] = {
+						left: widthMax + screenlistfact[numberCurrentScreen].X , //(numberCurrentScreenPerpendiculaire/nbscreenperpendiculaire)*widthMax,
+			        	top: heightMax + screenlistfact[numberCurrentScreen].Y, //(numberCurrentScreenParallele/nbscreenparallele)*heightMax,
+			        	URL: srcImg,
+			    		width: screenlistfact[numberCurrentScreen].width,
+			    		height: screenlistfact[numberCurrentScreen].height
+					};
+					widthMax = widthMax + screenlistfact[numberCurrentScreen].width;
+					numberCurrentScreen ++;
+					numberCurrentScreenPerpendiculaire++;
+				}
+			}
+			numberCurrentScreenPerpendiculaire = 0;
+			widthMax = 0;
+			if (screenlistfact[numberCurrentScreen] != undefined){
+				heightMax = heightMax + screenlistfact[numberCurrentScreen].height;
+			}
+			numberCurrentScreenParallele++;
+		}
+	    return imgDisposition;
+	};*/
+	}
 
 	var result = imanagefact.sendImgDispositionProperties($scope.screenList, $scope.NbParallelScreen, $scope.NbPerpendicularScreen, $scope.imgSrcList[0].src);
 	console.log(result);

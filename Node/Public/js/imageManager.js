@@ -1,3 +1,8 @@
+/*
+	TODO
+	To delete after tests
+*/
+
 function sendImgDispositionProperties(screenlist, nbscreenparallele, nbscreenperpendiculaire, srcImg) {
 	// nbscreenparallele = lignes
 	// nbscreenperpendiculaire = colonnes
