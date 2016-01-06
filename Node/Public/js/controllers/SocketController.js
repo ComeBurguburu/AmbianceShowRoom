@@ -18,10 +18,9 @@ angular.module('App').controller('socketController', ['$scope', 'sockserv', func
 			alert(ret.list);
 			console.log(ret.list.length);*/
 		}
-
-
+		sockserv.init(callback);
 	}
-	var ret = sockserv.init(callback);
+
 	/*$("#identify").click(function () {
 			socket.emit("identification", JSON.stringify())
 		});*/

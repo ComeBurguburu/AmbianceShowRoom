@@ -4,8 +4,7 @@ angular.module('socketService', []).service('sockserv', sockFnc);
 
 function sockFnc() {
 	function init(callback) {
-		if (!callback instanceof
-			function) {
+		if (!callback instanceof Function) {
 			return console.error("sockserv callback is not a function");
 		}
 
