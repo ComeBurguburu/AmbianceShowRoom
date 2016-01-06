@@ -35,7 +35,7 @@ socket.on("list", function (data) {
 
 function convert(obj) {
 	var a, str = "";
-	if (obj == null) {
+	if (obj === null) {
 		return null;
 	}
 	for (a in obj) {
@@ -50,4 +50,4 @@ function send(id, obj) {
 }
 window.onbeforeunload = function () {
 	socket.emit("disconnect");
-}
+};
