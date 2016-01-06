@@ -1,3 +1,4 @@
+/*
 angular.module('App').controller('ImageManagerController', ['$scope', 'ImManageServ', function ($scope, ImManageServ) {
 
 	$scope.screenList = [{width: 400, height: 400, X:0, Y:0}, 
@@ -10,7 +11,7 @@ angular.module('App').controller('ImageManagerController', ['$scope', 'ImManageS
 						{width: 400, height: 400, X:0, Y:0}
 						];
 
-	scope.imgSrcList = [{src: "../images/0.jpg"}, 
+	$scope.imgSrcList = [{src: "../images/0.jpg"}, 
 						{src: "../images/1.jpg"}, 
 						{src: "../images/2.jpg"},
 						{src: "../images/3.jpg"},
@@ -23,10 +24,13 @@ angular.module('App').controller('ImageManagerController', ['$scope', 'ImManageS
 						{src: "../images/10.jpg"}
 						];
 
-	$scope.NbParallelScreen;
-	$scope.NbPerpendicularScreen;
+	$scope.NbParallelScreen = 2;
+	$scope.NbPerpendicularScreen = 4;
 
-	var result = ImManageServ.sendImgDispositionProperties($scope.screenlist, 2, 4, $scope.imgSrcList[0].src);
+	console.log("connard");
+
+	var result = ImManageServ.sendImgDispositionProperties($scope.screenlist, $scope.NbParallelScreen, $scope.NbPerpendicularScreen, $scope.imgSrcList[0].src);
 	console.log(result);
 }]);
 
+*/
