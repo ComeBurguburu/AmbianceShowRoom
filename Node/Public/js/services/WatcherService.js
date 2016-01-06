@@ -1,6 +1,6 @@
 /*global io, angular*/
 "use strict";
-angular.module('socketService', []).service('sockserv', sockFnc);
+angular.module('watcherService', []).service('watcherserv', sockFnc);
 var socket;
 
 function sockFnc() {
@@ -38,47 +38,30 @@ function sockFnc() {
 			callback(ret);
 		});
 		socket.emit('Event', 'message test');
+		socket.on('EventError', function (msg) {
+			ret.error = msg;
+			ret.info = "";
 
-		socket.on("list", function (data) {
-			console.log("event list trig");
-			var i, json = JSON.parse(data);
-			ret.list = [];
-			//console.info(json);
-
-			for (i = 0; i < json.length; i++) {
-				ret.list.push(convert(json[i]));
-			}
+			this.off("connection");
+		});
+		socket.on('identification', function (id) {
+			ret.id = id;
 			callback(ret);
 		});
 
-		function convert(obj) {
-			var a, str = "";
-			if (obj === null) {
-				return null;
-			}
-			for (a in obj) {
-				str = str + a + " : " + obj[a] + "\n";
-			}
-			return str;
+		socket.on("image", function (obj) {
+			ret.img=obj.url;
+			console.log(obj);
+			callback(ret);
+		});
+		window.onbeforeunload = function () {
+			socket.emit("disconnect");
 		}
 
 
-		window.onbeforeunload = function () {
-			socket.emit("disconnect");
-		};
-
-	}
-
-	function send(id, url) {
-		console.log("Entree dans le send");
-		var obj ={};
-		obj.id = id;
-		obj.url = url;
-		socket.emit("image", obj);
 	}
 
 	return {
-		init: init,
-		send: send
+		init: init
 	}
 }

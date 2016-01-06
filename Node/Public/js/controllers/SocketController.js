@@ -22,6 +22,7 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact){
 			console.log(ret.list);
 			alert(ret.list);
 			console.log(ret.list.length);*/
+			$scope.$apply();
 		}
 		sockserv.init(callback);
 	}

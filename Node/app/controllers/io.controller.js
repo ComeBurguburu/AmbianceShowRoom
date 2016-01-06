@@ -73,11 +73,12 @@ controller.listen = function (server) {
 		});
 
 		socket.on('disconnect', function () {
-			console.log('disconnect');
+			
 
 			var id = mapSocket.indexOf(this);
 			mapSocket[id] = null;
 			mapInfo[id] = null;
+			console.log('disconnect client '+id);
 		});
 
 
@@ -96,10 +97,12 @@ controller.listen = function (server) {
 		socket.on("image", function (obj) {
 			console.log("lien image reçu");
 			//console.log(obj);
-			if(mapSocket[obj.id]===undefined){
-				console.log("error");
+			if(mapSocket[obj.id]===undefined || mapSocket[obj.id]===null){
+				console.log("error "+obj.id);
+				return;
 			}
 			mapSocket[obj.id].emit("image", obj);
+			console.log("emit");
 
 		})
 
