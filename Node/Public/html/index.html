@@ -80,7 +80,7 @@
 				<li ng-repeat="obj in draggableObjects">
 					<!-- <img src="../images/0.jpg"/> -->
 
-					<div ng-drag="true" ng-drag-data="obj" data-allow-transform="true"> {{obj.name}}
+					<div ng-drag="true" ng-drag-data="obj" data-allow-transform="true"> {{obj.id}}
 						<img ng-src="{{ obj.src }}" class="img-responsive" style="height:70px">
 					</div>
 				</li>
@@ -103,7 +103,7 @@
 					<!-- <span class="title">Drop area #1</span> -->
 
 					<div ng-repeat="obj in droppedObjects1" ng-drag="true" ng-drag-data="obj" ng-center-anchor="{{centerAnchor}}">
-						{{obj.name}}
+						{{obj.id}}
 						<img ng-src="{{ obj.src }}" class="img-responsive" style="width:200%;padding:1%">
 
 					</div>
@@ -117,7 +117,7 @@
 					<!-- <span class="title">Drop area #1</span> -->
 
 					<div ng-repeat="obj in droppedObjects2" ng-drag="true" ng-drag-data="obj" ng-center-anchor="{{centerAnchor}}">
-						{{obj.name}}
+						{{obj.id}}
 						<img ng-src="{{ obj.src }}" class="img-responsive">
 					</div>
 

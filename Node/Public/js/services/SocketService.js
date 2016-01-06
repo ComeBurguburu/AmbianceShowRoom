@@ -1,7 +1,7 @@
 /*global io, angular*/
 "use strict";
 angular.module('socketService', []).service('sockserv', sockFnc);
-
+var socket;
 function sockFnc() {
 	function init(callback) {
 		if (!callback instanceof Function) {
@@ -15,7 +15,7 @@ function sockFnc() {
 			list: []
 		};
 
-		var socket = io.connect();
+		socket = io.connect();
 		console.log("socket ready");
 		socket.on('connection', function (msg) {
 
@@ -66,8 +66,11 @@ function sockFnc() {
 
 	}
 
-	function send(id, obj) {
+	function send(id, url) {
+		console.log("Entree dans le send");
+		var obj ={};
 		obj.id = id;
+		obj.url = url;
 		socket.emit("image", obj);
 	}
 

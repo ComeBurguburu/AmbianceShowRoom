@@ -94,6 +94,11 @@ controller.listen = function (server) {
 		});
 
 		socket.on("image", function (obj) {
+			console.log("lien image reçu");
+			//console.log(obj);
+			if(mapSocket[obj.id]===undefined){
+				console.log("error");
+			}
 			mapSocket[obj.id].emit("image", obj);
 
 		})

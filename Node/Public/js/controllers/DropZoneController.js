@@ -1,9 +1,9 @@
 
-angular.module('App').controller('dropzoneController', function ($scope) {
+angular.module('App').controller('dropzoneController', ['$scope' ,'sockserv', function ($scope, sockserv) {
 
     $scope.centerAnchor = true;
     $scope.toggleCenterAnchor = function () {$scope.centerAnchor = !$scope.centerAnchor}
-    $scope.draggableObjects = [{name:'one', src:'../images/0.jpg'}, {name:'two', src:'../images/1.jpg'}, {name:'three', src:'../images/2.jpg'}];
+    $scope.draggableObjects = [{id: 0, src:'../images/0.jpg'}, {id:1, src:'../images/1.jpg'}, {id:2, src:'../images/2.jpg'}];
     $scope.droppedObjects1 = [];
     $scope.droppedObjects2= [];
 
@@ -13,6 +13,8 @@ angular.module('App').controller('dropzoneController', function ($scope) {
         var index = $scope.droppedObjects1.indexOf(data);
         if (index == -1)
         $scope.droppedObjects1[0]=data;
+        console.log(data);
+        sockserv.send(data.id,data.src);
         
     }
 
@@ -25,7 +27,7 @@ angular.module('App').controller('dropzoneController', function ($scope) {
     var inArray = function(array, obj) {
         var index = array.indexOf(obj);
     }
-  });
+  }]);
 
 
 
