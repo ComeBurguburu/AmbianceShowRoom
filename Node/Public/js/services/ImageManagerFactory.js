@@ -2,9 +2,9 @@
 angular.module('imageManagerFactory', []).factory('imanagefact', iManageFnc);
 
 function iManageFnc(){
-	var service = {};
+	var factory = {};
 	
-	service.sendImgDispositionProperties = function(screenlistfact, nbscreenparallele, nbscreenperpendiculaire, srcImg) {
+	factory.sendImgDispositionProperties = function(screenlistfact, nbscreenparallele, nbscreenperpendiculaire, srcImg) {
 		var imgDisposition = [];
 		var numberCurrentScreen = 0;
 		var heightMax = 0; //= screenlist[numberCurrentScreen].height - screenlist[numberCurrentScreen].Y;
@@ -39,5 +39,5 @@ function iManageFnc(){
 	    return imgDisposition;
 	};
 
-	return service;
+	return factory;
 };
