@@ -12,13 +12,9 @@ socket.on('connection', function (msg) {
 		height: window.innerHeight,
 		browser: navigator.appCodeName,
 		plateform: navigator.platform,
-<<<<<<< Updated upstream
 		version: parseInt(navigator.appVersion, 10),
 		X: screenX,
 		Y: screenY
-=======
-		version: parseInt(navigator.appVersion, 10)
->>>>>>> Stashed changes
 	}
 	socket.emit("register", JSON.stringify(info));
 });
@@ -29,10 +25,8 @@ socket.on('Event', function (msg) {
 socket.on('EventError', function (msg) {
 	$("#error,#info").hide();
 	$("#error").text(msg).show();
-<<<<<<< Updated upstream
 	this.off("connection");
-=======
->>>>>>> Stashed changes
+
 });
 socket.on('identification', function (id) {
 	document.getElementById("identity").innerText = id;
@@ -40,7 +34,6 @@ socket.on('identification', function (id) {
 socket.on('disconnect', function () {
 	$("#error,#info").hide();
 	$("#error").text("server is offline").show();
-<<<<<<< Updated upstream
 });
 socket.on("image", function (obj) {
 	console.log(obj);
@@ -48,6 +41,3 @@ socket.on("image", function (obj) {
 window.onbeforeunload = function () {
 	socket.emit("disconnect");
 }
-=======
-});
->>>>>>> Stashed changes
