@@ -98,9 +98,9 @@
 				<h1>Liste d'écrans</h1>
 
 				<div ng-repeat="i in list">
-					<div class="col-sm-3">
+					<div class="col-sm-3" ng-show="i.id != me">
 
-						<h3>Ecran 1</h3>
+						<h3>Ecran {{i.id}}</h3>
 
 						<div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
 							
