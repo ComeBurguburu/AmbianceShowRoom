@@ -16,4 +16,8 @@ IOController.listen(server);
 
 app.use("/", express.static(path.join(__dirname, "Public/")));
 app.use("/socket", express.static(path.join(__dirname, "Public/socket")));
+<<<<<<< Updated upstream
 //app.use(defaultRoute);
+=======
+app.use(defaultRoute);
+>>>>>>> Stashed changes

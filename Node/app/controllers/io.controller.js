@@ -60,6 +60,7 @@ controller.listen = function (server) {
 
 			}
 
+<<<<<<< Updated upstream
 			if (mapSocket.indexOf(this) == -1) {
 				var index = getFirstEmpty();
 				mapSocket[index] = this;
@@ -67,12 +68,24 @@ controller.listen = function (server) {
 				mapInfo[index].id = index;
 			}
 			this.emit("identification", mapSocket.indexOf(this));
+=======
+			if (mapSocket.indexOf(this) != -1) {
+				this.emit("identification", mapSocket.indexOf(this));
+
+			} else {
+				var index = getFirstEmpty();
+				mapSocket[index] = this;
+				this.emit("identification", mapSocket.indexOf(this));
+				mapInfo[index] = json;
+			}
+>>>>>>> Stashed changes
 			updateList();
 
 
 		});
 
 		socket.on('disconnect', function () {
+<<<<<<< Updated upstream
 			console.log('disconnect');
 
 			var id = mapSocket.indexOf(this);
@@ -95,6 +108,21 @@ controller.listen = function (server) {
 
 		socket.on("image", function (obj) {
 			mapSocket[obj.id].emit("image", obj);
+=======
+			var id = mapSocket.indexOf(this);
+			mapSocket[id] = null;
+		});
+
+
+
+		socket.on("remove", function (number) {
+			if (isNaN(number) || mapSocket[number] === undefined || mapSocket[number] === null) {
+				console.log(number);
+			}
+			mapSocket[number].emit("EventError", "you have been disconnected");
+			mapSocket[number] = null;
+			updateList();
+>>>>>>> Stashed changes
 		})
 
 	});
