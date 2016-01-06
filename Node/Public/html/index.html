@@ -89,32 +89,33 @@
 				<div ng-show="$scope.error==''" class="alert alert-danger" id="error" ng-bind="error"></div>
 				<button ng-click="test()">Click moi!</button>
 				<ul ng-repeat="screen in list">
-					<li>{{screen}}</li>
+					<li>{{screen.string}}</li>
 				</ul>
 
-			</div>
+			
+					{{list}}
+				<hr/>
+				<h1>Liste d'écrans</h1>
 
-			<hr/>
-			<h1>Liste d'écrans</h1>
-			<div class="col-sm-3">
+				<div ng-repeat="i in list">
+					<div class="col-sm-3">
 
-				<h3>Ecran 1</h3>
-				<div ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
-					<!-- <span class="title">Drop area #1</span> -->
+						<h3>Ecran 1</h3>
 
-					<div ng-repeat="obj in droppedObjects1" ng-drag="true" ng-drag-data="obj" ng-center-anchor="{{centerAnchor}}">
-						{{obj.id}}
-						<img ng-src="{{ obj.src }}" class="img-responsive" style="width:200%;padding:1%">
-
+						<div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
+							
+							<div  ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
+								{{droppedObjects1[i.id].id}}
+								<img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="width:200%;padding:1%">
+							</div>
+						</div>
 					</div>
-
 				</div>
 			</div>
-
-			<div class="col-sm-3">
+			<!-- <div class="col-sm-3">
 				<h3>Ecran 2</h3>
 				<div ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
-					<!-- <span class="title">Drop area #1</span> -->
+					
 
 					<div ng-repeat="obj in droppedObjects2" ng-drag="true" ng-drag-data="obj" ng-center-anchor="{{centerAnchor}}">
 						{{obj.id}}
@@ -122,7 +123,7 @@
 					</div>
 
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 

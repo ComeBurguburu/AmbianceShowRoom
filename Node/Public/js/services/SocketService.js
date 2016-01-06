@@ -57,9 +57,11 @@ function sockFnc() {
 				return null;
 			}
 			for (a in obj) {
+
 				str = str + a + " : " + obj[a] + "\n";
 			}
-			return str;
+			obj.string=str;
+			return obj;
 		}
 
 
