@@ -1,4 +1,3 @@
-
 angular.module('App').controller('dropzoneController', ['$scope' ,'sockserv', function ($scope, sockserv) {
 
     $scope.centerAnchor = true;

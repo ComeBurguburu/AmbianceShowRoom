@@ -6,6 +6,7 @@ angular.module('App').controller('socketController', ['$scope', 'sockserv', func
 			$scope.error = ret.error;
 			$scope.info = ret.info;
 			$scope.list = ret.list;
+
 			/*
 			//$scope.list = ["a", "b", "c"];
 			//$scope.$apply();
@@ -28,4 +29,4 @@ angular.module('App').controller('socketController', ['$scope', 'sockserv', func
 		$("#disconnect").click(function () {
 			socket.emit("remove", $("#number").val());
 		});*/
-		}]);
+	}]);
