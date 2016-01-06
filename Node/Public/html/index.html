@@ -1,73 +1,8 @@
 <!DOCTYPE html>
 <html lang="eng">
- <style>
-
-    *{
-        -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-    }
-    [ng-drag]{
-        -moz-user-select: -moz-none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-    [ng-drag]{
-        width: 50%;
-        height: 10%;
-       // background: blue;
-        color:white;
-        text-align: center;
-        padding-top:40px;
-        display: inline-block;
-        margin:10%;
-        cursor: move;
-    }
-    ul.draggable-objects:after{
-        display: block;
-        content:"";
-        clear:both;
-    }
-    .draggable-objects li{
-        float:left;
-        display: block;
-        width: 120px;
-        height:100px;
-    }
-    [ng-drag].drag-over{
-        border:solid 1px red;
-    }
-    [ng-drag].dragging{
-        opacity: 0.5;
-    }
-    [ng-drop]{
-        background: gray;
-        margin-left: 10%;
-     //   width:  10%;
-       // height: 10%;
-        padding:2%;
-        display: block;
-        position: relative;
-    }
-    [ng-drop].drag-enter{
-        border:solid 5px red;
-    }
-    [ng-drop] span.title{
-        display: block;
-        position: absolute;
-        //top:50%;
-        //left:50%;
-        
-        
-    }
-   /* [ng-drop] div{
-        position: relative;
-        z-index: 2;
-    }*/
-
-  </style>
 <head>
     <meta charset="utf-8">
+    <link href="../css/accueil.css" rel="stylesheet" type="text/css">
      <link href="../lib/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -134,44 +69,49 @@
 
     <div class="row">
       <h1>Liste d'images</h1>
-    </div>
+    
 
       <ul class="draggable-objects">
 
           <li  ng-repeat="obj in draggableObjects" >
              <!--  <img src="../images/0.jpg"/> -->
 
-              <div id="connard" ng-drag="true" ng-drag-data="obj" data-allow-transform="true" > {{obj.name}} 
-               <img src="{{ obj.src }}" class="img-responsive">   
+              <div ng-drag="true" ng-drag-data="obj" data-allow-transform="true" > {{obj.name}} 
+               <img src="{{ obj.src }}" class="img-responsive" style="height:70px">   
               </div>
           </li>
       </ul>
 
       <hr/>
       <h1>Liste d'écrans</h1>
-      <h3>Ecran 1</h3>
-      <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
-          <span class="title">Drop area #1</span>
+      <div class="col-sm-3">
+        
+        <h3>Ecran 1</h3>
+        <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
+            <!-- <span class="title">Drop area #1</span> -->
 
-          <div ng-repeat="obj in droppedObjects1" ng-drag="true" ng-drag-data="obj" ng-center-anchor="{{centerAnchor}}">
-              {{obj.name}}
-               <img src="{{ obj.src }}" class="img-responsive"> 
+            <div ng-repeat="obj in droppedObjects1" ng-drag="true" ng-drag-data="obj" ng-center-anchor="{{centerAnchor}}">
+                {{obj.name}}
+                 <img src="{{ obj.src }}" class="img-responsive" style="width:200%;padding:1%"> 
 
-          </div>
+            </div>
 
+        </div>
       </div>
 
-      <h3>Ecran 2</h3>
-      <div ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
-          <span class="title">Drop area #1</span>
+      <div class="col-sm-3">
+        <h3>Ecran 2</h3>
+          <div ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
+              <!-- <span class="title">Drop area #1</span> -->
 
-          <div ng-repeat="obj in droppedObjects2" ng-drag="true" ng-drag-data="obj" ng-center-anchor="{{centerAnchor}}">
-              {{obj.name}}
-              <img src="{{ obj.src }}" class="img-responsive"> 
+              <div ng-repeat="obj in droppedObjects2" ng-drag="true" ng-drag-data="obj" ng-center-anchor="{{centerAnchor}}">
+                  {{obj.name}}
+                  <img src="{{ obj.src }}" class="img-responsive"> 
+              </div>
+
           </div>
-
       </div>
-
+    </div>
   </div>
 
   <footer style="margin-top:2000px;">footer</footer>
