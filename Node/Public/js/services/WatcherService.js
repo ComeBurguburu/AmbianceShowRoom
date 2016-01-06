@@ -28,6 +28,8 @@ function sockFnc() {
 				height: window.innerHeight,
 				browser: navigator.appCodeName,
 				plateform: navigator.platform,
+				X: window.screenX,
+ 				Y: window.screenY,
 				version: parseInt(navigator.appVersion, 10)
 			}
 			socket.emit("register", JSON.stringify(info));
