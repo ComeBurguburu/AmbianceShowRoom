@@ -32,6 +32,12 @@ function sockFnc() {
 			}
 			socket.emit("register", JSON.stringify(info));
 		});
+		socket.on('identification',function(id){
+			ret.me=id;
+			callback(ret);
+		})
+		
+		
 		socket.on('disconnect', function () {
 			ret.info = "";
 			ret.error = "server is offline";
@@ -48,6 +54,7 @@ function sockFnc() {
 			for (i = 0; i < json.length; i++) {
 				ret.list.push(convert(json[i]));
 			}
+			
 			callback(ret);
 		});
 

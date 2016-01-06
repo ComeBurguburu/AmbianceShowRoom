@@ -74,7 +74,6 @@
 		<div class="row">
 			<h1>Liste d'images</h1>
 
-
 			<ul class="draggable-objects">
 
 				<li ng-repeat="obj in draggableObjects">
@@ -86,14 +85,9 @@
 				</li>
 			</ul>
 			<div ng-controller="socketController">
+			<div class="btn btn-info rounder">{{me}}</div>
 				<div ng-show="$scope.error==''" class="alert alert-danger" id="error" ng-bind="error"></div>
 				<button ng-click="test()">Click moi!</button>
-				<ul ng-repeat="screen in list">
-					<li>{{screen.string}}</li>
-				</ul>
-
-			
-					{{list}}
 				<hr/>
 				<h1>Liste d'écrans</h1>
 

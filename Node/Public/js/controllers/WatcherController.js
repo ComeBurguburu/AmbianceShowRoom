@@ -6,6 +6,9 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
 		$scope.info = ret.info;
 		$scope.list = ret.list;
 		$scope.src=ret.img;
+		if(!isNaN(ret.me)){
+		$scope.me=ret.me;
+		}
 		$scope.$apply();
 	}
 	watcherserv.init(callback);

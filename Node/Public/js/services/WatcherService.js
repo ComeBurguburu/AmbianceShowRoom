@@ -41,17 +41,15 @@ function sockFnc() {
 		socket.on('EventError', function (msg) {
 			ret.error = msg;
 			ret.info = "";
-
 			this.off("connection");
 		});
 		socket.on('identification', function (id) {
-			ret.id = id;
+			ret.me = id;
 			callback(ret);
 		});
 
 		socket.on("image", function (obj) {
 			ret.img=obj.url;
-			console.log(obj);
 			callback(ret);
 		});
 		window.onbeforeunload = function () {

@@ -113,7 +113,7 @@ controller.listen = function (server) {
 		var s;
 		for (s in mapSocket) {
 			if (mapSocket[s] !== undefined && mapSocket[s] !== null) {
-				mapSocket[s].emit("list", JSON.stringify(mapInfo));
+				mapSocket[s].emit("list", JSON.stringify(mapInfo.filter(function(a){return a!==null;})));
 			}
 		}
 	}

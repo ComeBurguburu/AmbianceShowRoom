@@ -5,13 +5,16 @@ socketCrtFnt.$inject=['$scope','$log','sockserv','imanagefact'];
 function socketCrtFnt($scope, $log, sockserv, imanagefact){
 
 	$scope.test = function () {
+		
 
 		function callback(ret) {
 			$scope.error = ret.error;
 			$scope.info = ret.info;
 			$scope.list = ret.list;
-
-			/*
+			if(!isNaN(ret.me)){
+			$scope.me=ret.me;
+			}
+		/*
 			//$scope.list = ["a", "b", "c"];
 			//$scope.$apply();
 			//	console.log(ret);
