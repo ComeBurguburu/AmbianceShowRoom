@@ -1,110 +1,85 @@
-var TAILLE_ECRAN = 600;
-var NB_ECRANS = 3;
-
-
-function sendImg(screenlist, nbscreenparallele, nbscreenperpendiculaire, srcImg) {
+function sendImgDispositionProperties(screenlist, nbscreenparallele, nbscreenperpendiculaire, srcImg) {
 	// nbscreenparallele = lignes
 	// nbscreenperpendiculaire = colonnes
 
-	// var myImg = new Image();
-	// myImg.width = widthImg;
-	// myImg.height = heightImg;
-	// myImg.src = srcImg;
-
-	// myImg.addEventListener('load', function() {
-
- //    }, false);
-
-/*
-screenlist[0].height
-screenlist[0].width
-*/
 	var imgDisposition = [];
 	var numberCurrentScreen = 0;
-	var heightMax = screenlist[numberCurrentScreen].height;
-	var widthMax = 0;
+	var heightMax; //= screenlist[numberCurrentScreen].height - screenlist[numberCurrentScreen].Y;
+	var widthMax;
 	var ligne = 0, colonne = 0;
-
-//	for (screen in screenlist){
+/*
 	for(ligne=0; ligne < nbscreenparallele; ligne++){
 		for(colonne=0; colonne < nbscreenperpendiculaire; colonne++){
 			if (screenlist[numberCurrentScreen] != undefined){
-				widthMax = widthMax + screenlist[numberCurrentScreen].width;
+				widthMax = widthMax + screenlist[numberCurrentScreen].width - screenlist[numberCurrentScreen].X ;
 				numberCurrentScreen++;
 			}
 		}
 		if (screenlist[numberCurrentScreen] != undefined){
-			heightMax = heightMax + screenlist[numberCurrentScreen].height;
+			heightMax = heightMax + screenlist[numberCurrentScreen].height - screenlist[numberCurrentScreen].Y;
 		}
 	}
-//	}
 
-	numberCurrentScreen = 0;
-	var numberCurrentScreenParallele = 1;
-	var numberCurrentScreenPerpendiculaire = 1;
+	if(nbscreenparallele<nbscreenperpendiculaire){
+		widthMax = widthMax*(nbscreenparallele/nbscreenperpendiculaire);
+	}else{
+		heightMax = heightMax*(nbscreenperpendiculaire/nbscreenparallele)
+	}
 
+	console.log("widthMax = " + widthMax);
+	console.log("heightMax = " + heightMax);
+*/
+	//numberCurrentScreen = 0;
+	var numberCurrentScreenParallele = 0;
+	var numberCurrentScreenPerpendiculaire = 0;
+	widthMax = 0;
+	heightMax = 0;
 
-//	for (screen in screenlist){
 	for(ligne=0; ligne < nbscreenparallele; ligne++){
 		for(colonne=0; colonne < nbscreenperpendiculaire; colonne++){
 			if (screenlist[numberCurrentScreen] != undefined){
 				imgDisposition[numberCurrentScreen] = {
-					left: (numberCurrentScreenParallele/nbscreenparallele)*widthMax,
-		        	top: (numberCurrentScreenPerpendiculaire/nbscreenperpendiculaire)*heightMax,
+					left: widthMax + screenlist[numberCurrentScreen].X , //(numberCurrentScreenPerpendiculaire/nbscreenperpendiculaire)*widthMax,
+		        	top: heightMax + screenlist[numberCurrentScreen].Y, //(numberCurrentScreenParallele/nbscreenparallele)*heightMax,
 		        	URL: srcImg,
 		    		width: screenlist[numberCurrentScreen].width,
 		    		height: screenlist[numberCurrentScreen].height
 				};
+				widthMax = widthMax + screenlist[numberCurrentScreen].width;
 				numberCurrentScreen ++;
 				numberCurrentScreenPerpendiculaire++;
 			}
 		}
+		numberCurrentScreenPerpendiculaire = 0;
+		widthMax = 0;
+		if (screenlist[numberCurrentScreen] != undefined){
+			heightMax = heightMax + screenlist[numberCurrentScreen].height;
+		}
 		numberCurrentScreenParallele++;
 	}
-//	}
-
-    // var obj = [
-    //     {
-    //         left: 'Lerdorf',
-    //         top: 'Gutmans',
-    //         URL: 'Suraski',
-    //     	width:'',
-    //     	height: ''
-    //     },{
-
-    //     }]
-    //     ;
     return imgDisposition;
     //document.body.appendChild(myImg); // L'image est ajoutée au DOM
 }
 
-;
+
 var listEcrans = [];
-// listEcrans[0].width = 300;
-// listEcrans[0].height = 300;
-var obj = {width: 300, height: 300}
+
+var obj = {width: 400, height: 400, X:0, Y:0}
 listEcrans[0] = obj;
-obj = {width: 200, height: 200}
+obj = {width: 400, height: 400, X:20, Y:0}
 listEcrans[1] = obj;
-// listEcrans[1].width = 200;
-// listEcrans[1].height = 200;
-
-// listEcrans[2].width = 800;
-// listEcrans[2].height = 800;
-obj = {width: 800, height: 800}
+obj = {width: 385, height: 400, X:50, Y:50}
 listEcrans[2] = obj;
-// listEcrans[3].width = 500;
-// listEcrans[3].height = 500;
-obj = {width: 500, height: 500}
+obj = {width: 420, height: 400, X:10, Y:60}
 listEcrans[3] = obj;
-// listEcrans[4].width = 100;
-// listEcrans[4].height = 100;
-obj = {width: 100, height: 100}
+obj = {width: 410, height: 400, X:0, Y:20}
 listEcrans[4] = obj;
-// listEcrans[5].width = 200;
-// listEcrans[5].height = 200;
-obj = {width: 200, height: 200}
+obj = {width: 380, height: 400, X:40, Y:60}
 listEcrans[5] = obj;
+obj = {width: 400, height: 400, X:0, Y:20}
+listEcrans[6] = obj;
+obj = {width: 400, height: 400, X:0, Y:0}
+listEcrans[7] = obj;
 
-var result = sendImg(listEcrans, 4, 2, "../images/0.jpg");
+var result = sendImgDispositionProperties(listEcrans, 2, 4, "../images/0.jpg");
 console.log(result);
