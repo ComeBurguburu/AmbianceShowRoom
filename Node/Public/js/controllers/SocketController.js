@@ -153,7 +153,7 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact) {
 	function callback(ret) {
 		$scope.error = ret.error;
 		$scope.info = ret.info;
-		// $scope.droppedObjects1 = [];
+
 		$scope.list = ret.list;
 		$scope.me = ret.me;
 		if (ret.list != undefined) {
