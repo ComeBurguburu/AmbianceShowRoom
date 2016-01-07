@@ -5,7 +5,9 @@
 	<meta charset="utf-8">
 	<title>Admin</title>
 	<link href="../css/accueil.css" rel="stylesheet" type="text/css">
+	<link href="../css/ScrollBar.css" rel="stylesheet" type="text/css">
 	<link href="../lib/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body ng-app="App">
@@ -73,17 +75,16 @@
 
 		<div class="row">
 			<h1>Liste d'images</h1>
-
+			<div id="scroll">
 			<ul class="draggable-objects">
 
-				<li ng-repeat="obj in draggableObjects">
+				<li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
 					<!-- <img src="../images/0.jpg"/> -->
-
-					<div ng-drag="true" ng-drag-data="obj" data-allow-transform="true"> {{obj.id}}
-						<img ng-src="{{ obj.src }}" class="img-responsive" style="height:70px">
-					</div>
+						<img ng-src="{{ obj.src }}" style="height:70px">
+						{{obj.id}}
 				</li>
 			</ul>
+			</div>
 			<div ng-controller="socketController">
 				<div class="btn btn-info rounder">{{me}}</div>
 				<div ng-hide="error===undefined || error==''" class="alert alert-danger" id="error" ng-bind="error"></div>

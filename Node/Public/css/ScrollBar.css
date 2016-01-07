@@ -1,0 +1,49 @@
+* {
+margin:0;
+padding:0;
+outline:0;
+}
+body {
+padding-top:25px;
+text-align:center;
+}
+#scroll {
+width:1200px;
+height:150px;
+margin:100px auto;
+background:#A3CBE0;
+border:2px solid #000;
+overflow:auto;
+box-shadow:0 0 10px #000;
+}
+#scroll ul {
+display:table;
+white-space:nowrap;
+list-style:none;
+}
+#scroll li {
+display:table-cell; 
+text-align:center;       
+}
+#scroll img {
+border:0;
+width: 100px;
+display:block;
+border:1px solid #A3CBE0;
+margin:15px 15px 0 15px;
+}
+#scroll a:active img, #scroll a:focus img, #scroll a:hover img {
+border:1px solid #000;
+}
+#scroll a {
+text-decoration:none;
+font-weight:bold;
+color:#000;
+}
+#scroll a:active, #scroll a:focus, #scroll a:hover {
+color:#FFF;
+}
+#scroll span {
+padding:5px 0 0;
+display:block;
+}

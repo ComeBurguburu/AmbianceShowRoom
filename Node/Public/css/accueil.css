@@ -25,10 +25,10 @@
         clear:both;
     }
     .draggable-objects li{
-        float:left;
-        display: block;
-        width: 120px;
-        height:100px;
+        /*float:left;
+        display: block;*/
+        /*width: 120px;
+        height:100px;*/
     }
     [ng-drag].drag-over{
         border:solid 1px red;
