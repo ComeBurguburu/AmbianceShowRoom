@@ -68,6 +68,7 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+	
 	<div class="container" ng-controller="socketController">
 		<div class="row">
 			<div class="col-lg-3">
@@ -98,8 +99,10 @@
 					<label>Nb Perpendicular Screens</label>
 					<input id="NbPerpendicularScreen" ng-binding="NbPerpendicularScreen">
 				</form>
-				<h1>Liste d'écrans</h1>
 
+				<div class="col-lg-3">
+					<h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
+				</div>
 				<div ng-repeat="i in list">
 					<div class="col-sm-3" ng-show="i.id != me">
 
