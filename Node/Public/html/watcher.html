@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="eng">
+
 <head>
 	<meta charset="utf-8">
 	<title>Watcher</title>
@@ -69,32 +70,33 @@
 
 
 	<div class="container" ng-controller="watcherController">
-	<h3>My Controller</h3>
-	<p>URL:{{src}}</p>
-				<div class="btn btn-info rounder">{{me}}</div>
+		<h3>My Controller</h3>
+		<div ng-hide="error===undefined || error==''" class="alert alert-danger" ng-bind="error"></div>
+		<div ng-hide="info===undefined || info==''" class="alert alert-info" ng-bind="info"></div>
+
+		<p>URL:{{src}}</p>
+		<div class="btn btn-info rounder">{{me}}</div>
 		<div class="row">
 			<div class="col-xs-12 col-lg-12">
-				<img ng-src="{{src}}" />
+				<img ng-src="{{src}}" ng-style="{'with': width,'height':height,'position':'absolute','left':left,'top':top}/>
 			</div>
-
-
 		</div>
 	</div>
 
-	<footer style="margin-top:2000px;">footer</footer>
-	<script src="../lib/js/angular.min.js"></script>
-	<script src="../js/services/WatcherService.js"></script>
+	<footer style=" margin-top:2000px; ">footer</footer>
+	<script src="../lib/js/angular.min.js "></script>
+	<script src="../js/services/WatcherService.js "></script>
 
-	<script src="../js/application/appWatcher.js"></script>
-	<script src="../js/controllers/WatcherController.js"></script>
-	<script src="/socket.io/socket.io.js"></script>
-
-
+	<script src="../js/application/appWatcher.js "></script>
+	<script src="../js/controllers/WatcherController.js "></script>
+	<script src="/socket.io/socket.io.js "></script>
 
 
 
-	<script src="../lib/js/jquery-1.11.1.min.js"></script>
-	<script src="../lib/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+
+
+	<script src="../lib/js/jquery-1.11.1.min.js "></script>
+	<script src="../lib/bootstrap-3.3.6-dist/js/bootstrap.js "></script>
 </body>
 
 </html>

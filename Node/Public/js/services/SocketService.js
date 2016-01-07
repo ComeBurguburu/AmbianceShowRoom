@@ -28,16 +28,18 @@ function sockFnc() {
 				height: window.innerHeight,
 				browser: navigator.appCodeName,
 				plateform: navigator.platform,
-				version: parseInt(navigator.appVersion, 10)
+				version: parseInt(navigator.appVersion, 10),
+				X: window.screenX,
+				Y: window.screenY
 			}
 			socket.emit("register", JSON.stringify(info));
 		});
-		socket.on('identification',function(id){
-			ret.me=id;
+		socket.on('identification', function (id) {
+			ret.me = id;
 			callback(ret);
 		})
-		
-		
+
+
 		socket.on('disconnect', function () {
 			ret.info = "";
 			ret.error = "server is offline";
@@ -54,7 +56,7 @@ function sockFnc() {
 			for (i = 0; i < json.length; i++) {
 				ret.list.push(convert(json[i]));
 			}
-			
+
 			callback(ret);
 		});
 
@@ -67,7 +69,7 @@ function sockFnc() {
 
 				str = str + a + " : " + obj[a] + "\n";
 			}
-			obj.string=str;
+			obj.string = str;
 			return obj;
 		}
 
@@ -80,7 +82,7 @@ function sockFnc() {
 
 	function send(id, url) {
 		console.log("Entree dans le send");
-		var obj ={};
+		var obj = {};
 		obj.id = id;
 		obj.url = url;
 		socket.emit("image", obj);

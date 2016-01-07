@@ -29,7 +29,6 @@ controller.listen = function (server) {
 			for (s in mapSocket) {
 				if (mapSocket[s] !== undefined && mapSocket[s] !== null) {
 					mapSocket[s].emit('Event', JSON.stringify(obj));
-					console.log("transfert");
 				}
 			}
 		});
@@ -73,12 +72,12 @@ controller.listen = function (server) {
 		});
 
 		socket.on('disconnect', function () {
-			
 
 			var id = mapSocket.indexOf(this);
 			mapSocket[id] = null;
 			mapInfo[id] = null;
-			console.log('disconnect client '+id);
+			console.log('disconnect client ' + id);
+			updateList();
 		});
 
 
@@ -97,8 +96,8 @@ controller.listen = function (server) {
 		socket.on("image", function (obj) {
 			console.log("lien image reçu");
 			//console.log(obj);
-			if(mapSocket[obj.id]===undefined || mapSocket[obj.id]===null){
-				console.log("error "+obj.id);
+			if (mapSocket[obj.id] === undefined || mapSocket[obj.id] === null) {
+				console.log("error " + obj.id);
 				return;
 			}
 			mapSocket[obj.id].emit("image", obj);
@@ -111,9 +110,12 @@ controller.listen = function (server) {
 	function updateList() {
 
 		var s;
+		var map = mapInfo.filter(function (a) {
+			return a !== null;
+		});
 		for (s in mapSocket) {
 			if (mapSocket[s] !== undefined && mapSocket[s] !== null) {
-				mapSocket[s].emit("list", JSON.stringify(mapInfo.filter(function(a){return a!==null;})));
+				mapSocket[s].emit("list", JSON.stringify(map));
 			}
 		}
 	}
@@ -126,8 +128,6 @@ controller.listen = function (server) {
 			}
 		}
 		return mapSocket.length;
-
-
 	}
 }
 module.exports = controller;
