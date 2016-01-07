@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 
 <head>
 	<meta charset="utf-8">
@@ -8,7 +8,7 @@
 	<link href="../lib/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
 
-<body ng-app="AppWatcher">
+<body ng-app="AppWatcher" ng-controller="watcherController">
 
 
 	<nav class="navbar navbar-inverse">
@@ -67,9 +67,10 @@
 		<!-- /.container-fluid -->
 	</nav>
 
+	<img ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" ng-src="{{src}}" ng-show="{{left===undefined}}" />
 
 
-	<div class="container" ng-controller="watcherController">
+	<div class="container" ng-show="{{left!==undefined}}">
 		<h3>My Controller</h3>
 		<div ng-hide="error===undefined || error==''" class="alert alert-danger" ng-bind="error"></div>
 		<div ng-hide="info===undefined || info==''" class="alert alert-info" ng-bind="info"></div>
@@ -78,13 +79,12 @@
 		<div class="btn btn-info rounder">{{me}}</div>
 		<div class="row">
 			<div class="col-xs-12 col-lg-12">
-				<img ng-src="{{src}}" ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':left}" />
-				<span ng-bind="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':left}"></span>
+				<img ng-src="{{src}}" />
 			</div>
 		</div>
 	</div>
 
-	<footer style=" margin-top:2000px; ">footer</footer>
+	<footer>footer</footer>
 	<script src="../lib/js/angular.min.js "></script>
 	<script src="../js/services/WatcherService.js "></script>
 
