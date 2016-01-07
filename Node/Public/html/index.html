@@ -68,10 +68,11 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
-	<div class="container">
+	<div class="container" ng-controller="socketController">
 		<div class="row">
-			<div class="col-lg-3"><h3 style="border:3px solid #456789;color:#456789">Liste d'images</h3></div>
-			<div class="col-lg-6 col-lg-offset-3" ng-controller="socketController">
+			<div class="col-lg-3">
+				<h3 style="border:3px solid #456789;color:#456789">Liste d'images</h3></div>
+			<div class="col-lg-6 col-lg-offset-3">
 				<div class="btn btn-info rounder">{{me}}</div>
 				<div ng-hide="error===undefined || error==''" class="alert alert-danger" id="error" ng-bind="error"></div>
 				<div ng-hide="info===undefined || info==''" class="alert alert-info" ng-bind="info"></div>
@@ -84,19 +85,19 @@
 			<div id="scroll">
 				<ul class="draggable-objects">
 					<li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
-							<img ng-src="{{ obj.src }}" style="height:70px">
-							{{obj.id}}
+						<img ng-src="{{ obj.src }}" style="height:70px"> {{obj.id}}
 					</li>
 				</ul>
 			</div>
-			
-				<hr/>
+
+			<hr/>
+			<div ng-controller="socketController">
 				<form>
-	 				<label>Nb Paralel Screens</label>
-	 				<input id="nbParalelScreen" ng-binding="NbParallelScreen">
-	 				 <label>Nb Perpendicular Screens</label>
+					<label>Nb Paralel Screens</label>
+					<input id="nbParalelScreen" ng-binding="NbParallelScreen">
+					<label>Nb Perpendicular Screens</label>
 					<input id="NbPerpendicularScreen" ng-binding="NbPerpendicularScreen">
- 				</form>
+				</form>
 				<h1>Liste d'écrans</h1>
 
 				<div ng-repeat="i in list">
@@ -113,7 +114,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
 		</div>
+
 	</div>
 
 	<footer style="margin-top:2000px;">footer</footer>

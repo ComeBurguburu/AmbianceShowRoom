@@ -10,8 +10,8 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
 		$scope.me = ret.me;
 
 
-		$scope.left = 0;
-		//$scope.left = undefined;
+		//$scope.left = 0;
+		$scope.left = undefined;
 		$scope.top = 0;
 		$scope.width = "1600px";
 		$scope.height = "auto";
