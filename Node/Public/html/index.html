@@ -90,6 +90,12 @@
 				<div ng-hide="error===undefined || error==''" class="alert alert-danger" id="error" ng-bind="error"></div>
 				<div ng-hide="info===undefined || info==''" class="alert alert-info" ng-bind="info"></div>
 				<hr/>
+				<form>
+	 				<label>Nb Paralel Screens</label>
+	 				<input id="nbParalelScreen" ng-binding="NbParallelScreen">
+	 				 <label>Nb Perpendicular Screens</label>
+					<input id="NbPerpendicularScreen" ng-binding="NbPerpendicularScreen">
+ 				</form>
 				<h1>Liste d'écrans</h1>
 
 				<div ng-repeat="i in list">
@@ -132,13 +138,8 @@
 	<script src="../js/controllers/DropZoneController.js"></script>
 	<script src="../js/controllers/ImageManagerController.js"></script>
 	<script src="../js/controllers/SocketController.js"></script>
-	<!--<script src="../js/imageManager.js"></script> To delete after tests -->
 
 	<script src="/socket.io/socket.io.js"></script>
-
-
-
-
 
 	<script src="../lib/js/jquery-1.11.1.min.js"></script>
 	<script src="../lib/bootstrap-3.3.6-dist/js/bootstrap.js"></script>

@@ -8,8 +8,8 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact) {
 
 	$scope.imgSrcList = [];
 
-	$scope.NbParallelScreen = 2;
-	$scope.NbPerpendicularScreen = 4;
+	$scope.NbParallelScreen;// = 2;
+	$scope.NbPerpendicularScreen;// = 4;
 
 	$scope.fillScreenList = function () {
 		$scope.screenList[0] = {
@@ -61,7 +61,7 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact) {
 			Y: 0
 		};
 	}
-	$scope.fillScreenList();
+	//$scope.fillScreenList();
 
 	$scope.fillImgSrcList = function () {
 		$scope.imgSrcList[0] = {
@@ -112,18 +112,30 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact) {
 	$scope.addWatcher = function (information) {
 
 		var i = 0;
-		var arraySize = $scope.screenList.length;
-
-		for (i = 0; i < information.length; i++) {
-			$scope.screenList[arraySize + i] = {
-				width: information[i].width,
-				height: information[i].height,
-				X: information[i].X,
-				Y: information[i].Y
-			};
+		var arraySize;
+		if ($scope.screenList.length != undefined){
+			arraySize = $scope.screenList.length;
+			for (i = 0; i < information.length; i++) {
+				$scope.screenList[arraySize + i] = {
+					width: information[i].width,
+					height: information[i].height,
+					X: information[i].X,
+					Y: information[i].Y
+				};
+			}
 		}
-		//console.log("new watcher : ");
-		//console.log($scope.screenList);
+		else{
+			arraySize = 0;
+			$scope.screenList[arraySize] = {
+					width: information[arraySize].width,
+					height: information[arraySize].height,
+					X: information[arraySize].X,
+					Y: information[arraySize].Y
+				};
+		}
+
+		console.log("new watcher : ");
+		console.log($scope.screenList);
 	}
 
 	$scope.addImage = function (urlImage) {
@@ -144,7 +156,9 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact) {
 		$scope.info = ret.info;
 		$scope.list = ret.list;
 		$scope.me = ret.me;
-
+		if(ret.list != undefined){
+			$scope.addWatcher(ret.list);
+		}
 		/*
 			//$scope.list = ["a", "b", "c"];
 			//$scope.$apply();
