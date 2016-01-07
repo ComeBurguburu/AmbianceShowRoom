@@ -68,27 +68,28 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
-
-
-
-	<div class="container" ng-controller="dropzoneController">
-
+	<div class="container">
 		<div class="row">
-			<h1>Liste d'images</h1>
-			<div id="scroll">
-			<ul class="draggable-objects">
-
-				<li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
-					<!-- <img src="../images/0.jpg"/> -->
-						<img ng-src="{{ obj.src }}" style="height:70px">
-						{{obj.id}}
-				</li>
-			</ul>
-			</div>
-			<div ng-controller="socketController">
+			<div class="col-lg-3"><h3 style="border:3px solid #456789;color:#456789">Liste d'images</h3></div>
+			<div class="col-lg-6 col-lg-offset-3" ng-controller="socketController">
 				<div class="btn btn-info rounder">{{me}}</div>
 				<div ng-hide="error===undefined || error==''" class="alert alert-danger" id="error" ng-bind="error"></div>
 				<div ng-hide="info===undefined || info==''" class="alert alert-info" ng-bind="info"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" ng-controller="dropzoneController">
+		<div class="row">
+			<div id="scroll">
+				<ul class="draggable-objects">
+					<li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
+							<img ng-src="{{ obj.src }}" style="height:70px">
+							{{obj.id}}
+					</li>
+				</ul>
+			</div>
+			
 				<hr/>
 				<form>
 	 				<label>Nb Paralel Screens</label>
@@ -112,19 +113,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- <div class="col-sm-3">
-				<h3>Ecran 2</h3>
-				<div ng-drop="true" ng-drop-success="onDropComplete2($data,$event)">
-					
-
-					<div ng-repeat="obj in droppedObjects2" ng-drag="true" ng-drag-data="obj" ng-center-anchor="{{centerAnchor}}">
-						{{obj.id}}
-						<img ng-src="{{ obj.src }}" class="img-responsive">
-					</div>
-
-				</div>
-			</div> -->
 		</div>
 	</div>
 
