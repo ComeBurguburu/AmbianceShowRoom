@@ -12,7 +12,6 @@ function iManageFnc(){
 		var ligne = 0, colonne = 0;
 		var numberCurrentScreenParallele = 0;
 		var numberCurrentScreenPerpendiculaire = 0;
-		console.log("dans le service");
 
 		for(ligne=0; ligne < nbscreenparallele; ligne++){
 			for(colonne=0; colonne < nbscreenperpendiculaire; colonne++){
