@@ -114,7 +114,7 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact) {
 		var i = 0;
 		var arraySize = $scope.screenList.length;
 
-		for(i=0; i < information.length; i++){
+		for (i = 0; i < information.length; i++) {
 			$scope.screenList[arraySize + i] = {
 				width: information[i].width,
 				height: information[i].height,
@@ -143,11 +143,8 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact) {
 		$scope.error = ret.error;
 		$scope.info = ret.info;
 		$scope.list = ret.list;
-		if (!isNaN(ret.me)) {
-			$scope.me = ret.me;
-		}
-		//console.log(ret);
-		$scope.addWatcher(ret.list);
+		$scope.me = ret.me;
+
 		/*
 			//$scope.list = ["a", "b", "c"];
 			//$scope.$apply();

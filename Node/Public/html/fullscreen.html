@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<button id="test" onclick="goFullScreen()">Full</button>
+	<script>
+		function goFullScreen() {
+			var
+				el = document.documentElement,
+				rfs =
+				el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen
+
+			;
+			rfs.call(el);
+		}
+		var el = document.getElementById("test");
+		(el.onclick || el.click || function () {})();
+	</script>
+</body>
+
+</html>

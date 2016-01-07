@@ -78,7 +78,8 @@
 		<div class="btn btn-info rounder">{{me}}</div>
 		<div class="row">
 			<div class="col-xs-12 col-lg-12">
-				<img ng-src="{{src}}" ng-style="{'with': width,'height':height,'position':'absolute','left':left,'top':top}" />
+				<img ng-src="{{src}}" ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':left}" />
+				<span ng-bind="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':left}"></span>
 			</div>
 		</div>
 	</div>
