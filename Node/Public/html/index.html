@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 
 <head>
 	<meta charset="utf-8">
 	<title>Admin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="../css/accueil.css" rel="stylesheet" type="text/css">
 	<link href="../css/ScrollBar.css" rel="stylesheet" type="text/css">
 	<link href="../lib/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -82,29 +83,29 @@
 	</div>
 
 	<div class="container" ng-controller="dropzoneController">
-		
-			<div id="scroll">
-				<ul class="draggable-objects">
-					<li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
-						<img ng-src="{{ obj.src }}"> {{obj.id}}
-					</li>
-				</ul>
-			</div>
 
-			<hr/>
-			<div class="row">
-				<div ng-controller="socketController">
-					<form>
-						<label>Nb Paralel Screens</label>
-						<input id="nbParalelScreen" ng-binding="NbParallelScreen">
-						<label>Nb Perpendicular Screens</label>
-						<input id="NbPerpendicularScreen" ng-binding="NbPerpendicularScreen">
-					</form>
+		<div id="scroll">
+			<ul class="draggable-objects">
+				<li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
+					<img ng-src="{{ obj.src }}"> {{obj.id}}
+				</li>
+			</ul>
+		</div>
 
-					<div class="col-lg-3">
-						<h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
-					</div>
-					<div id="scroll">
+		<hr/>
+		<div class="row">
+			<div ng-controller="socketController">
+				<form>
+					<label>Nb Paralel Screens</label>
+					<input id="nbParalelScreen" ng-binding="NbParallelScreen">
+					<label>Nb Perpendicular Screens</label>
+					<input id="NbPerpendicularScreen" ng-binding="NbPerpendicularScreen">
+				</form>
+
+				<div class="col-lg-3">
+					<h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
+				</div>
+				<div id="scroll">
 					<div ng-repeat="i in list">
 						<div class="col-sm-3" ng-show="i.id != me">
 
@@ -114,7 +115,7 @@
 
 								<ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
 									{{droppedObjects1[i.id].id}}
-								<li>	<img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
+									<li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
 								</ul>
 							</div>
 						</div>
@@ -123,23 +124,23 @@
 				</div>
 			</div>
 
-	</div>
+		</div>
 
-	<footer style="margin-top:2000px;">footer</footer>
-	<script src="../lib/js/angular.min.js"></script>
-	<script src="../lib/js/ngDraggable.js"></script>
-	<script src="../js/services/SocketService.js"></script>
-	<script src="../js/services/ImageManagerFactory.js"></script>
+		<footer style="margin-top:2000px;">footer</footer>
+		<script src="../lib/js/angular.min.js"></script>
+		<script src="../lib/js/ngDraggable.js"></script>
+		<script src="../js/services/SocketService.js"></script>
+		<script src="../js/services/ImageManagerFactory.js"></script>
 
-	<script src="../js/application/app.js"></script>
-	<script src="../js/controllers/DropZoneController.js"></script>
-	<script src="../js/controllers/ImageManagerController.js"></script>
-	<script src="../js/controllers/SocketController.js"></script>
+		<script src="../js/application/app.js"></script>
+		<script src="../js/controllers/DropZoneController.js"></script>
+		<script src="../js/controllers/ImageManagerController.js"></script>
+		<script src="../js/controllers/SocketController.js"></script>
 
-	<script src="/socket.io/socket.io.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
 
-	<script src="../lib/js/jquery-1.11.1.min.js"></script>
-	<script src="../lib/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+		<script src="../lib/js/jquery-1.11.1.min.js"></script>
+		<script src="../lib/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
 </body>
 
 </html>
