@@ -1,5 +1,6 @@
 "use strict";
 var io = require('socket.io');
+var image = require('./image.service.js');
 
 var mapSocket = [],
 	mapInfo = [];
@@ -65,6 +66,7 @@ controller.listen = function (server) {
 				mapInfo[index] = json;
 				mapInfo[index].id = index;
 			}
+			console.log('connect client ' + mapSocket.indexOf(this));
 			this.emit("identification", mapSocket.indexOf(this));
 			updateList();
 
@@ -76,7 +78,6 @@ controller.listen = function (server) {
 			var id = mapSocket.indexOf(this);
 			mapSocket[id] = null;
 			mapInfo[id] = null;
-			console.log('disconnect client ' + id);
 			updateList();
 		});
 
@@ -94,18 +95,36 @@ controller.listen = function (server) {
 		});
 
 		socket.on("image", function (obj) {
+			//testImage();
 			console.log("lien image reçu");
 			//console.log(obj);
 			if (mapSocket[obj.id] === undefined || mapSocket[obj.id] === null) {
 				console.log("error " + obj.id);
 				return;
 			}
-			mapSocket[obj.id].emit("image", obj);
-			console.log("emit");
+
+			var mapReceiver = splitImage(2,2, obj.url);
+			
+			if (true) { //parametrable
+
+				for (var id = 0; id < mapSocket.length; id++) {
+					mapSocket[id].emit("image", search(mapReceiver,id));
+				}
+			} else {
+				mapSocket[obj.id].emit("image", obj);
+
+			}
 
 		})
 
 	});
+	function search(map,id){
+		var result=map.filter(function(x){return x.id===id;});
+		if(result.length===0){
+			return;
+		}
+	return result[0];
+	}
 
 	function updateList() {
 
@@ -129,5 +148,39 @@ controller.listen = function (server) {
 		}
 		return mapSocket.length;
 	}
+
+	function splitImage(row, col, url) {
+
+		var r = mapInfo.filter(function (a) {
+			return a !== null && a.admin !== true;
+		});
+
+		return image.sendImgDispositionProperties(r, row, col, url);
+	}
+
+
+
+	function testImage() {
+		var r = mapInfo.filter(function (a) {
+			return a !== null && a.admin !== true;
+		});
+		console.log("before:");
+		console.log(r[0]);
+		console.log("");
+		console.log("after:");
+		var tab = image.sendImgDispositionProperties(r, 3, 1, "coucou");
+		console.log(tab[0]);
+
+		var s;
+		for (s in mapSocket) {
+			if (mapSocket[s] !== undefined && mapSocket[s] !== null) {
+				//mapSocket[s].emit("test", JSON.stringify(r));
+				mapSocket[s].emit("test", JSON.stringify(tab));
+			}
+		}
+
+	}
+
+
 }
 module.exports = controller;

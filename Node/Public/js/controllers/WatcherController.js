@@ -5,16 +5,29 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
 		$scope.error = ret.error;
 		$scope.info = ret.info;
 		$scope.list = ret.list;
-		$scope.src = ret.img;
+
 
 		$scope.me = ret.me;
 
+		if (ret.img === undefined) {
+			$scope.$apply();
+			return;
+		}
 
+		$scope.src = ret.img.url;
 		//$scope.left = 0;
-		$scope.left = undefined;
-		$scope.top = 0;
-		$scope.width = "1600px";
+		console.log(ret.img);
+
+		$scope.left = ret.img.left + (isNaN(ret.img.left) ? "" : "px");
+
+
+		$scope.top = ret.img.top + (isNaN(ret.img.top) ? "" : "px");
+		console.info(ret.img.width);
+		$scope.width = "" + ret.img.width + (isNaN(ret.img.width) ? "" : "px");
+		console.info($scope.width);
 		$scope.height = "auto";
+		console.log(ret.img);
+		console.log($scope);
 
 		$scope.$apply();
 	}

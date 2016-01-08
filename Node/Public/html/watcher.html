@@ -9,7 +9,7 @@
 	<link href="../lib/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
 
-<body ng-app="AppWatcher" ng-controller="watcherController">
+<body ng-app="AppWatcher" ng-controller="watcherController" ><!-- style="overflow: hidden">-->
 
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -68,7 +68,15 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<img ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" ng-src="{{src}}" ng-show="{{left===undefined}}" />
+	<img ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" ng-src="{{src}}" ng-show="{{left===undefined}}" title="fullsreen" />
+					<span class="scope" style="color: white;margin-top: 50px">
+				<ul><li>{{width===undefined ? 'auto':width}}</li>
+					<li>{{height===undefined?'auto':height}}</li>
+					<li>{{left===undefined?'static':'absolute'}}</li>
+					<li>{{left===undefined?'auto':left}}</li>
+					<li>{{top===undefined?'auto':top}}</li>
+					</ul>
+					
 
 
 	<div class="container" ng-show="{{left!==undefined}}">
@@ -80,7 +88,8 @@
 		<div class="btn btn-info rounder">{{me}}</div>
 		<div class="row">
 			<div class="col-xs-12 col-lg-12">
-				<img ng-src="{{src}}" />
+				<img ng-src="{{src}}" title="real size" />
+				<span class="scope"></span>
 			</div>
 		</div>
 	</div>

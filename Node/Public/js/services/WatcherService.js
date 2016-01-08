@@ -29,7 +29,7 @@ function sockFnc() {
 				browser: navigator.appCodeName,
 				plateform: navigator.platform,
 				X: window.screenX,
- 				Y: window.screenY,
+				Y: window.screenY,
 				version: parseInt(navigator.appVersion, 10)
 			}
 			socket.emit("register", JSON.stringify(info));
@@ -51,9 +51,16 @@ function sockFnc() {
 		});
 
 		socket.on("image", function (obj) {
-			ret.img=obj.url;
+			ret.img = obj;
+			console.log(obj);
 			callback(ret);
 		});
+
+
+		socket.on("test", function (log) {
+			console.log(log);
+		});
+
 		window.onbeforeunload = function () {
 			socket.emit("disconnect");
 		}

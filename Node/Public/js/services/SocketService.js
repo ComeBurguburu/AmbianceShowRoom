@@ -30,7 +30,8 @@ function sockFnc() {
 				plateform: navigator.platform,
 				version: parseInt(navigator.appVersion, 10),
 				X: window.screenX,
-				Y: window.screenY
+				Y: window.screenY,
+				admin: true
 			}
 			socket.emit("register", JSON.stringify(info));
 		});
