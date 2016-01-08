@@ -1,3 +1,7 @@
+/*
+	Github
+*/
+
 angular.module('app')
 
 .controller('DashboardCtrl', ['$scope', '$timeout', '$compile', "graphService", "userService",

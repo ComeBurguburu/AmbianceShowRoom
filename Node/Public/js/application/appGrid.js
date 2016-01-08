@@ -1,3 +1,6 @@
+/*
+	Github
+*/
 app = angular.module('app', ['gridster', 'ui.bootstrap', 'ngRoute','nvd3ChartDirectives',"leaflet-directive"])
 	.config(['$routeProvider',
 		function($routeProvider) {

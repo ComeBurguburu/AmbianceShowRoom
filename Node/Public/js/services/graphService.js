@@ -1,3 +1,6 @@
+/*
+    Github
+*/
 
 app.service('graphService',['$http','$q', function ($http,$q) {
 
@@ -21,7 +24,10 @@ app.service('graphService',['$http','$q', function ($http,$q) {
             'array': ['tyre with searchTab','tyre','sensor','whatever'],
             'graph': ['tyre','sensor','whatever'],
             'map':   ['tyre','sensor','whatever'],
-            'image': ['whatever','whatever'],
+            'image': [/*
+    Github
+*/
+'whatever','whatever'],
             'chart': ['tyre','sensor','whatever']
         }
     }

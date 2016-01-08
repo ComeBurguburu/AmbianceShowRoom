@@ -1,3 +1,7 @@
+/*
+	Github
+*/
+
 app.directive("dynCustom", function($compile,$rootScope,widgetService){
     return({
       transclude:true,

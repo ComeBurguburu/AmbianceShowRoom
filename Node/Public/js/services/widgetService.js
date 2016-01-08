@@ -1,3 +1,6 @@
+/*
+    Github
+*/
 
 app.service('widgetService',['$http','$q', function ($http,$q) {
 
