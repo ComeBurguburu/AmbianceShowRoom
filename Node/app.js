@@ -14,6 +14,6 @@ server.listen(1337);
 //server.listen(80);
 IOController.listen(server);
 
-app.use("/", express.static(path.join(__dirname, "Public/")));
+app.use("/", express.static(path.join(__dirname, "Public")));
 app.use("/socket", express.static(path.join(__dirname, "Public/socket")));
 //app.use(defaultRoute);
