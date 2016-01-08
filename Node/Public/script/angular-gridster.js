@@ -1872,8 +1872,13 @@
 
 				this.enable = function() {
 					if (!$dragHandle) {
+						/*
+						DRAG DISABLED
+						*************************************************************************************
 						$dragHandle = angular.element('<div class="gridster-item-resizable-handler handle-' + hClass + '"></div>');
 						$el.append($dragHandle);
+						*************************************************************************************
+						*/
 					}
 
 					unifiedInput = new GridsterTouch($dragHandle[0], mouseDown, mouseMove, mouseUp);

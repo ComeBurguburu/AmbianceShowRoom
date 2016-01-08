@@ -24,10 +24,7 @@ app.service('graphService',['$http','$q', function ($http,$q) {
             'array': ['tyre with searchTab','tyre','sensor','whatever'],
             'graph': ['tyre','sensor','whatever'],
             'map':   ['tyre','sensor','whatever'],
-            'image': [/*
-    Github
-*/
-'whatever','whatever'],
+            'image': ['whatever','whatever'],
             'chart': ['tyre','sensor','whatever']
         }
     }

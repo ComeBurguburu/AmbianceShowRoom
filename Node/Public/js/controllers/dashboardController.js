@@ -86,7 +86,9 @@ angular.module('app')
 		$scope.remove = function(widget) {
 			$scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
 		};
-
+/*
+******************************************************************************************
+		// SETTINGS POP UP
 		$scope.openSettings = function(widget) {
 			$modal.open({
 				scope: $scope,
@@ -99,7 +101,8 @@ angular.module('app')
 				}
 			});
 		};
-
+******************************************************************************************
+*/
 	}
 ])
 
