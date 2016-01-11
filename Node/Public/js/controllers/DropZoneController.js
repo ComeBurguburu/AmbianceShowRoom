@@ -47,6 +47,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
         $scope.droppedObjects1[idEcran.id] = data;
         sockserv.send(idEcran.id, data.src, $scope.isGrid);
 
+
     }
     $scope.currentImage = {};
     $scope.currentImage.id = $scope.draggableObjects[0].id;
@@ -80,23 +81,22 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
         $scope.currentScreen.src = '../images/0.jpg';
     }
 
+    
     $scope.initialise();
+                  
+    
+    $scope.nextScreen=function(list){
 
 
-    $scope.nextScreen = function (list) {
-
-
-        console.log($scope.droppedObjects1);
-        console.log(list);
-        if ($scope.currentScreen.id === list[list.length - 1].id) {
-            $scope.currentScreen.id = 0;
+       //  console.log($scope.droppedObjects1);
+       //console.log(list);
+      if($scope.currentScreen.id===list[list.length-1].id){
+            $scope.currentScreen.id=0;
         } else {
             $scope.currentScreen.id++;
         }
-
-        $scope.currentScreen.src == list[$scope.currentScreen.id].src;
-
-
+        
+         $scope.currentScreen.src=list[$scope.currentScreen.id].src; 
 
     }
 
