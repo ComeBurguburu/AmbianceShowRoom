@@ -11,7 +11,7 @@
 
 </head>
 
-<body ng-app="App">
+<body ng-app="App" style="padding-top: 50px;">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -69,7 +69,7 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <div class="container hidden-xs" ng-controller="socketController">
+    <div class="container" ng-controller="socketController">
         <div class="row">
             <div class="col-lg-3">
                 <h3 style="border:3px solid #456789;color:#456789">Liste d'images</h3></div>
@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    <div class="container" ng-controller="dropzoneController">
+    <div class="container hidden-xs" ng-controller="dropzoneController">
 
         <div id="scroll" class="hidden-xs">
             <ul class="draggable-objects">
@@ -124,7 +124,7 @@
     </div>
 
 
-    <div class="container" ng-controller="dropzoneController">
+    <div class="container visible-xs" ng-controller="dropzoneController">
         <ul class="draggable-objects">
             <li ng-drag="true" ng-drag-data="currentImage" data-allow-transform="true">
 
@@ -140,15 +140,16 @@
 
         <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
         <div ng-controller="socketController">
-            <div ng-if="list.length>1">
-                <!-- <div ng-repeat="i in list"> -->
+       <!--      <div ng-if="list.length>1">
+               
                 {{list.length}} {{droppedObjects1.length}}
                 <div class="col-sm-3" ng-show="list[0].id != me">
                     <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,list[currentScreen.id])">
 
                         <ul ng-drag="true" ng-drag-data="droppedObjects1[list[currentScreen.id].id]" ng-center-anchor="{{centerAnchor}}">
                             <h3>Ecran {{list[currentScreen.id].id}}</h3>
-                            <li> <img ng-src="{{ droppedObjects1[list[currentScreen.id].id].src }}" class="img-responsive" style="padding:1%">
+                            {{currentScreen}}
+                            <li> <img id= "oklm" src="{{ droppedObjects1[list[currentScreen.id].id].src }}" class="img-responsive" style="padding:1%">
                             </li>
                         </ul>
 
@@ -158,11 +159,25 @@
                         </ul>
                     </div>
                 </div>
+            	
+            </div> -->
+            <div ng-repeat="i in list">
+                    <div ng-show="i.id == currentScreen.id"  ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
+                    	<div class="col-sm-3" ng-show="i.id != me">
+                    	<h3>Ecran {{i.id}}</h3>
+                        <ul  ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
+                            {{droppedObjects1[i.id].id}}
+                            <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
+                        </ul>
+                         <ul class="pager">
+                            <li class="previous" ng-click="previousScreen(list,me)"><a href="#">Previous</a></li>
+                            <li class="next" ng-click="nextScreen(list,me)"><a href="#">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <footer style="margin-top:2000px;">footer</footer>
     <script src="../lib/js/angular.min.js"></script>
     <script src="../lib/js/ngDraggable.js"></script>
     <script src="../js/services/SocketService.js"></script>

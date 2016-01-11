@@ -37,14 +37,22 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
     }];
     $scope.droppedObjects1 = [];
 
-
+    function clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+    }
 
     $scope.onDropComplete1 = function (data, evt, idEcran) {
 
         var index = $scope.droppedObjects1.indexOf(data);
         if (index == -1)
             console.log(idEcran);
-        $scope.droppedObjects1[idEcran.id] = data;
+
+        $scope.droppedObjects1[idEcran.id] = clone(data);
         sockserv.send(idEcran.id, data.src, $scope.isGrid);
 
 
@@ -55,7 +63,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
     $scope.nextImage = function () {
 
-        if ($scope.currentImage.id === $scope.draggableObjects.length - 1) {
+        if ($scope.currentImage.id == $scope.draggableObjects.length - 1) {
             $scope.currentImage.id = 0;
         } else {
             $scope.currentImage.id++;
@@ -78,26 +86,46 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
     $scope.initialise = function () {
         $scope.currentScreen = {};
         $scope.currentScreen.id = 0;
-        $scope.currentScreen.src = '../images/0.jpg';
     }
 
     
     $scope.initialise();
                   
     
-    $scope.nextScreen=function(list){
-
-
-       //  console.log($scope.droppedObjects1);
-       //console.log(list);
-      if($scope.currentScreen.id===list[list.length-1].id){
+    $scope.nextScreen=function(list,me){
+ 
+        if($scope.currentScreen.id==list[list.length-1].id){
             $scope.currentScreen.id=0;
         } else {
+            console.log("id dif de 0");
             $scope.currentScreen.id++;
+            if($scope.currentScreen.id==me){  
+                if($scope.currentScreen.id==list[list.length-1].id){
+                  $scope.currentScreen.id=0;
+                } else{
+                    $scope.currentScreen.id++;    
+                }
+                
+            }
         }
-        
-         $scope.currentScreen.src=list[$scope.currentScreen.id].src; 
+    }
 
+    $scope.previousScreen=function(list,me){
+ 
+        if($scope.currentScreen.id==0){
+            $scope.currentScreen.id=list[list.length-1].id;
+        } else {
+            console.log("id dif de 0");
+            $scope.currentScreen.id--;
+            if($scope.currentScreen.id==me){  
+                if($scope.currentScreen.id==0){
+                  $scope.currentScreen.id=list[list.length-1].id;
+                } else{
+                    $scope.currentScreen.id--;    
+                }
+                
+            }
+        }
     }
 
 
