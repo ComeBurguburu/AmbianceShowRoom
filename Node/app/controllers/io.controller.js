@@ -108,7 +108,9 @@ controller.listen = function (server) {
             if (obj.isGrid === true) { //parametrable
 
                 for (var id = 0; id < mapSocket.length; id++) {
-                    mapSocket[id].emit("image", search(mapReceiver, id));
+                    if (mapSocket[id] !== undefined && mapSocket[id] !== null) {
+                        mapSocket[id].emit("image", search(mapReceiver, id));
+                    }
                 }
             } else {
                 mapSocket[obj.id].emit("image", obj);
