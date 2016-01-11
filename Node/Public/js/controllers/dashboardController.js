@@ -116,42 +116,74 @@ angular.module('app')
         $scope.fillGrid = function () {
             $scope.clear();
             var i = 0;
+            var widgetId;
+
             for (i = 0; i < $scope.widgetList.length; i++) {
+                if($scope.dashboard.widgets.length==undefined){
+                    widgetId = 0;
+                }else{
+                    widgetId = $scope.dashboard.widgets.length;
+                }
+
                 $scope.dashboard.widgets.push({
                     name: $scope.widgetList[i].name,
                     sizeX: $scope.widgetList[i].sizeX,
                     sizeY: $scope.widgetList[i].sizeY,
                     // col: $scope.widgetList[i].col,
                     // row: $scope.widgetList[i].row,
+                    id: widgetId,
                     content: $scope.widgetList[i].content,
+                });
+            }
+            console.log($scope.dashboard.widgets);
+        };
+
+        $scope.fillGridParam = function (widgetListParam) {
+            $scope.clear();
+            var i = 0;
+            var widgetId;
+
+            for (i = 0; i < widgetListParam.length; i++) {
+                if($scope.dashboard.widgets.length==undefined){
+                    widgetId = 0;
+                }else{
+                    widgetId = $scope.dashboard.widgets.length;
+                }
+
+                $scope.dashboard.widgets.push({
+                    name: widgetListParam[i].name,
+                    sizeX: widgetListParam[i].sizeX,
+                    sizeY: widgetListParam[i].sizeY,
+                    // col: widgetListParam[i].col,
+                    // row: widgetListParam[i].row,
+                    id: widgetId,
+                    content: widgetListParam[i].content,
                 });
             }
         };
 
         $scope.widgetList = [{
-                name: "widget 1",
-                sizeX: 1,
-                sizeY: 1,
-                col: 0,
-                row: 1,
-                content: "image",
-							},
-            {
-                name: "widget 2",
-                sizeX: 1,
-                sizeY: 1,
-                col: 1,
-                row: 1,
-                content: "image",
-							},
-            {
-                name: "widget 3",
-                sizeX: 1,
-                sizeY: 1,
-                col: 2,
-                row: 1,
-                content: "image",
-							},
+                    name: "widget 1",
+                    sizeX: 1,
+                    sizeY: 1,
+                    col: 0,
+                    row: 1,
+                    content: "image",
+				},{
+                    name: "widget 2",
+                    sizeX: 1,
+                    sizeY: 1,
+                    col: 1,
+                    row: 1,
+                    content: "image",
+				},{
+                    name: "widget 3",
+                    sizeX: 1,
+                    sizeY: 1,
+                    col: 2,
+                    row: 1,
+                    content: "image",
+				},
 		];
 
         $scope.getWidget = function () {
