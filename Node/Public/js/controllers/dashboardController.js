@@ -81,7 +81,6 @@ angular.module('app')
             "values": [[1, 0], [2, -6.33], [3, -5.95], [4, -11.56], [5, -5.47], [6, 0.50], [7, -5.53], [8, -5.78], [9, -7.32], [10, -6.70], [11, 0.44], [12, 7.24], [13, 9.25], [14, 11.34], [15, 14.73], [16, 12.38], [17, 18.43], [18, 19.83], [19, 22.64]]
  		}];
 
-<<<<<<< Updated upstream
         //for graphe purpose
         $scope.xFunction = function () {
             return function (d) {
@@ -179,7 +178,7 @@ angular.module('app')
             console.log(screen);
         }
 
-
+/*
         //Save the current dashboard in the 'mon dashboard' item
         $scope.save = function () {
             var widgets = JSON.parse(JSON.stringify($scope.dashboard.widgets));
@@ -200,6 +199,8 @@ angular.module('app')
             }
             userService.saveDashboard(widgets);
         }
+*/
+
 
         //To switch between Dashboard
         $scope.$watch('selectedDashboardId', function (newVal, oldVal) {
@@ -213,103 +214,15 @@ angular.module('app')
 
         // choose the Dashboard '1' when first load.
         $scope.selectedDashboardId = '1';
-=======
-		//for graphe purpose
-	 	$scope.xFunction = function() {return function(d) {return d.key;};}
-	 	$scope.yFunction = function() {return function(d) {return d.y;};}
-
-
-		$scope.dashboards = userService.RecoverDashboard();
-
-		//Clear all widget from dashboard
-		$scope.clear = function() {
-			$scope.dashboard.widgets = [];
-		};
-
-		//Add a new empty widget to the Dashboard
-		$scope.addWidget = function() {
-			var widgetSize = $scope.dashboard.widgets.length + 1;
-			var widgetName = "Widget " + widgetSize;
-			$scope.dashboard.widgets.push({
-				name: widgetName,
-				sizeX: 1,
-				sizeY: 1,
-			});
-			console.log($scope.dashboard);
-		};
-
-		$scope.fillGrid = function() {
-			$scope.clear();
-			var i = 0;
-			for(i=0; i<$scope.widgetList.length; i++){
-				$scope.dashboard.widgets.push({
-					name: $scope.widgetList[i].name,
-					sizeX: $scope.widgetList[i].sizeX,
-					sizeY: $scope.widgetList[i].sizeY,
-					col: $scope.widgetList[i].col,
-					row: $scope.widgetList[i].row,
-					content: $scope.widgetList[i].content,
-				});
-			}
-		};
-
-		$scope.widgetList = [{
-								name: "widget 1",
-								sizeX: 1,
-								sizeY: 1,
-								col: 0,
-								row: 1,
-								content: "image",
-							},{
-								name: "widget 2",
-								sizeX: 1,
-								sizeY: 1,
-								col: 1,
-								row: 1,
-								content: "image",
-							},{
-								name: "widget 3",
-								sizeX: 1,
-								sizeY: 1,
-								col: 2,
-								row: 1,
-								content: "image",
-							},
-		];
-
-		//Save the current dashboard in the 'mon dashboard' item
-		$scope.save = function(){
-			var widgets = JSON.parse(JSON.stringify($scope.dashboard.widgets));
-			var length = Object.keys($scope.dashboards).length;
-			if($scope.dashboards[length].name == "mon dashboard")
-				$scope.dashboards[length] = { id:length, name:"mon dashboard", widgets:widgets};
-			else{
-				length++;
-				$scope.dashboards[length] = { id:length, name:"mon dashboard", widgets:widgets};
-			}
-			userService.saveDashboard(widgets);
-		}
-
-		//To switch between Dashboard
-		$scope.$watch('selectedDashboardId', function(newVal, oldVal) {
-			if (newVal !== oldVal) {
-				$scope.dashboard = $scope.dashboards[newVal];
-			} else {//Should never happend ? 
-				$scope.dashboard = $scope.dashboards[1];
-
-			}
-		});
-
-		// choose the Dashboard '1' when first load.
-		$scope.selectedDashboardId = '1';
->>>>>>> Stashed changes
 	}])
+
 
 .controller('CustomWidgetCtrl', ['$scope', '$modal',
 	function ($scope, $modal) {
 
         $scope.remove = function (widget) {
             $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
+            console.warn("Remove Widget");
         };
         /*
         ******************************************************************************************
@@ -330,7 +243,7 @@ angular.module('app')
         */
 	}
 ])
-
+/*
 .controller('WidgetSettingsCtrl', ['$scope', '$timeout', '$rootScope', '$modalInstance', 'widget', '$compile',
 	function ($scope, $timeout, $rootScope, $modalInstance, widget) {
         $scope.widget = widget;
@@ -382,6 +295,7 @@ angular.module('app')
 	}
 ])
 
+
 // helper code
 .filter('object2Array', function () {
     return function (input) {
@@ -392,3 +306,4 @@ angular.module('app')
         return out;
     }
 });
+*/
