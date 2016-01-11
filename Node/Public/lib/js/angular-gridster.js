@@ -44,7 +44,7 @@
 		maxSizeY: null, // maximum row height of an item
 		saveGridItemCalculatedHeightInMobile: false, // grid item height in mobile display. true- to use the calculated height by sizeY given
 		resizable: { // options to pass to resizable handler
-			enabled: true,
+			enabled: false,  // Set to false *********************//true,
 			handles: ['s', 'e', 'n', 'w', 'se', 'ne', 'sw', 'nw']
 		},
 		draggable: { // options to pass to draggable handler

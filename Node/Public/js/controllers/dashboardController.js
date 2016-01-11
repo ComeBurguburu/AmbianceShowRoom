@@ -10,9 +10,9 @@ angular.module('app')
 		$scope.gridsterOptions = {
 			margins: [20, 20],
 			columns: 5,
-			resize: {
-				enabled: false
-			},
+			// resize: {
+			// 	enabled: false
+			// },
 			draggable: {
 				handle: 'h3'
 			}
