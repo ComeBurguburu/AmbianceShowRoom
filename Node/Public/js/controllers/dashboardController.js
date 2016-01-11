@@ -121,8 +121,8 @@ angular.module('app')
                     name: $scope.widgetList[i].name,
                     sizeX: $scope.widgetList[i].sizeX,
                     sizeY: $scope.widgetList[i].sizeY,
-                    col: $scope.widgetList[i].col,
-                    row: $scope.widgetList[i].row,
+                    // col: $scope.widgetList[i].col,
+                    // row: $scope.widgetList[i].row,
                     content: $scope.widgetList[i].content,
                 });
             }
