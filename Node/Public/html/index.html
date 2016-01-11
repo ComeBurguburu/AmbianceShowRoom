@@ -95,7 +95,13 @@
 		<hr/>
 		<div class="row">
 			<div ng-controller="socketController" class="hidden-xs">
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 				<h1>Liste d'écrans</h1>
 
 				<div class="col-lg-3">
@@ -122,7 +128,7 @@
 	</div>
 
 
-		<div class="container" ng-controller="dropzoneController" >
+		<!-- <div class="container" ng-controller="dropzoneController" >
 			<ul class="draggable-objects">
 				<li ng-drag="true" ng-drag-data="currentImage" data-allow-transform="true">
 					 
@@ -139,13 +145,44 @@
 		  <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
 		  	<div ng-controller="socketController">
 			  			<div ng-if="list.length>1">
-						<!-- <div ng-repeat="i in list"> -->
+						
 							{{list.length}}
 							{{droppedObjects1.length}}
 							<div class="col-sm-3" ng-show="list[0].id != me">
 							<div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,list[currentScreen.id])">
 
 								<ul ng-drag="true" ng-drag-data="droppedObjects1[list[currentScreen.id].id]" ng-center-anchor="{{centerAnchor}}">
+									<h3>Ecran {{list[currentScreen.id].id}}</h3>
+									<li> <img ng-src="{{ droppedObjects1[list[currentScreen.id].id].src }}" class="img-responsive" style="padding:1%">
+									</li>
+								</ul>
+ -->
+
+
+		<div class="container" ng-controller="dropzoneController" >
+			<ul class="draggable-objects">
+				<li ng-drag="true" ng-drag-data="currentImage" data-allow-transform="true">
+					 
+				
+				<img ng-src="{{currentImage.src}}" class="img-responsive center-block" style="width:auto;height:100px;padding:1%;"> 
+				</li>  
+			</ul>
+		 	           
+		  <ul class="pager">
+		    <li class="previous" ng-click="previousImage()"><a href="#">Previous</a></li>
+		    <li class="next" ng-click="nextImage()"><a href="#">Next</a></li>
+		  </ul>
+
+		  <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
+		  	<div  ng-controller="socketController">
+			  			<div ng-if="list.length>1">
+						<!-- <div ng-repeat="i in list"> -->
+							{{list.length}}
+							{{droppedObjects1.length}}
+							<div class="col-sm-3" ng-show="list[0].id != me">
+							<div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,list[currentScreen.id])">
+
+								<ul class="center-block" ng-drag="true" ng-drag-data="droppedObjects1[list[currentScreen.id].id]" ng-center-anchor="{{centerAnchor}}">
 									<h3>Ecran {{list[currentScreen.id].id}}</h3>
 									<li> <img ng-src="{{ droppedObjects1[list[currentScreen.id].id].src }}" class="img-responsive" style="padding:1%">
 									</li>
