@@ -55,12 +55,57 @@ angular.module('app')
 
 		//Add a new empty widget to the Dashboard
 		$scope.addWidget = function() {
+			var widgetSize = $scope.dashboard.widgets.length + 1;
+			var widgetName = "Widget " + widgetSize;
 			$scope.dashboard.widgets.push({
-				name: "New Widget",
+				name: widgetName,
 				sizeX: 1,
 				sizeY: 1,
 			});
+			console.log($scope.dashboard);
 		};
+
+		$scope.fillGrid = function() {
+			$scope.clear();
+			var i = 0;
+			for(i=0; i<$scope.widgetList.length; i++){
+				$scope.dashboard.widgets.push({
+					name: $scope.widgetList[i].name,
+					sizeX: $scope.widgetList[i].sizeX,
+					sizeY: $scope.widgetList[i].sizeY,
+					col: $scope.widgetList[i].col,
+					row: $scope.widgetList[i].row,
+					content: $scope.widgetList[i].content,
+				});
+			}
+		};
+
+		$scope.widgetList = [{
+								name: "widget 1",
+								sizeX: 1,
+								sizeY: 1,
+								col: 0,
+								row: 1,
+								content: "image",
+							},
+							{
+								name: "widget 2",
+								sizeX: 1,
+								sizeY: 1,
+								col: 1,
+								row: 1,
+								content: "image",
+							},
+							{
+								name: "widget 3",
+								sizeX: 1,
+								sizeY: 1,
+								col: 2,
+								row: 1,
+								content: "image",
+							},
+		];
+		//var r = fillGrid($scope.widgetList);
 
 		//Save the current dashboard in the 'mon dashboard' item
 		$scope.save = function(){

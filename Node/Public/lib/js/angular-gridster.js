@@ -1380,6 +1380,7 @@
 					originalRow = item.row;
 
 					dragStart(e);
+					console.log("dragStart !!!!!!!!!!!!!!!!!!!!!!!!!");
 
 					return true;
 				}
