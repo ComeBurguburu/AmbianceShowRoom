@@ -10,10 +10,19 @@ angular.module('app')
 		$scope.gridsterOptions = {
 			margins: [20, 20],
 			columns: 5,
+			resize: {
+				enabled: false
+			},
 			draggable: {
 				handle: 'h3'
 			}
 		};
+		
+		/***********************************************************
+
+		Add a .resize_widget( $widget, [size_x], [size_y], [reposition], [callback] ) qui ne fait rien
+
+		***********************************************************/
 
 		$scope.dispTypelist = false;
 		$scope.ContentList = graphService.RecoverData();
