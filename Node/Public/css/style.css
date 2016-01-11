@@ -1,3 +1,7 @@
+html {
+    background-color: white!important;
+}
+
 body{
   background-color: #222
 }
@@ -15,6 +19,7 @@ input {
 }
 .container {
     margin: auto;
+    background-color: white;
 }
 .code-coverage {
     color: #fff;
