@@ -5,220 +5,299 @@
 angular.module('app')
 
 .controller('DashboardCtrl', ['$scope', '$timeout', '$compile', "graphService", "userService",
-	function($scope, $timeout,$compile,graphService,userService) {
-		//Options for Gridster system
-		$scope.gridsterOptions = {
-			margins: [20, 20],
-			columns: 5,
-			// resize: {
-			// 	enabled: false
-			// },
-			draggable: {
-				handle: 'h3'
-			}
-		};
-		
-		/***********************************************************
 
-		Add a .resize_widget( $widget, [size_x], [size_y], [reposition], [callback] ) qui ne fait rien
 
-		***********************************************************/
+	function ($scope, $timeout, $compile, graphService, userService) {
+        //Options for Gridster system
+        $scope.gridsterOptions = {
+            margins: [20, 20],
+            columns: 5,
+            resize: {
+                enabled: false
+            },
+            draggable: {
+                handle: 'h3'
+            },
+            serialize_params: function ($w, wgd) {
+                return {
+                    id: $w.prop("id"),
+                    col: wdg.col,
+                    row: wdg.row,
+                    size_x: wdg.size_x,
+                    size_y: wdg.size_y,
+                    test: true
+                }
+            }
+        };
 
-		$scope.dispTypelist = false;
-		$scope.ContentList = graphService.RecoverData();
-		$scope.typeList = [""];
+        /***********************************************************
 
-		$scope.graphContentList = graphService.RecoverDetailGraph();
-		
-		//For leaflet Details
-		angular.extend($scope, {center: {lat: 45.783,lng: 3.083,zoom: 13}});
+        Add a .resize_widget( $widget, [size_x], [size_y], [reposition], [callback] ) qui ne fait rien
 
-	 	//Data for piechart Exemple
-	 	$scope.examplePieData = [{key: "One",y: 5},{key: "Two",y: 2},{key: "Three",y: 9},{key: "Four",y: 7},{key: "Five",y: 4},{key: "Six",y: 3},{key: "Seven",y: 9}];
+        ***********************************************************/
 
-	 	//Data for Line Chart
- 	 	$scope.exampleLineData = [{"key": "Series 1",
- 			"values": [ [ 1 , 0] , [ 2 , -6.33] , [ 3 , -5.95] , [ 4 , -11.56] , [ 5 , -5.47] , [ 6 , 0.50] , [ 7 , -5.53] , [ 8 , -5.78] , [ 9 , -7.32] , [ 10 , -6.70] , [ 11 , 0.44] , [ 12 , 7.24] , [ 13 , 9.25] , [ 14 , 11.34] , [ 15 , 14.73] , [ 16 , 12.38] , [ 17 , 18.43] , [ 18 , 19.83] , [ 19 , 22.64]]
+        $scope.dispTypelist = false;
+        $scope.ContentList = graphService.RecoverData();
+        $scope.typeList = [""];
+
+        $scope.graphContentList = graphService.RecoverDetailGraph();
+
+        //For leaflet Details
+        angular.extend($scope, {
+            center: {
+                lat: 45.783,
+                lng: 3.083,
+                zoom: 13
+            }
+        });
+
+        //Data for piechart Exemple
+        $scope.examplePieData = [{
+            key: "One",
+            y: 5
+        }, {
+            key: "Two",
+            y: 2
+        }, {
+            key: "Three",
+            y: 9
+        }, {
+            key: "Four",
+            y: 7
+        }, {
+            key: "Five",
+            y: 4
+        }, {
+            key: "Six",
+            y: 3
+        }, {
+            key: "Seven",
+            y: 9
+        }];
+
+        //Data for Line Chart
+        $scope.exampleLineData = [{
+            "key": "Series 1",
+            "values": [[1, 0], [2, -6.33], [3, -5.95], [4, -11.56], [5, -5.47], [6, 0.50], [7, -5.53], [8, -5.78], [9, -7.32], [10, -6.70], [11, 0.44], [12, 7.24], [13, 9.25], [14, 11.34], [15, 14.73], [16, 12.38], [17, 18.43], [18, 19.83], [19, 22.64]]
  		}];
 
-		//for graphe purpose
-	 	$scope.xFunction = function() {return function(d) {return d.key;};}
-	 	$scope.yFunction = function() {return function(d) {return d.y;};}
+        //for graphe purpose
+        $scope.xFunction = function () {
+            return function (d) {
+                return d.key;
+            };
+        }
+        $scope.yFunction = function () {
+            return function (d) {
+                return d.y;
+            };
+        }
 
 
-		$scope.dashboards = userService.RecoverDashboard();
+        $scope.dashboards = userService.RecoverDashboard();
 
-		//Clear all widget from dashboard
-		$scope.clear = function() {
-			$scope.dashboard.widgets = [];
-		};
+        //Clear all widget from dashboard
+        $scope.clear = function () {
+            $scope.dashboard.widgets = [];
+        };
 
-		//Add a new empty widget to the Dashboard
-		$scope.addWidget = function() {
-			var widgetSize = $scope.dashboard.widgets.length + 1;
-			var widgetName = "Widget " + widgetSize;
-			$scope.dashboard.widgets.push({
-				name: widgetName,
-				sizeX: 1,
-				sizeY: 1,
-			});
-			console.log($scope.dashboard);
-		};
+        //Add a new empty widget to the Dashboard
+        $scope.addWidget = function () {
+            var widgetSize = $scope.dashboard.widgets.length + 1;
+            var widgetName = "Widget " + widgetSize;
+            $scope.dashboard.widgets.push({
+                name: widgetName,
+                sizeX: 1,
+                sizeY: 1,
+            });
+            console.log($scope.dashboard);
+        };
 
-		$scope.fillGrid = function() {
-			$scope.clear();
-			var i = 0;
-			for(i=0; i<$scope.widgetList.length; i++){
-				$scope.dashboard.widgets.push({
-					name: $scope.widgetList[i].name,
-					sizeX: $scope.widgetList[i].sizeX,
-					sizeY: $scope.widgetList[i].sizeY,
-					col: $scope.widgetList[i].col,
-					row: $scope.widgetList[i].row,
-					content: $scope.widgetList[i].content,
-				});
-			}
-		};
+        $scope.fillGrid = function () {
+            $scope.clear();
+            var i = 0;
+            for (i = 0; i < $scope.widgetList.length; i++) {
+                $scope.dashboard.widgets.push({
+                    name: $scope.widgetList[i].name,
+                    sizeX: $scope.widgetList[i].sizeX,
+                    sizeY: $scope.widgetList[i].sizeY,
+                    col: $scope.widgetList[i].col,
+                    row: $scope.widgetList[i].row,
+                    content: $scope.widgetList[i].content,
+                });
+            }
+        };
 
-		$scope.widgetList = [{
-								name: "widget 1",
-								sizeX: 1,
-								sizeY: 1,
-								col: 0,
-								row: 1,
-								content: "image",
+        $scope.widgetList = [{
+                name: "widget 1",
+                sizeX: 1,
+                sizeY: 1,
+                col: 0,
+                row: 1,
+                content: "image",
 							},
-							{
-								name: "widget 2",
-								sizeX: 1,
-								sizeY: 1,
-								col: 1,
-								row: 1,
-								content: "image",
+            {
+                name: "widget 2",
+                sizeX: 1,
+                sizeY: 1,
+                col: 1,
+                row: 1,
+                content: "image",
 							},
-							{
-								name: "widget 3",
-								sizeX: 1,
-								sizeY: 1,
-								col: 2,
-								row: 1,
-								content: "image",
+            {
+                name: "widget 3",
+                sizeX: 1,
+                sizeY: 1,
+                col: 2,
+                row: 1,
+                content: "image",
 							},
 		];
-		//var r = fillGrid($scope.widgetList);
 
-		//Save the current dashboard in the 'mon dashboard' item
-		$scope.save = function(){
-			var widgets = JSON.parse(JSON.stringify($scope.dashboard.widgets));
-			var length = Object.keys($scope.dashboards).length;
-			if($scope.dashboards[length].name == "mon dashboard")
-				$scope.dashboards[length] = { id:length, name:"mon dashboard", widgets:widgets};
-			else{
-				length++;
-				$scope.dashboards[length] = { id:length, name:"mon dashboard", widgets:widgets};
-			}
-			userService.saveDashboard(widgets);
-		}
+        $scope.getWidget = function () {
+            var wlist = $scope.dashboard.widgets;
+            var screen = {
+                col: 0,
+                row: 0,
+                screenlist: []
+            };
+            for (var i = 0; i < wlist.length; i++) {
+                screen.screenlist.push({
+                    id: wlist[i].id,
+                    col: wlist[i].col,
+                    row: wlist[i].row
+                });
+                if (wlist[i].col > screen.col) {
+                    screen.col = wlist[i].col;
+                }
+                if (wlist[i].row > screen.row) {
+                    screen.row = wlist[i].row;
+                }
+            }
+            console.info($scope.dashboard.widgets);
+            console.log(screen);
+        }
 
-		//To switch between Dashboard
-		$scope.$watch('selectedDashboardId', function(newVal, oldVal) {
-			if (newVal !== oldVal) {
-				$scope.dashboard = $scope.dashboards[newVal];
-			} else {//Should never happend ? 
-				$scope.dashboard = $scope.dashboards[1];
 
-			}
-		});
+        //Save the current dashboard in the 'mon dashboard' item
+        $scope.save = function () {
+            var widgets = JSON.parse(JSON.stringify($scope.dashboard.widgets));
+            var length = Object.keys($scope.dashboards).length;
+            if ($scope.dashboards[length].name == "mon dashboard")
+                $scope.dashboards[length] = {
+                    id: length,
+                    name: "mon dashboard",
+                    widgets: widgets
+                };
+            else {
+                length++;
+                $scope.dashboards[length] = {
+                    id: length,
+                    name: "mon dashboard",
+                    widgets: widgets
+                };
+            }
+            userService.saveDashboard(widgets);
+        }
 
-		// choose the Dashboard '1' when first load.
-		$scope.selectedDashboardId = '1';
+        //To switch between Dashboard
+        $scope.$watch('selectedDashboardId', function (newVal, oldVal) {
+            if (newVal !== oldVal) {
+                $scope.dashboard = $scope.dashboards[newVal];
+            } else { //Should never happend ? 
+                $scope.dashboard = $scope.dashboards[1];
+
+            }
+        });
+
+        // choose the Dashboard '1' when first load.
+        $scope.selectedDashboardId = '1';
 	}])
 
 .controller('CustomWidgetCtrl', ['$scope', '$modal',
-	function($scope, $modal) {
+	function ($scope, $modal) {
 
-		$scope.remove = function(widget) {
-			$scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
-		};
-/*
-******************************************************************************************
-		// SETTINGS POP UP
-		$scope.openSettings = function(widget) {
-			$modal.open({
-				scope: $scope,
-				templateUrl: '../html/template/widget_settings.html',
-				controller: 'WidgetSettingsCtrl',
-				resolve: {
-					widget: function() {
-						return widget;
-					}
-				}
-			});
-		};
-******************************************************************************************
-*/
+        $scope.remove = function (widget) {
+            $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
+        };
+        /*
+        ******************************************************************************************
+        		// SETTINGS POP UP
+        		$scope.openSettings = function(widget) {
+        			$modal.open({
+        				scope: $scope,
+        				templateUrl: '../html/template/widget_settings.html',
+        				controller: 'WidgetSettingsCtrl',
+        				resolve: {
+        					widget: function() {
+        						return widget;
+        					}
+        				}
+        			});
+        		};
+        ******************************************************************************************
+        */
 	}
 ])
 
-.controller('WidgetSettingsCtrl', ['$scope', '$timeout', '$rootScope', '$modalInstance', 'widget', '$compile' ,
-	function($scope, $timeout, $rootScope, $modalInstance, widget ) {
-		$scope.widget = widget;
+.controller('WidgetSettingsCtrl', ['$scope', '$timeout', '$rootScope', '$modalInstance', 'widget', '$compile',
+	function ($scope, $timeout, $rootScope, $modalInstance, widget) {
+        $scope.widget = widget;
 
-		$scope.form = {
-			name: widget.name,
-			sizeX: widget.sizeX,
-			sizeY: widget.sizeY,
-			col: widget.col,
-			row: widget.row,
-			content: widget.content,
-		};
+        $scope.form = {
+            name: widget.name,
+            sizeX: widget.sizeX,
+            sizeY: widget.sizeY,
+            col: widget.col,
+            row: widget.row,
+            content: widget.content,
+        };
 
-		$scope.$watch('form.content', function(newValue, oldValue) {
-			if(typeof(newValue) !== 'undefined'){
-				$scope.typeList = $scope.graphContentList[newValue];	
-				$scope.dispTypelist = true;
-			}
-			else
-				$scope.dispTypelist  = false;
-		});
+        $scope.$watch('form.content', function (newValue, oldValue) {
+            if (typeof (newValue) !== 'undefined') {
+                $scope.typeList = $scope.graphContentList[newValue];
+                $scope.dispTypelist = true;
+            } else
+                $scope.dispTypelist = false;
+        });
 
-		$scope.sizeOptions = [{
-			id: '1',
-			name: '1'
+        $scope.sizeOptions = [{
+            id: '1',
+            name: '1'
 		}, {
-			id: '2',
-			name: '2'
+            id: '2',
+            name: '2'
 		}, {
-			id: '3',
-			name: '3'
+            id: '3',
+            name: '3'
 		}, {
-			id: '4',
-			name: '4'
+            id: '4',
+            name: '4'
 		}];
 
-		$scope.dismiss = function() {
-			$modalInstance.dismiss();
-		};
+        $scope.dismiss = function () {
+            $modalInstance.dismiss();
+        };
 
-		$scope.remove = function() {
-			$scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
-			$modalInstance.close();
-		};
+        $scope.remove = function () {
+            $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
+            $modalInstance.close();
+        };
 
-		$scope.submit = function() {
-			angular.extend(widget, $scope.form);
-			$modalInstance.close(widget);
-		};
+        $scope.submit = function () {
+            angular.extend(widget, $scope.form);
+            $modalInstance.close(widget);
+        };
 	}
 ])
 
 // helper code
-.filter('object2Array', function() {
-	return function(input) {
-		var out = [];
-		for (i in input) {
-			out.push(input[i]);
-		}
-		return out;
-	}
+.filter('object2Array', function () {
+    return function (input) {
+        var out = [];
+        for (i in input) {
+            out.push(input[i]);
+        }
+        return out;
+    }
 });
