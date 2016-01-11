@@ -101,14 +101,68 @@ angular.module('app')
             $scope.dashboard.widgets = [];
         };
 
+        $scope.addId = function () {
+            var i = 0;
+            var id_tmp = new Array();
+            var widgetSize = $scope.dashboard.widgets.length;
+            var found = false;
+            var result; // Default
+
+            for (i = 0; i < widgetSize; i++) {
+                id_tmp.push($scope.dashboard.widgets[i].id);
+            }
+            id_tmp.sort(function compare(x, y) {return x - y;});
+
+            i = 0;
+
+            while(found==false){
+                for (i = 0; i < id_tmp.length; i++) {
+                    if((id_tmp[i]+1)!=(id_tmp[i+1])){
+                        result = id_tmp[i]+1;
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
+        $scope.addIdParam = function (widgetListParam) {
+            var i = 0;
+            var id_tmp = new Array();
+            var widgetSize = widgetListParam.length;
+            var found = false;
+            var result; // Default
+
+            for (i = 0; i < widgetSize; i++) {
+                id_tmp.push(widgetListParam[i].id);
+            }
+            id_tmp.sort(function compare(x, y) {return x - y;});
+
+            i = 0;
+
+            while(found==false){
+                for (i = 0; i < id_tmp.length; i++) {
+                    if((id_tmp[i]+1)!=(id_tmp[i+1])){
+                        result = id_tmp[i]+1;
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
         //Add a new empty widget to the Dashboard
         $scope.addWidget = function () {
             var widgetSize = $scope.dashboard.widgets.length + 1;
             var widgetName = "Widget " + widgetSize;
+            var idToSet = $scope.addId();
             $scope.dashboard.widgets.push({
                 name: widgetName,
                 sizeX: 1,
                 sizeY: 1,
+                id: idToSet,
             });
             console.log($scope.dashboard);
         };
