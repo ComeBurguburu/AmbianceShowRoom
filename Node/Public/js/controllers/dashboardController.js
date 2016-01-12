@@ -106,7 +106,7 @@ angular.module('app')
             var id_tmp = new Array();
             var widgetSize = $scope.dashboard.widgets.length;
             var found = false;
-            var result; // Default
+            var result;
 
             for (i = 0; i < widgetSize; i++) {
                 id_tmp.push($scope.dashboard.widgets[i].id);
@@ -156,8 +156,8 @@ angular.module('app')
         //Add a new empty widget to the Dashboard
         $scope.addWidget = function () {
             var widgetSize = $scope.dashboard.widgets.length + 1;
-            var widgetName = "Widget " + widgetSize;
             var idToSet = $scope.addId();
+            var widgetName = "Widget " + (idToSet+1);
             $scope.dashboard.widgets.push({
                 name: widgetName,
                 sizeX: 1,
@@ -187,6 +187,7 @@ angular.module('app')
                     // row: $scope.widgetList[i].row,
                     id: widgetId,
                     content: $scope.widgetList[i].content,
+                    type: $scope.widgetList[i].type,
                 });
             }
             console.log($scope.dashboard.widgets);
@@ -212,6 +213,7 @@ angular.module('app')
                     // row: widgetListParam[i].row,
                     id: widgetId,
                     content: widgetListParam[i].content,
+                    type: widgetListParam[i].type,
                 });
             }
         };
@@ -223,6 +225,7 @@ angular.module('app')
                     col: 0,
                     row: 1,
                     content: "image",
+                    type: 0,
 				},{
                     name: "widget 2",
                     sizeX: 1,
@@ -230,6 +233,7 @@ angular.module('app')
                     col: 1,
                     row: 1,
                     content: "image",
+                    type: 0,
 				},{
                     name: "widget 3",
                     sizeX: 1,
@@ -237,6 +241,7 @@ angular.module('app')
                     col: 2,
                     row: 1,
                     content: "image",
+                    type: 9,
 				},
 		];
 

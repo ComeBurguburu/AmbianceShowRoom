@@ -14,7 +14,7 @@ app.service('widgetService',['$http','$q', function ($http,$q) {
                                     return '<my-array-display search="false"></my-array-display>';
                                 }
             case 'image'    :   if(typeof(type) !== 'undefined')
-                                    return '<img class="ImgBoxes" ng-src="images/'+type+'.jpg" alt="'+type+'"></img>';
+                                    return '<img class="ImgBoxes" ng-src="../images/'+type+'.jpg" alt="'+type+'"></img>';
 
             case 'map'      :   return '<leaflet center="center"></leaflet>';
 
