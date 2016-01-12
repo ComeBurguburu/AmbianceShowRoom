@@ -2,7 +2,7 @@
 	Github
 */
 
-app.controller('RootCtrl', function ($scope) {
+angular.module('App').controller('RootCtrl', function ($scope) {
     $scope.gridsterOptions = {
         margins: [20, 20],
         columns: 5,

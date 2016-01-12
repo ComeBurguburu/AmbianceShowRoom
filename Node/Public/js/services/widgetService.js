@@ -2,7 +2,7 @@
     Github
 */
 
-app.service('widgetService',['$http','$q', function ($http,$q) {
+angular.module('App').service('widgetService',['$http','$q', function ($http,$q) {
 
     function getDirective(content, type){
         switch(content){

@@ -2,7 +2,7 @@
 	Github
 */
 
-app.directive("dynCustom", function($compile,$rootScope,widgetService){
+angular.module('App').directive("dynCustom", function($compile,$rootScope,widgetService){
     return({
       transclude:true,
       priority: 1000,

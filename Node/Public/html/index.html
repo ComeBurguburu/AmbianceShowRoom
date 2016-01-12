@@ -9,10 +9,25 @@
     <link href="../css/ScrollBar.css" rel="stylesheet" type="text/css">
     <link href="../lib/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
 
+   
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ 
+
+    <meta name="viewport" content="width=device-width" />
+
+ 
+    <link rel="stylesheet" href="../css/angular-gridster.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/nvd3.min.css">
+    <link rel="stylesheet" href="../css/leaflet.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+
+
 </head>
 
-<body ng-app="App" style="padding-top: 50px;">
-
+<body  style="padding-top: 50px;">
+    <div ng-app="App">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -68,7 +83,9 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
+    <label>grid
+            <input class="form-control" type="checkbox" ng-model="isGrid" ng-init="isGrid=false" />
+    </label>
     <div class="container" ng-controller="socketController">
         <div class="row">
             <div class="col-lg-3">
@@ -92,14 +109,9 @@
         </div>
 
         <hr/>
-        <label>grid
-            <input class="form-control" type="checkbox" ng-model="isGrid" />
-        </label>
-        <div class="row">
+       
+        <div class="row" ng-if="isGrid==false">
             <div ng-controller="socketController" class="hidden-xs">
-
-                <h1>Liste d'écrans</h1>
-
                 <div class="col-lg-3">
                     <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
                 </div>
@@ -138,29 +150,10 @@
             <li class="next" ng-click="nextImage()"><a href="#">Next</a></li>
         </ul>
 
-        <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
-        <div ng-controller="socketController">
-            <!--      <div ng-if="list.length>1">
-               
-                {{list.length}} {{droppedObjects1.length}}
-                <div class="col-sm-3" ng-show="list[0].id != me">
-                    <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,list[currentScreen.id])">
 
-                        <ul ng-drag="true" ng-drag-data="droppedObjects1[list[currentScreen.id].id]" ng-center-anchor="{{centerAnchor}}">
-                            <h3>Ecran {{list[currentScreen.id].id}}</h3>
-                            {{currentScreen}}
-                            <li> <img id= "oklm" src="{{ droppedObjects1[list[currentScreen.id].id].src }}" class="img-responsive" style="padding:1%">
-                            </li>
-                        </ul>
-
-                        <ul class="pager">
-                            <li class="previous" ng-click="previousScreen(list)"><a href="#">Previous</a></li>
-                            <li class="next" ng-click="nextScreen(list)"><a href="#">Next</a></li>
-                        </ul>
-                    </div>
-                </div>
-            	
-            </div> -->
+        
+        <div ng-controller="socketController" ng-if="isGrid==false">
+            <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
             <div ng-repeat="i in list">
                 <div ng-show="i.id == currentScreen.id" ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
                     <div class="col-sm-3" ng-show="i.id != me">
@@ -178,14 +171,56 @@
             </div>
         </div>
     </div>
+    <div class="row" ng-controller="RootCtrl" ng-if="isGrid==true">
+        <div class="col-md-1"></div>
+        <div class="container col-md-10" ng-view></div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
     <script src="../lib/js/angular.min.js"></script>
     <script src="../lib/js/ngDraggable.js"></script>
+    <script src="../lib/js/ngInclude.js"></script>
     <script src="../js/services/SocketService.js"></script>
     <script src="../js/services/ImageManagerFactory.js"></script>
 
     <script src="../js/application/app.js"></script>
     <script src="../js/controllers/DropZoneController.js"></script>
     <script src="../js/controllers/SocketController.js"></script>
+
+
+
+     <script src="../lib/js/jquery.min.js"></script>
+    <script src="../lib/js/leaflet.js"></script>
+
+    <!-- angular dependency -->
+   
+    <script src="../lib/js/angular-route.min.js"></script>
+
+    <!-- App lib -->
+
+
+    <script src="../js/controllers/mainController.js"></script>
+    <script src="../js/controllers/dashboardController.js"></script>
+
+    <script src="../js/services/ArrayService.js"></script>
+    <script src="../js/services/graphService.js"></script>
+    <script src="../js/services/userService.js"></script>
+    <script src="../js/services/widgetService.js"></script>
+
+    <script src="../js/directives/ArrayDirective.js"></script>
+    <script src="../js/directives/dynCustomDirective.js"></script>
+
+    <!-- Other Lib -->
+    <script src="../lib/js/angular-gridster.js"></script>
+    <script src="../lib/js/jquery.gridster.min.js"></script>
+    <script src="../lib/js/ui-bootstrap-tpls.min.js"></script>
+    <script src="../lib/js/d3.min.js"></script>
+    <script src="../lib/js/nvd3.min.js"></script>
+    <script src="../lib/js/angularjs-nvd3-directives.js"></script>
+    <script src="../lib/js/angular-leaflet-directive.min.js"></script>
+
+
+
 
     <script src="/socket.io/socket.io.js"></script>
 

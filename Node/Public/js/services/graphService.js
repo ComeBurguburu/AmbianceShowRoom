@@ -2,7 +2,7 @@
     Github
 */
 
-app.service('graphService',['$http','$q', function ($http,$q) {
+angular.module('App').service('graphService',['$http','$q', function ($http,$q) {
 
     /* This shoud be part of a 'UserService' -> Allow to get Custom Widget depending on user */
 

@@ -2,7 +2,7 @@
     Github
 */
 
-app.directive("myArrayDisplay", function () {
+angular.module('App').directive("myArrayDisplay", function () {
     return {
         restrict: 'AEC',
         templateUrl: '../html/template/MyArray.html',

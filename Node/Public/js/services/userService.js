@@ -2,7 +2,7 @@
     Github
 */
 
-app.service('userService',['$http','$q', function ($http,$q) {
+angular.module('App').service('userService',['$http','$q', function ($http,$q) {
 
     /* Same as graphService. This shoud be part of a 'UserService' -> Allow to get Custom Widget depending on user */
 
@@ -13,15 +13,7 @@ app.service('userService',['$http','$q', function ($http,$q) {
                 name: 'dashboard 1',
                 widgets: [
                     {col: 0,row: 0,sizeY: 1,sizeX: 1,name: "Widget 1",id:0,content:""}, 
-                    {col: 2,row: 0,sizeY: 1, sizeX: 1,name: "Widget 2",id:1,content:'map'}
-                ]
-            },
-            2: {
-                id: '2',
-                name: 'dashboard 2',
-                widgets: [
-                    {col: 1,row: 1,sizeY: 1,sizeX: 2,name: "Other Widget 1",id:0},
-                    {col: 1,row: 3,sizeY: 1, sizeX: 1,name: "Other Widget 2",id:1}
+                    {col: 2,row: 0,sizeY: 1, sizeX: 1,name: "Widget 2",id:1,content:''}
                 ]
             }
         };

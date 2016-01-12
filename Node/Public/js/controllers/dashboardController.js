@@ -2,7 +2,7 @@
 	Github
 */
 
-angular.module('app')
+angular.module('App')
 
 .controller('DashboardCtrl', ['$scope', '$timeout', '$compile', "graphService", "userService", //'imanagefact',
 

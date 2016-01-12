@@ -2,7 +2,7 @@
     Github
 */
 
-app.factory('myDataService', [function () {
+angular.module('App').factory('myDataService', [function () {
 
     var dataTab = [
         { name: 'Fish', fish: 'Crab', tastiness: 2 },
