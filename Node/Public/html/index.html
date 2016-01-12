@@ -151,7 +151,7 @@
         </ul>
     </div>
 
-    <div class="container visible-xs" ng-controller="dropzoneController" ng-show="isGrid==false">   
+    <div class="container visible-xs" ng-controller="dropzoneController">   
         <div ng-controller="socketController">
             <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
             <div ng-repeat="i in list">
@@ -173,9 +173,9 @@
     </div>
     
     <div class="row" ng-controller="RootCtrl" ng-show="isGrid==true">
-        <!-- <div class="col-md-1"></div> -->
-        <div class="container" ng-view></div>
-        <!-- <div class="col-md-1"></div> -->
+        <div class="col-md-1"></div>
+        <div class="container col-md-10" ng-view></div>
+        <div class="col-md-1"></div>
     </div>
 </div>
     <script src="../lib/js/angular.min.js"></script>
