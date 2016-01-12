@@ -1,6 +1,7 @@
 angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$timeout', function ($scope, sockserv, $timeout) {
 
     $scope.centerAnchor = true;
+    $scope.imageSelected=false;
     $scope.toggleCenterAnchor = function () {
         $scope.centerAnchor = !$scope.centerAnchor
     }
@@ -161,7 +162,14 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
         $scope.droppedObjects1[idEcran.id] = clone(data);
         sockserv.send(idEcran.id, data.src, $scope.isGrid);
+        console.log($scope.isGrid);
+        console.log($scope.imageSelected);
+        if($scope.isGrid==true){
+            $scope.imageSelected=true;
+            console.log($scope.isGrid);
+            console.log($scope.imageSelected);
 
+        }
 
     }
     $scope.currentImage = {};
