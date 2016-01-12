@@ -69,7 +69,7 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <img data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" data-ng-src="{{src}}" data-ng-show="left!==undefined" title="fullsreen" alt="fullscreen" onclick="FullScreen()" />
+    <img data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" data-ng-src="{{src}}" data-ng-show="left!==undefined" title="fullsreen" alt="fullscreen" ondblclick="FullScreen()" />
 
     <div class="container" data-ng-show="left===undefined">
         <h3>My Controller</h3>
