@@ -104,10 +104,16 @@
             </div>
         </div>
 
+<<<<<<< Updated upstream
     </div>-->
 
-        <div id="dropbox" class="container hidden-xs dropbox" ng-class="dropClass" ng-controller="dropzoneController">
-
+    <div id="dropbox" class="container hidden-xs dropbox" ng-class="dropClass" ng-controller="dropzoneController" droppable="true">
+        <div id="scroll" class="hidden-xs">
+            <ul class="draggable-objects">
+                <li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
+                    <img ng-src="{{ obj.src }}"> {{obj.id}}
+                </li>
+            </ul>
         </div>
 
         <div class="container hidden-xs" ng-controller="dropzoneController">

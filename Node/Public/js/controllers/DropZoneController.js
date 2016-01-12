@@ -93,8 +93,10 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
                     $scope.files.push(files[i])
                     console.log("$scope.files : ");
                     console.log($scope.files);
+
                 }
             })
+            $scope.uploadFile();
         }
     }, false)
     //============== DRAG & DROP =============
@@ -113,17 +115,19 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
     $scope.uploadFile = function() {
         var fd = new FormData()
-        for (var i in $scope.files) {
-            fd.append("uploadedFile", $scope.files[i])
-        }
+        // for (var i in $scope.files) {
+        //     fd.append("uploadedFile", $scope.files[i])
+        // }
+        fd.append("file", $scope.files[0]);
         var xhr = new XMLHttpRequest()
         xhr.upload.addEventListener("progress", uploadProgress, false)
         xhr.addEventListener("load", uploadComplete, false)
         xhr.addEventListener("error", uploadFailed, false)
         xhr.addEventListener("abort", uploadCanceled, false)
-        xhr.open("POST", "/fileupload")
+        xhr.open("POST", "/file-upload")
         $scope.progressVisible = true
         xhr.send(fd)
+        console.log("bien envoyé");
     }
 
     function uploadProgress(evt) {
