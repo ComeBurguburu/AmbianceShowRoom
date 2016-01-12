@@ -79,7 +79,32 @@ controller.listen = function (server) {
             updateList();
         });
 
+        socket.on("test", function (log) {
+            console.log("-------------------------------------");
+            console.log(log);
+            console.log("-------------------------------------");
+        });
 
+        socket.on("configuration", function (conf) {
+
+            console.log("--conf--");
+
+            for (var i = 0; i < conf.screenlist.length; i++) {
+                for (var j = 0; j < mapInfo.length; j++) {
+
+                    if (mapInfo[j].id === conf.screenlist[i].id) {
+                        mapInfo[j].row = conf.screenlist[i].row;
+                        mapInfo[j].col = conf.screenlist[i].col;
+                        mapInfo[j].sizeX = 1;
+                        mapInfo[j].sizeY = 1;
+                        console.info(mapInfo[j].id);
+                    }
+
+                }
+            }
+            console.log("--end--");
+            updateList();
+        });
 
         socket.on("remove", function (number) {
             if (isNaN(number) || mapSocket[number] === undefined || mapSocket[number] === null) {

@@ -11,7 +11,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width" />
- 
+
     <link rel="stylesheet" href="../css/angular-gridster.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/nvd3.min.css">
@@ -21,78 +21,78 @@
 
 </head>
 
-<body  style="padding-top: 50px;">
+<body style="padding-top: 50px;">
     <div ng-app="App">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Brand</a>
-            </div>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="watcher.html" target="_blank">Watcher <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="watcher.html" target="_blank">Watcher <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                        <ul class="nav navbar-nav" ng-controller="socketController">
+
+                            <li class="btn btn-info rounder"><a href="#">{{me}}</a></li>
+                            <li ng-hide="error===undefined || error==''" style="color:red;" id="error" ng-bind="error"></li>
+                            <li ng-hide="info===undefined || info==''" style="color:blue;" ng-bind="info"></li>
+
                         </ul>
-                    </li>
-                    <ul class="nav navbar-nav" ng-controller="socketController">
-        
-                        <li class="btn btn-info rounder"><a href="#">{{me}}</a></li>
-                        <li ng-hide="error===undefined || error==''" style="color:red;" id="error" ng-bind="error"></li>
-                        <li ng-hide="info===undefined || info==''"  style="color:blue;" ng-bind="info"></li>
-           
                     </ul>
-                </ul>
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
 
-                <ul class="nav navbar-nav navbar-right">
-                    
-                    <li>grid
-                   <input class="form-control" type="checkbox" ng-model="isGrid"  ng-init="isGrid=false" />
-                   </li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li>grid
+                            <input class="form-control" type="checkbox" ng-model="isGrid" ng-init="isGrid=false" />
+                        </li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+            <!-- /.container-fluid -->
+        </nav>
 
 
-  <!--   <div class="container" ng-controller="socketController">
+        <!--   <div class="container" ng-controller="socketController">
 
         <div class="row">
             <div class="col-lg-3">
@@ -106,119 +106,119 @@
 
     </div>-->
 
-    <div id="dropbox" class="container hidden-xs dropbox" ng-class="dropClass" ng-controller="dropzoneController">
+        <div id="dropbox" class="container hidden-xs dropbox" ng-class="dropClass" ng-controller="dropzoneController">
 
-    </div> 
-  
-    <div class="container hidden-xs" ng-controller="dropzoneController">
-        <div class="row">
-            <div class="col-lg-3">
-                <h3 style="border:3px solid #456789;color:#456789">Liste d'images</h3>
-            </div>
         </div>
 
-        <div id="scroll" class="hidden-xs">
-            <ul class="draggable-objects">
-                <li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
-                    <img ng-src="{{ obj.src }}"> {{obj.id}}
-                </li>
-            </ul>
-        </div>
-
-        <hr/>
-       
-        <div class="row" ng-show="isGrid==false">
-            <div ng-controller="socketController" class="hidden-xs">
+        <div class="container hidden-xs" ng-controller="dropzoneController">
+            <div class="row">
                 <div class="col-lg-3">
-                    <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
+                    <h3 style="border:3px solid #456789;color:#456789">Liste d'images</h3>
                 </div>
-                <div id="scroll">
-                    <div ng-repeat="i in list">
-                        <div class="col-sm-3" ng-show="i.id != me">
+            </div>
 
-                            <h3>Ecran {{i.id}}</h3>
+            <div id="scroll" class="hidden-xs">
+                <ul class="draggable-objects">
+                    <li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
+                        <img ng-src="{{ obj.src }}"> {{obj.id}}
+                    </li>
+                </ul>
+            </div>
 
-                            <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
+            <hr/>
 
-                                <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
-                                    {{droppedObjects1[i.id].id}}
-                                    <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
-                                </ul>
+            <div class="row" ng-show="isGrid==false">
+                <div ng-controller="socketController" class="hidden-xs">
+                    <div class="col-lg-3">
+                        <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
+                    </div>
+                    <div id="scroll">
+                        <div ng-repeat="i in list">
+                            <div class="col-sm-3" ng-show="i.id != me">
+
+                                <h3>Ecran {{i.id}}</h3>
+
+                                <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
+
+                                    <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
+                                        {{droppedObjects1[i.id].id}}
+                                        <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
-    </div>
+
+        <div class="container visible-xs" ng-controller="dropzoneController">
+            <ul class="draggable-objects">
+                <li ng-drag="true" ng-drag-data="currentImage" data-allow-transform="true">
 
 
-    <div class="container visible-xs" ng-controller="dropzoneController">
-        <ul class="draggable-objects">
-            <li ng-drag="true" ng-drag-data="currentImage" data-allow-transform="true">
+                    <img ng-src="{{currentImage.src}}" class="img-responsive center-block" style="width:auto;height:100px;padding:1%;">
+                </li>
+            </ul>
 
+            <ul class="pager">
+                <li class="previous" ng-click="previousImage()"><a href="#">Previous</a></li>
+                <li class="next" ng-click="nextImage()"><a href="#">Next</a></li>
+            </ul>
+        </div>
 
-                <img ng-src="{{currentImage.src}}" class="img-responsive center-block" style="width:auto;height:100px;padding:1%;">
-            </li>
-        </ul>
+        <div class="container visible-xs" ng-controller="dropzoneController">
+            <div ng-controller="socketController">
 
-        <ul class="pager">
-            <li class="previous" ng-click="previousImage()"><a href="#">Previous</a></li>
-            <li class="next" ng-click="nextImage()"><a href="#">Next</a></li>
-        </ul>
-    </div>
-
-    <div class="container visible-xs" ng-controller="dropzoneController">   
-        <div ng-controller="socketController">
-
-            <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
-            <div ng-repeat="i in list">
-                <div ng-show="i.id == currentScreen.id" ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
-                    <div class="col-sm-3" ng-show="i.id != me">
-                        <h3>Ecran {{i.id}}</h3>
-                        <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
-                            {{droppedObjects1[i.id].id}}
-                            <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
-                        </ul>
-                        <ul class="pager">
-                            <li class="previous" ng-click="previousScreen(list,me)"><a href="#">Previous</a></li>
-                            <li class="next" ng-click="nextScreen(list,me)"><a href="#">Next</a></li>
-                        </ul>
+                <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
+                <div ng-repeat="i in list">
+                    <div ng-show="i.id == currentScreen.id" ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
+                        <div class="col-sm-3" ng-show="i.id != me">
+                            <h3>Ecran {{i.id}}</h3>
+                            <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
+                                {{droppedObjects1[i.id].id}}
+                                <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
+                            </ul>
+                            <ul class="pager">
+                                <li class="previous" ng-click="previousScreen(list,me)"><a href="#">Previous</a></li>
+                                <li class="next" ng-click="nextScreen(list,me)"><a href="#">Next</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container hidden-xs" ng-controller="dropzoneController" ng-show="isGrid===true">
-        <div class="row">
-            <div ng-controller="socketController" class="hidden-xs col-lg-3">
-             
+        <div class="container hidden-xs" ng-controller="dropzoneController" ng-show="isGrid===true">
+            <div class="row">
+                <div ng-controller="socketController" class="hidden-xs col-lg-3">
+
                     <h3 style="border:3px solid #456789;color:#456789;width:100%;">Composition d'écrans</h3>
-               
+
                     <!-- <div ng-repeat="i in list"> -->
-                        <!-- <div ng-show="list[1].id != me"> -->
+                    <!-- <div ng-show="list[1].id != me"> -->
 
-                            <h3>Ecran {{list[0].id}}</h3>
+                    <h3>Ecran {{list[0].id}}</h3>
 
-                            <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,list[1])" style="width:100%;">
+                    <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,list[1])" style="width:100%;">
 
-                                <ul ng-drag="true" ng-drag-data="droppedObjects1[list[1].id]" ng-center-anchor="{{centerAnchor}}">
-                                    {{droppedObjects1[i.id].id}}
-                                    <li> <img ng-src="{{ droppedObjects1[list[1].id].src }}" class="img-responsive" style="padding:1%"></li>
-                                </ul>
-                            </div>
-            </div>
-                    <!-- </div> -->
+                        <ul ng-drag="true" ng-drag-data="droppedObjects1[list[1].id]" ng-center-anchor="{{centerAnchor}}">
+                            {{droppedObjects1[i.id].id}}
+                            <li> <img ng-src="{{ droppedObjects1[list[1].id].src }}" class="img-responsive" style="padding:1%"></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- </div> -->
 
-            <div class="col-lg-9" ng-controller="RootCtrl" >      
-                <div class="col-md-1"></div>
-                <div class="container col-md-10" ng-view></div>
-                <div class="col-md-1"></div>
+                <div class="col-lg-9" ng-controller="RootCtrl">
+                    <div class="col-md-1"></div>
+                    <div class="container col-md-10" ng-view></div>
+                    <div class="col-md-1"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -236,7 +236,7 @@
     <script src="../lib/js/leaflet.js"></script>
 
     <!-- angular dependency -->
-   
+
     <script src="../lib/js/angular-route.min.js"></script>
 
     <!-- App lib -->

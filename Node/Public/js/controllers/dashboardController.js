@@ -4,10 +4,10 @@
 
 angular.module('App')
 
-.controller('DashboardCtrl', ['$scope', '$timeout', '$compile', "graphService", "userService", //'imanagefact',
+.controller('DashboardCtrl', ['$scope', '$timeout', '$compile', "graphService", "userService", "sockserv", //'imanagefact',
 
 
-	function ($scope, $timeout, $compile, graphService, userService) { //, imanagefact) {
+	function ($scope, $timeout, $compile, graphService, userService, sockserv) { //, imanagefact) {
         //Options for Gridster system
         $scope.gridsterOptions = {
             margins: [20, 20],
@@ -108,20 +108,22 @@ angular.module('App')
             var found = false;
             var result;
 
-            if(widgetSize == 0 || widgetSize==undefined){
+            if (widgetSize == 0 || widgetSize == undefined) {
                 return 0;
-            }else{
+            } else {
                 for (i = 0; i < widgetSize; i++) {
                     id_tmp.push($scope.dashboard.widgets[i].id);
                 }
-                id_tmp.sort(function compare(x, y) {return x - y;});
+                id_tmp.sort(function compare(x, y) {
+                    return x - y;
+                });
 
                 i = 0;
 
-                while(found==false){
+                while (found == false) {
                     for (i = 0; i < id_tmp.length; i++) {
-                        if((id_tmp[i]+1)!=(id_tmp[i+1])){
-                            result = id_tmp[i]+1;
+                        if ((id_tmp[i] + 1) != (id_tmp[i + 1])) {
+                            result = id_tmp[i] + 1;
                             found = true;
                             break;
                         }
@@ -138,20 +140,22 @@ angular.module('App')
             var found = false;
             var result; // Default
 
-            if(widgetSize == 0 || widgetSize==undefined){
+            if (widgetSize == 0 || widgetSize == undefined) {
                 return 0;
-            }else{
+            } else {
                 for (i = 0; i < widgetSize; i++) {
                     id_tmp.push(widgetListParam[i].id);
                 }
-                id_tmp.sort(function compare(x, y) {return x - y;});
+                id_tmp.sort(function compare(x, y) {
+                    return x - y;
+                });
 
                 i = 0;
 
-                while(found==false){
+                while (found === false) {
                     for (i = 0; i < id_tmp.length; i++) {
-                        if((id_tmp[i]+1)!=(id_tmp[i+1])){
-                            result = id_tmp[i]+1;
+                        if ((id_tmp[i] + 1) != (id_tmp[i + 1])) {
+                            result = id_tmp[i] + 1;
                             found = true;
                             break;
                         }
@@ -165,7 +169,7 @@ angular.module('App')
         $scope.addWidget = function () {
             var widgetSize = $scope.dashboard.widgets.length + 1;
             var idToSet = $scope.addId();
-            var widgetName = "Widget " + (idToSet+1);
+            var widgetName = "Widget " + (idToSet + 1);
             $scope.dashboard.widgets.push({
                 name: widgetName,
                 sizeX: 1,
@@ -175,15 +179,85 @@ angular.module('App')
             console.log($scope.dashboard);
         };
 
+        function callback(ret) {
+
+            $scope.clear();
+            var index;
+            // alert(ret.widgets.length);
+            for (index = 0; index < ret.widgets.length; index++) {
+                $scope.dashboard.widgets.push({
+                    name: "Screen " + index,
+                    row: ret.widgets[index].row,
+                    col: ret.widgets[index].col,
+                    type: 0,
+                    id: ret.widgets[index].id,
+                    content: "image"
+                });
+
+            }
+
+
+            /*  console.warn(JSON.stringify([{
+                name: "widget 1",
+                sizeX: 1,
+                sizeY: 1,
+                col: 0,
+                row: 1,
+                content: "image",
+                type: 0,
+				}, {
+                name: "widget 2",
+                sizeX: 1,
+                sizeY: 1,
+                col: 1,
+                row: 1,
+                content: "image",
+                type: 0,
+				}]));*/
+
+            //console.warn($scope.dashboard.widgets);
+
+
+            //$scope.dashboard.widgets = ret.widgets;
+            /*$scope.dashboard.widgets = [{
+                name: "Jhon",
+                sizeX: 1,
+                sizeY: 1,
+                col: 0,
+                row: 1,
+                content: "image",
+                type: 0,
+                other: 0
+				}, {
+                name: "DOOOOOOE",
+                sizeX: 1,
+                sizeY: 1,
+                col: 1,
+                row: 1,
+                content: "image",
+                type: 0,
+                other: 0
+				}];*/
+
+
+            //console.error($scope.dashboard.widgets);
+            $scope.$apply();
+
+        }
+
+        //  console.error("coucou");
+        sockserv.grid.init(callback)
+
+
         $scope.fillGrid = function () {
             $scope.clear();
             var i = 0;
             var widgetId;
 
             for (i = 0; i < $scope.widgetList.length; i++) {
-                if($scope.dashboard.widgets.length==undefined){
+                if ($scope.dashboard.widgets.length == undefined) {
                     widgetId = 0;
-                }else{
+                } else {
                     widgetId = $scope.dashboard.widgets.length;
                 }
 
@@ -207,9 +281,9 @@ angular.module('App')
             var widgetId;
 
             for (i = 0; i < widgetListParam.length; i++) {
-                if($scope.dashboard.widgets.length==undefined){
+                if ($scope.dashboard.widgets.length == undefined) {
                     widgetId = 0;
-                }else{
+                } else {
                     widgetId = $scope.dashboard.widgets.length;
                 }
 
@@ -227,33 +301,36 @@ angular.module('App')
         };
 
         $scope.widgetList = [{
-                    name: "widget 1",
-                    sizeX: 1,
-                    sizeY: 1,
-                    col: 0,
-                    row: 1,
-                    content: "image",
-                    type: 0,
-				},{
-                    name: "widget 2",
-                    sizeX: 1,
-                    sizeY: 1,
-                    col: 1,
-                    row: 1,
-                    content: "image",
-                    type: 0,
-				},{
-                    name: "widget 3",
-                    sizeX: 1,
-                    sizeY: 1,
-                    col: 2,
-                    row: 1,
-                    content: "image",
-                    type: "whatever",
+                name: "widget 1",
+                sizeX: 1,
+                sizeY: 1,
+                col: 0,
+                row: 1,
+                content: "image",
+                type: 0,
+				}, {
+                name: "widget 2",
+                sizeX: 1,
+                sizeY: 1,
+                col: 1,
+                row: 1,
+                content: "image",
+                type: 0,
+				}, {
+                name: "widget 3",
+                sizeX: 1,
+                sizeY: 1,
+                col: 2,
+                row: 1,
+                content: "image",
+                type: "whatever",
 				},
 		];
 
         $scope.getWidget = function () {
+            console.log($scope.privategetWidget());
+        }
+        $scope.privategetWidget = function () {
             var wlist = $scope.dashboard.widgets;
             var screen = {
                 col: 0,
@@ -273,32 +350,32 @@ angular.module('App')
                     screen.row = wlist[i].row;
                 }
             }
-            console.info($scope.dashboard.widgets);
-            console.log(screen);
+            sockserv.emit("configuration", screen);
+            return screen;
         }
 
-/*
-        //Save the current dashboard in the 'mon dashboard' item
-        $scope.save = function () {
-            var widgets = JSON.parse(JSON.stringify($scope.dashboard.widgets));
-            var length = Object.keys($scope.dashboards).length;
-            if ($scope.dashboards[length].name == "mon dashboard")
-                $scope.dashboards[length] = {
-                    id: length,
-                    name: "mon dashboard",
-                    widgets: widgets
-                };
-            else {
-                length++;
-                $scope.dashboards[length] = {
-                    id: length,
-                    name: "mon dashboard",
-                    widgets: widgets
-                };
-            }
-            userService.saveDashboard(widgets);
-        }
-*/
+        /*
+                //Save the current dashboard in the 'mon dashboard' item
+                $scope.save = function () {
+                    var widgets = JSON.parse(JSON.stringify($scope.dashboard.widgets));
+                    var length = Object.keys($scope.dashboards).length;
+                    if ($scope.dashboards[length].name == "mon dashboard")
+                        $scope.dashboards[length] = {
+                            id: length,
+                            name: "mon dashboard",
+                            widgets: widgets
+                        };
+                    else {
+                        length++;
+                        $scope.dashboards[length] = {
+                            id: length,
+                            name: "mon dashboard",
+                            widgets: widgets
+                        };
+                    }
+                    userService.saveDashboard(widgets);
+                }
+        */
 
 
         //To switch between Dashboard
@@ -313,96 +390,96 @@ angular.module('App')
 
         // choose the Dashboard '1' when first load.
         $scope.selectedDashboardId = '1';
-	}])
+}])
 
 
 .controller('CustomWidgetCtrl', ['$scope', '$modal',
 	function ($scope, $modal) {
 
-        $scope.remove = function (widget) {
-            $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
-            //console.warn("Remove Widget");
-        };
-        /*
-        ******************************************************************************************
-        		// SETTINGS POP UP
-        		$scope.openSettings = function(widget) {
-        			$modal.open({
-        				scope: $scope,
-        				templateUrl: '../html/template/widget_settings.html',
-        				controller: 'WidgetSettingsCtrl',
-        				resolve: {
-        					widget: function() {
-        						return widget;
-        					}
-        				}
-        			});
-        		};
-        ******************************************************************************************
-        */
+            $scope.remove = function (widget) {
+                $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
+                //console.warn("Remove Widget");
+            };
+            /*
+            ******************************************************************************************
+            		// SETTINGS POP UP
+            		$scope.openSettings = function(widget) {
+            			$modal.open({
+            				scope: $scope,
+            				templateUrl: '../html/template/widget_settings.html',
+            				controller: 'WidgetSettingsCtrl',
+            				resolve: {
+            					widget: function() {
+            						return widget;
+            					}
+            				}
+            			});
+            		};
+            ******************************************************************************************
+            */
 	}
 ])
-/*
-.controller('WidgetSettingsCtrl', ['$scope', '$timeout', '$rootScope', '$modalInstance', 'widget', '$compile',
-	function ($scope, $timeout, $rootScope, $modalInstance, widget) {
-        $scope.widget = widget;
+    /*
+    .controller('WidgetSettingsCtrl', ['$scope', '$timeout', '$rootScope', '$modalInstance', 'widget', '$compile',
+    	function ($scope, $timeout, $rootScope, $modalInstance, widget) {
+            $scope.widget = widget;
 
-        $scope.form = {
-            name: widget.name,
-            sizeX: widget.sizeX,
-            sizeY: widget.sizeY,
-            col: widget.col,
-            row: widget.row,
-            content: widget.content,
-        };
+            $scope.form = {
+                name: widget.name,
+                sizeX: widget.sizeX,
+                sizeY: widget.sizeY,
+                col: widget.col,
+                row: widget.row,
+                content: widget.content,
+            };
 
-        $scope.$watch('form.content', function (newValue, oldValue) {
-            if (typeof (newValue) !== 'undefined') {
-                $scope.typeList = $scope.graphContentList[newValue];
-                $scope.dispTypelist = true;
-            } else
-                $scope.dispTypelist = false;
-        });
+            $scope.$watch('form.content', function (newValue, oldValue) {
+                if (typeof (newValue) !== 'undefined') {
+                    $scope.typeList = $scope.graphContentList[newValue];
+                    $scope.dispTypelist = true;
+                } else
+                    $scope.dispTypelist = false;
+            });
 
-        $scope.sizeOptions = [{
-            id: '1',
-            name: '1'
-		}, {
-            id: '2',
-            name: '2'
-		}, {
-            id: '3',
-            name: '3'
-		}, {
-            id: '4',
-            name: '4'
-		}];
+            $scope.sizeOptions = [{
+                id: '1',
+                name: '1'
+    		}, {
+                id: '2',
+                name: '2'
+    		}, {
+                id: '3',
+                name: '3'
+    		}, {
+                id: '4',
+                name: '4'
+    		}];
 
-        $scope.dismiss = function () {
-            $modalInstance.dismiss();
-        };
+            $scope.dismiss = function () {
+                $modalInstance.dismiss();
+            };
 
-        $scope.remove = function () {
-            $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
-            $modalInstance.close();
-        };
+            $scope.remove = function () {
+                $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
+                $modalInstance.close();
+            };
 
-        $scope.submit = function () {
-            angular.extend(widget, $scope.form);
-            $modalInstance.close(widget);
-        };
-	}
-])
+            $scope.submit = function () {
+                angular.extend(widget, $scope.form);
+                $modalInstance.close(widget);
+            };
+    	}
+    ])
 
 
-// helper code
-.filter('object2Array', function () {
-    return function (input) {
-        var out = [];
-        for (i in input) {
-            out.push(input[i]);
+    // helper code
+    .filter('object2Array', function () {
+        return function (input) {
+            var out = [];
+            for (i in input) {
+                out.push(input[i]);
+            }
+            return out;
         }
-        return out;
-    }
-});
-*/
+    });
+    */

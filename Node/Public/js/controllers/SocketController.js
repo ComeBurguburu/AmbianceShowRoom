@@ -160,17 +160,6 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact) {
             $scope.addWatcher(ret.list);
         }
         console.log($scope.list);
-        /*
-        	//$scope.list = ["a", "b", "c"];
-        	//$scope.$apply();
-        	//	console.log(ret);
-        	var a = JSON.stringify(ret);
-        	console.log(a);
-        	console.log(ret.list[0]);
-        	console.log($scope.list);
-        	console.log(ret.list);
-        	alert(ret.list);
-        	console.log(ret.list.length);*/
         $scope.$apply();
         //$scope.addWatcher($scope.info);
     }

@@ -31,6 +31,10 @@ function sockFnc() {
                 version: parseInt(navigator.appVersion, 10),
                 X: window.screenX,
                 Y: window.screenY,
+                row: 1,
+                col: 1,
+                sizeX: 1,
+                sizeY: 1,
                 admin: true
             };
             socket.emit("register", JSON.stringify(info));
@@ -83,8 +87,31 @@ function sockFnc() {
         socket.emit("image", obj);
     }
 
+    function test(log) {
+        socket.emit("test", log);
+    }
+
+    function emit(event, data) {
+        socket.emit(event, data);
+    }
+
+    function init_grid(c) {
+        socket.on("list", function (list) {
+            c({
+                widgets: JSON.parse(list)
+            });
+        })
+
+
+    }
+
     return {
         init: init,
-        send: send
+        test: test,
+        emit: emit,
+        send: send,
+        grid: {
+            init: init_grid
+        }
     };
 }
