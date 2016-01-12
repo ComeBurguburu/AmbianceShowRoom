@@ -61,7 +61,7 @@ controller.listen = function (server) {
             var index,
                 soket_id = mapSocket.indexOf(this);
 
-            if (soket_id === -1) {
+            if (soket_id === -1 || mapSocket[soket_id] === null) {
                 var index = getFirstEmpty();
                 var last = getLast();
                 json.row = last.row;
@@ -102,13 +102,14 @@ controller.listen = function (server) {
 
             for (var i = 0; i < conf.screenlist.length; i++) {
                 for (var j = 0; j < mapInfo.length; j++) {
-
-                    if (mapInfo[j].id === conf.screenlist[i].id) {
-                        mapInfo[j].row = conf.screenlist[i].row;
-                        mapInfo[j].col = conf.screenlist[i].col;
-                        mapInfo[j].sizeX = 1;
-                        mapInfo[j].sizeY = 1;
-                        console.info(mapInfo[j].id);
+                    if (mapInfo[j] !== undefined && mapInfo[j] !== null && conf.screenlist[i] !== undefined && conf.screenlist[i] !== null) {
+                        if (mapInfo[j].id === conf.screenlist[i].id) {
+                            mapInfo[j].row = conf.screenlist[i].row;
+                            mapInfo[j].col = conf.screenlist[i].col;
+                            mapInfo[j].sizeX = 1;
+                            mapInfo[j].sizeY = 1;
+                            console.info(mapInfo[j].id);
+                        }
                     }
 
                 }
@@ -143,8 +144,7 @@ controller.listen = function (server) {
             }
             var dim = getLast();
 
-            var id, mapReceiver = splitImage(dim.col + 1, dim.row + 1, obj.url);
-
+            var id, mapReceiver = splitImage(dim.row + 1, dim.col + 1, obj.url);
 
             if (obj.isGrid === true) { //parametrable
 
@@ -169,7 +169,10 @@ controller.listen = function (server) {
             return x.id === id;
         });
         if (result.length === 0) {
-            return;
+            return {
+                error: "error",
+                id: id
+            };
         }
         return result[0];
     }

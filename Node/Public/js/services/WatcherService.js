@@ -67,7 +67,7 @@ function sockFnc() {
             socket.emit("disconnect");
         }
         window.onresize = function () {
-            socket.emit("register");
+            socket.emit("register", JSON.stringify(info));
         }
 
 

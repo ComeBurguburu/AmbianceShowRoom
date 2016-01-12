@@ -190,12 +190,13 @@ angular.module('App')
                     continue;
                 }
                 $scope.dashboard.widgets.push({
-                    name: "Screen " + index,
+                    name: "Screen " + index + "(" + ret.widgets[index].plateform + ")",
                     row: ret.widgets[index].row,
                     col: ret.widgets[index].col,
                     type: 0,
                     id: ret.widgets[index].id,
                     content: "image"
+
                 });
 
             }

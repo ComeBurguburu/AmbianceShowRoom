@@ -9,8 +9,7 @@
     <link href="../lib/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
 </head>
 
-<body data-ng-app="AppWatcher" data-ng-controller="watcherController" style="padding-top: 50px;">
-    <!-- style="overflow: hidden">-->
+<body data-ng-app="AppWatcher" data-ng-controller="watcherController" style="padding-top: 50px;overflow: hidden">
 
 
     <nav class="navbar navbar-inverse navbar-fixed-top" data-ng-show="left===undefined">
@@ -80,7 +79,7 @@
         <div class="btn btn-info rounder">{{me}}</div>
         <div class="row">
             <div class="col-xs-12 col-lg-12">
-                <img data-ng-src="{{src}}" title="real size" alt="real size" />
+                <img data-ng-src="{{src}}" title="real size" alt="real size" style="width: 100%;height: auto;" />
             </div>
         </div>
     </div>

@@ -197,11 +197,11 @@
 
                     <h3>Ecran {{idWatcher.id}}</h3>
 
-                    <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,idWatcher)" style="width:100%;">
+                    <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,{id:0})" style="width:100%;">
 
-                        <ul ng-drag="true" ng-drag-data="droppedObjects1[idWatcher.id]" ng-center-anchor="{{centerAnchor}}">
-                
-                            <li> <img ng-src="{{ droppedObjects1[idWatcher.id].src }}" class="img-responsive" style="padding:1%"></li>
+                        <ul ng-drag="true" ng-drag-data="droppedObjects1[0]" ng-center-anchor="{{centerAnchor}}">
+
+                            <li> <img ng-src="{{ droppedObjects1[0].src }}" class="img-responsive" style="padding:1%"></li>
                         </ul>
                     </div>
                 </div>

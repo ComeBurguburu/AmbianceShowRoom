@@ -17,6 +17,7 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
         $scope.src = ret.img.url;
         //$scope.left = 0;
         console.log(ret.img);
+        //alert(JSON.stringify(ret.img));
         if (ret.img.left !== undefined) {
             $scope.left = ret.img.left + (isNaN(ret.img.left) ? "" : "px");
             $scope.top = ret.img.top + (isNaN(ret.img.top) ? "" : "px");
@@ -24,7 +25,7 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
         console.info(ret.img.width);
         $scope.width = "" + ret.img.width + (isNaN(ret.img.width) ? "" : "px");
         console.info($scope.width);
-        $scope.height = "auto";
+        $scope.height = "" + ret.img.height + (isNaN(ret.img.width) ? "" : "px")
         console.log(ret.img);
         console.log($scope);
 

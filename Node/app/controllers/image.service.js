@@ -7,8 +7,6 @@ image.sendImgDispositionProperties = function (screenlistfact, nbrligne, nbrcolo
     var widthMax = 0;
     var ligne = 0,
         colonne = 0;
-    var numberCurrentScreenParallele = 0;
-    var numberCurrentScreenPerpendiculaire = 0;
 
     for (ligne = 0; ligne < nbrligne; ligne++) {
         for (colonne = 0; colonne < nbrcolonne; colonne++) {
@@ -27,15 +25,12 @@ image.sendImgDispositionProperties = function (screenlistfact, nbrligne, nbrcolo
                 };
                 widthMax = widthMax + screenlistfact[numberCurrentScreen].width;
                 numberCurrentScreen++;
-                numberCurrentScreenPerpendiculaire++;
             }
         }
-        numberCurrentScreenPerpendiculaire = 0;
         widthMax = 0;
         if (screenlistfact[numberCurrentScreen] != undefined) {
             heightMax = heightMax + screenlistfact[numberCurrentScreen].height;
         }
-        numberCurrentScreenParallele++;
     }
     return imgDisposition;
 }
