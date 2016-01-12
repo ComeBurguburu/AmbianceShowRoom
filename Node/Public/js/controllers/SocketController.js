@@ -95,16 +95,16 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact) {
             src: "../images/9.jpg"
         };
         $scope.imgSrcList[10] = {
-            src: "../images/10.jpg"
+            src: "../images/Clone.jpg"
         };
         $scope.imgSrcList[11] = {
-            src: "../images/11.jpg"
+            src: "../images/Dark-Vador.jpg"
         };
         $scope.imgSrcList[12] = {
-            src: "../images/12.jpg"
+            src: "../images/Luke.jpg"
         };
         $scope.imgSrcList[13] = {
-            src: "../images/13.jpg"
+            src: "../images/whatever.jpg"
         };
     }
     $scope.fillImgSrcList();

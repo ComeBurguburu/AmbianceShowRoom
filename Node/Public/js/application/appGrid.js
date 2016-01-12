@@ -1,7 +1,7 @@
 /*
 	Github
 */
-app = angular.module('app', ['gridster', 'ui.bootstrap', 'ngRoute','nvd3ChartDirectives',"leaflet-directive"])
+app = angular.module('app', ['gridster', 'ui.bootstrap', 'ngRoute','nvd3ChartDirectives', "leaflet-directive"]) //, 'imageManagerFactory'])
 	.config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider

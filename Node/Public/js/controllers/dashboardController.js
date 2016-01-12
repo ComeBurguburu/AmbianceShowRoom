@@ -4,10 +4,10 @@
 
 angular.module('app')
 
-.controller('DashboardCtrl', ['$scope', '$timeout', '$compile', "graphService", "userService",
+.controller('DashboardCtrl', ['$scope', '$timeout', '$compile', "graphService", "userService", //'imanagefact',
 
 
-	function ($scope, $timeout, $compile, graphService, userService) {
+	function ($scope, $timeout, $compile, graphService, userService) { //, imanagefact) {
         //Options for Gridster system
         $scope.gridsterOptions = {
             margins: [20, 20],
@@ -241,7 +241,7 @@ angular.module('app')
                     col: 2,
                     row: 1,
                     content: "image",
-                    type: 9,
+                    type: "whatever",
 				},
 		];
 
@@ -313,7 +313,7 @@ angular.module('app')
 
         $scope.remove = function (widget) {
             $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
-            console.warn("Remove Widget");
+            //console.warn("Remove Widget");
         };
         /*
         ******************************************************************************************
