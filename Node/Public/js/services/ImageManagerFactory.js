@@ -17,7 +17,7 @@ function iManageFnc(){
 			for(colonne=0; colonne < nbscreenperpendiculaire; colonne++){
 				if (screenlistfact[numberCurrentScreen] != undefined){
 					imgDisposition[numberCurrentScreen] = {
-						left: widthMax + screenlistfact[numberCurrentScreen].X , //(numberCurrentScreenPerpendiculaire/nbscreenperpendiculaire)*widthMax,
+						left: widthMax + screenlistfact[numberCurrentScreen].X, //(numberCurrentScreenPerpendiculaire/nbscreenperpendiculaire)*widthMax,
 			        	top: heightMax + screenlistfact[numberCurrentScreen].Y, //(numberCurrentScreenParallele/nbscreenparallele)*heightMax,
 			        	URL: srcImg,
 			    		width: screenlistfact[numberCurrentScreen].width,

@@ -108,23 +108,27 @@ angular.module('app')
             var found = false;
             var result;
 
-            for (i = 0; i < widgetSize; i++) {
-                id_tmp.push($scope.dashboard.widgets[i].id);
-            }
-            id_tmp.sort(function compare(x, y) {return x - y;});
+            if(widgetSize == 0 || widgetSize==undefined){
+                return 0;
+            }else{
+                for (i = 0; i < widgetSize; i++) {
+                    id_tmp.push($scope.dashboard.widgets[i].id);
+                }
+                id_tmp.sort(function compare(x, y) {return x - y;});
 
-            i = 0;
+                i = 0;
 
-            while(found==false){
-                for (i = 0; i < id_tmp.length; i++) {
-                    if((id_tmp[i]+1)!=(id_tmp[i+1])){
-                        result = id_tmp[i]+1;
-                        found = true;
-                        break;
+                while(found==false){
+                    for (i = 0; i < id_tmp.length; i++) {
+                        if((id_tmp[i]+1)!=(id_tmp[i+1])){
+                            result = id_tmp[i]+1;
+                            found = true;
+                            break;
+                        }
                     }
                 }
+                return result;
             }
-            return result;
         }
 
         $scope.addIdParam = function (widgetListParam) {
@@ -134,23 +138,27 @@ angular.module('app')
             var found = false;
             var result; // Default
 
-            for (i = 0; i < widgetSize; i++) {
-                id_tmp.push(widgetListParam[i].id);
-            }
-            id_tmp.sort(function compare(x, y) {return x - y;});
+            if(widgetSize == 0 || widgetSize==undefined){
+                return 0;
+            }else{
+                for (i = 0; i < widgetSize; i++) {
+                    id_tmp.push(widgetListParam[i].id);
+                }
+                id_tmp.sort(function compare(x, y) {return x - y;});
 
-            i = 0;
+                i = 0;
 
-            while(found==false){
-                for (i = 0; i < id_tmp.length; i++) {
-                    if((id_tmp[i]+1)!=(id_tmp[i+1])){
-                        result = id_tmp[i]+1;
-                        found = true;
-                        break;
+                while(found==false){
+                    for (i = 0; i < id_tmp.length; i++) {
+                        if((id_tmp[i]+1)!=(id_tmp[i+1])){
+                            result = id_tmp[i]+1;
+                            found = true;
+                            break;
+                        }
                     }
                 }
+                return result;
             }
-            return result;
         }
 
         //Add a new empty widget to the Dashboard
