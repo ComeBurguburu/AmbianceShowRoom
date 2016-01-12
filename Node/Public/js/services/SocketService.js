@@ -32,13 +32,13 @@ function sockFnc() {
                 X: window.screenX,
                 Y: window.screenY,
                 admin: true
-            }
+            };
             socket.emit("register", JSON.stringify(info));
         });
         socket.on('identification', function (id) {
             ret.me = id;
             callback(ret);
-        })
+        });
 
 
         socket.on('disconnect', function () {
@@ -48,6 +48,11 @@ function sockFnc() {
         });
         socket.emit('Event', 'message test');
 
+        socket.on("update", function (data) {
+            ret.update = data;
+        });
+
+
         socket.on("list", function (data) {
             console.log("event list trig");
             var i, json = JSON.parse(data);
@@ -55,25 +60,11 @@ function sockFnc() {
             //console.info(json);
 
             for (i = 0; i < json.length; i++) {
-                ret.list.push(convert(json[i]));
+                ret.list.push(json[i]);
             }
 
             callback(ret);
         });
-
-        function convert(obj) {
-            var a, str = "";
-            if (obj === null) {
-                return null;
-            }
-            for (a in obj) {
-
-                str = str + a + " : " + obj[a] + "\n";
-            }
-            obj.string = str;
-            return obj;
-        }
-
 
         window.onbeforeunload = function () {
             socket.emit("disconnect");
@@ -87,11 +78,13 @@ function sockFnc() {
         obj.id = id;
         obj.url = url;
         obj.isGrid = isGrid;
+        obj.col = 2;
+        obj.row = 2;
         socket.emit("image", obj);
     }
 
     return {
         init: init,
         send: send
-    }
+    };
 }

@@ -12,10 +12,8 @@ var controller = function () {};
 controller.listen = function (server) {
 
 
-    var ioServer = io.listen(server);
+    var obj, ioServer = io.listen(server);
     ioServer.set('log level', 1);
-
-    var obj;
 
     ioServer.on('connection', function (socket) {
         /**
@@ -45,7 +43,7 @@ controller.listen = function (server) {
 
         socket.on('identification', function () {
             this.emit("identification", mapSocket.indexOf(this));
-        })
+        });
 
         socket.on('register', function (data) {
             var json = "";
@@ -60,7 +58,7 @@ controller.listen = function (server) {
 
             }
 
-            if (mapSocket.indexOf(this) == -1) {
+            if (mapSocket.indexOf(this) === -1) {
                 var index = getFirstEmpty();
                 mapSocket[index] = this;
                 mapInfo[index] = json;
@@ -90,12 +88,11 @@ controller.listen = function (server) {
             }
             mapSocket[number].emit("EventError", "you have been disconnected");
             mapSocket[number] = null;
-            mapInfo[number] = null
+            mapInfo[number] = null;
             updateList();
         });
 
         socket.on("image", function (obj) {
-            //testImage();
             console.log("lien image reçu");
             //console.log(obj);
             if (mapSocket[obj.id] === undefined || mapSocket[obj.id] === null) {
@@ -103,17 +100,20 @@ controller.listen = function (server) {
                 return;
             }
 
-            var mapReceiver = splitImage(2, 2, obj.url);
+            var id, mapReceiver = splitImage(obj.col, obj.row, obj.url);
+
 
             if (obj.isGrid === true) { //parametrable
 
-                for (var id = 0; id < mapSocket.length; id++) {
+                for (id = 0; id < mapSocket.length; id++) {
                     if (mapSocket[id] !== undefined && mapSocket[id] !== null) {
                         mapSocket[id].emit("image", search(mapReceiver, id));
+                        mapSocket[id].emit("update", mapReceiver);
                     }
                 }
             } else {
                 mapSocket[obj.id].emit("image", obj);
+                mapSocket[obj.id].emit("update", mapReceiver);
 
             }
 
@@ -187,5 +187,5 @@ controller.listen = function (server) {
     }
 
 
-}
+};
 module.exports = controller;
