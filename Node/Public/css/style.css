@@ -6,6 +6,10 @@ input {
     font-size: 14px;
     padding: 4px;
 }
+
+h3, .h3 {
+    font-size: 15px!important;
+}
 .container {
     margin: auto;
     background-color: white;

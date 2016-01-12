@@ -16,4 +16,16 @@ IOController.listen(server);
 
 app.use("/", express.static(path.join(__dirname, "Public")));
 app.use("/socket", express.static(path.join(__dirname, "Public/socket")));
-//app.use(defaultRoute);
+// app.post("/upload", function (){        
+// 		var fileInput = document.querySelector('#file');
+
+//         fileInput.addEventListener('change', function() {
+//             var xhr = new XMLHttpRequest();
+//             xhr.open('POST', '/upload'); // Rappelons qu'il est obligatoire d'utiliser la méthode POST quand on souhaite utiliser un FormData
+//             xhr.addEventListener('load', function() {
+//                 alert('Upload terminé !');
+//             }, false);
+//             // Upload du fichier…
+//         }, false););
+// 	});
+	//app.use(defaultRoute);
