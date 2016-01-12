@@ -35,6 +35,21 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
     }, {
         id: 9,
         src: '../images/9.jpg'
+    }, {
+        id: 10,
+        src: '../images/10.jpg'
+    }, {
+        id: 11,
+        src: '../images/11.jpg'
+    }, {
+        id: 12,
+        src: '../images/12.jpg'
+    }, {
+        id: 13,
+        src: '../images/13.jpg'
+    }, {
+        id: 14,
+        src: '../images/14.jpg'
     }];
     $scope.droppedObjects1 = [];
 
