@@ -140,7 +140,7 @@
 
         <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
         <div ng-controller="socketController">
-       <!--      <div ng-if="list.length>1">
+            <!--      <div ng-if="list.length>1">
                
                 {{list.length}} {{droppedObjects1.length}}
                 <div class="col-sm-3" ng-show="list[0].id != me">
@@ -162,14 +162,14 @@
             	
             </div> -->
             <div ng-repeat="i in list">
-                    <div ng-show="i.id == currentScreen.id"  ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
-                    	<div class="col-sm-3" ng-show="i.id != me">
-                    	<h3>Ecran {{i.id}}</h3>
-                        <ul  ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
+                <div ng-show="i.id == currentScreen.id" ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
+                    <div class="col-sm-3" ng-show="i.id != me">
+                        <h3>Ecran {{i.id}}</h3>
+                        <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
                             {{droppedObjects1[i.id].id}}
                             <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
                         </ul>
-                         <ul class="pager">
+                        <ul class="pager">
                             <li class="previous" ng-click="previousScreen(list,me)"><a href="#">Previous</a></li>
                             <li class="next" ng-click="nextScreen(list,me)"><a href="#">Next</a></li>
                         </ul>
@@ -185,7 +185,6 @@
 
     <script src="../js/application/app.js"></script>
     <script src="../js/controllers/DropZoneController.js"></script>
-    <script src="../js/controllers/ImageManagerController.js"></script>
     <script src="../js/controllers/SocketController.js"></script>
 
     <script src="/socket.io/socket.io.js"></script>
