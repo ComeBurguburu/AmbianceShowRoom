@@ -202,6 +202,18 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
         $scope.currentImage.src = $scope.draggableObjects[$scope.currentImage.id].src;
 
     }
+
+    $scope.searchNoAdminWatcher = function(list,me){
+        $scope.idWatcher= {};
+        for(i=0;i<list.length;i++){
+            if(list[i].id!=me){
+                 $scope.idWatcher.id=list[i].id;
+                 break;
+            }    
+        }
+    }
+
+
     $scope.initialise = function () {
         $scope.currentScreen = {};
         $scope.currentScreen.id = 0;

@@ -189,19 +189,19 @@
         <div class="container hidden-xs" ng-controller="dropzoneController" ng-show="isGrid===true">
             <div class="row">
                 <div ng-controller="socketController" class="hidden-xs col-lg-3">
-
+                    {{searchNoAdminWatcher(list,me);}}
                     <h3 style="border:3px solid #456789;color:#456789;width:100%;">Composition d'écrans</h3>
 
                     <!-- <div ng-repeat="i in list"> -->
-                    <!-- <div ng-show="list[1].id != me"> -->
+                    <!-- <div ng-show="idWatcher.id != me"> -->
 
-                    <h3>Ecran {{list[0].id}}</h3>
+                    <h3>Ecran {{idWatcher.id}}</h3>
 
-                    <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,list[1])" style="width:100%;">
+                    <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,idWatcher)" style="width:100%;">
 
-                        <ul ng-drag="true" ng-drag-data="droppedObjects1[list[1].id]" ng-center-anchor="{{centerAnchor}}">
-                            {{droppedObjects1[i.id].id}}
-                            <li> <img ng-src="{{ droppedObjects1[list[1].id].src }}" class="img-responsive" style="padding:1%"></li>
+                        <ul ng-drag="true" ng-drag-data="droppedObjects1[idWatcher.id]" ng-center-anchor="{{centerAnchor}}">
+                
+                            <li> <img ng-src="{{ droppedObjects1[idWatcher.id].src }}" class="img-responsive" style="padding:1%"></li>
                         </ul>
                     </div>
                 </div>
