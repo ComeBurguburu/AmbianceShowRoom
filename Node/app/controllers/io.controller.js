@@ -58,12 +58,21 @@ controller.listen = function (server) {
 
             }
 
-            if (mapSocket.indexOf(this) === -1) {
+            var index,
+                soket_id = mapSocket.indexOf(this);
+
+            if (soket_id === -1) {
                 var index = getFirstEmpty();
-                mapSocket[index] = this;
-                mapInfo[index] = json;
-                mapInfo[index].id = index;
+                var last = getLast();
+                json.row = last.row;
+                json.col = last.col;
+            } else {
+                index = soket_id;
             }
+            mapSocket[index] = this;
+            mapInfo[index] = json;
+            mapInfo[index].id = index;
+
             console.log('connect client ' + mapSocket.indexOf(this));
             this.emit("identification", mapSocket.indexOf(this));
             updateList();
@@ -88,6 +97,8 @@ controller.listen = function (server) {
         socket.on("configuration", function (conf) {
 
             console.log("--conf--");
+            console.log(":before");
+            console.log(mapInfo);
 
             for (var i = 0; i < conf.screenlist.length; i++) {
                 for (var j = 0; j < mapInfo.length; j++) {
@@ -102,9 +113,15 @@ controller.listen = function (server) {
 
                 }
             }
+            console.log(":after");
+            console.log(mapInfo);
             console.log("--end--");
             updateList();
+            console.log(getLast());
         });
+        socket.on("list", function () {
+            updateList();
+        })
 
         socket.on("remove", function (number) {
             if (isNaN(number) || mapSocket[number] === undefined || mapSocket[number] === null) {
@@ -124,8 +141,9 @@ controller.listen = function (server) {
                 console.log("error " + obj.id);
                 return;
             }
+            var dim = getLast();
 
-            var id, mapReceiver = splitImage(obj.col, obj.row, obj.url);
+            var id, mapReceiver = splitImage(dim.col + 1, dim.row + 1, obj.url);
 
 
             if (obj.isGrid === true) { //parametrable
@@ -169,6 +187,26 @@ controller.listen = function (server) {
         }
     }
 
+    function getLast() {
+        var i = 0,
+            r = 0,
+            c = 0;
+        for (i = 0; i < mapInfo.length; i++) {
+            if (mapInfo[i] !== undefined && mapInfo[i] !== null) {
+                if (mapInfo[i].row > r) {
+                    r = mapInfo[i].row;
+                }
+                if (mapInfo[i].col > c) {
+                    c = mapInfo[i].col;
+                }
+            }
+        }
+        return {
+            row: r,
+            col: c
+        };
+    }
+
     function getFirstEmpty() {
         var i;
         for (i = 0; i < mapSocket.length; i++) {
@@ -188,28 +226,6 @@ controller.listen = function (server) {
         return image.sendImgDispositionProperties(r, row, col, url);
     }
 
-
-
-    function testImage() {
-        var r = mapInfo.filter(function (a) {
-            return a !== null && a.admin !== true;
-        });
-        console.log("before:");
-        console.log(r[0]);
-        console.log("");
-        console.log("after:");
-        var tab = image.sendImgDispositionProperties(r, 3, 1, "coucou");
-        console.log(tab[0]);
-
-        var s;
-        for (s in mapSocket) {
-            if (mapSocket[s] !== undefined && mapSocket[s] !== null) {
-                //mapSocket[s].emit("test", JSON.stringify(r));
-                mapSocket[s].emit("test", JSON.stringify(tab));
-            }
-        }
-
-    }
 
 
 };

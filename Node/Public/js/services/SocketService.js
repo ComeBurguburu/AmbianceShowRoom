@@ -29,10 +29,8 @@ function sockFnc() {
                 browser: navigator.appCodeName,
                 plateform: navigator.platform,
                 version: parseInt(navigator.appVersion, 10),
-                X: window.screenX,
-                Y: window.screenY,
-                row: 1,
-                col: 1,
+                row: -1,
+                col: -1,
                 sizeX: 1,
                 sizeY: 1,
                 admin: true

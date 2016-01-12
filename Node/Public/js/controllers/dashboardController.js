@@ -10,8 +10,8 @@ angular.module('App')
 	function ($scope, $timeout, $compile, graphService, userService, sockserv) { //, imanagefact) {
         //Options for Gridster system
         $scope.gridsterOptions = {
-            margins: [20, 20],
-            columns: 5,
+            margins: [0, 0],
+            columns: 6,
             resize: {
                 enabled: false
             },
@@ -183,8 +183,12 @@ angular.module('App')
 
             $scope.clear();
             var index;
-            // alert(ret.widgets.length);
+            console.warn(ret.widgets);
+
             for (index = 0; index < ret.widgets.length; index++) {
+                if (ret.widgets[index].admin === true) {
+                    continue;
+                }
                 $scope.dashboard.widgets.push({
                     name: "Screen " + index,
                     row: ret.widgets[index].row,

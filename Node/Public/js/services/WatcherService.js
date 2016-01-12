@@ -28,11 +28,9 @@ function sockFnc() {
                 height: window.innerHeight,
                 browser: navigator.appCodeName,
                 plateform: navigator.platform,
-                X: window.screenX,
-                Y: window.screenY,
                 version: parseInt(navigator.appVersion, 10),
-                row: 1,
-                col: 1,
+                row: -1,
+                col: -1,
                 sizeX: 1,
                 sizeY: 1
             }
@@ -67,6 +65,9 @@ function sockFnc() {
 
         window.onbeforeunload = function () {
             socket.emit("disconnect");
+        }
+        window.onresize = function () {
+            socket.emit("register");
         }
 
 
