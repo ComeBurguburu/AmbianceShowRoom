@@ -114,31 +114,37 @@
 
                 <!-- Liste d'écran pour gros écran -->
 
-                <div class="row" ng-show="isGrid==false">
+                <div  ng-show="isGrid==false">
                     <div ng-controller="socketController" class="hidden-xs">
-                        <div class="col-lg-3">
-                            <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
+                            </div>
                         </div>
                         <div id="scroll">
-                            <div ng-repeat="i in list">
-                                <div class="col-sm-3" ng-show="i.id != me">
+                            <div class="row">
+                                <div ng-repeat="i in list">
+                                    <div class="col-sm-3" ng-show="i.id != me">
 
-                                    <h3>Ecran {{i.id}}</h3>
+                                        <h3>Ecran {{i.id}}</h3>
 
-                                    <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
+                                        <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
 
-                                        <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
-                                            {{droppedObjects1[i.id].id}}
-                                            <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
-                                        </ul>
+                                            <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
+                                                {{droppedObjects1[i.id].id}}
+                                                <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
+
                 <!-- Grid pour gros écran -->
-                <div class="row" ng-show="isGrid===true">
+                <div class="container row" ng-show="isGrid===true">
                     <div ng-controller="socketController" class="hidden-xs col-lg-3">
 
                         <h3 style="border:3px solid #456789;color:#456789;width:100%;">Composition d'écrans</h3>
@@ -161,10 +167,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
 
             <!--  Liste d'images pour petit écran -->
 
