@@ -1,4 +1,4 @@
-angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$timeout', function ($scope, sockserv, $timeout) {
+angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', function ($scope, sockserv) {
 
     $scope.centerAnchor = true;
     $scope.imageSelected = false;
@@ -87,8 +87,8 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
     }, false);
     //console.log("****************************************************************************************");
      function ondrop (evt) {
-        console.log("****************************************************************************************");
-        console.log(JSON.parse(JSON.stringify(evt.dataTransfer)));
+       // console.log("****************************************************************************************");
+      //  console.log(JSON.parse(JSON.stringify(evt.dataTransfer)));
         evt.stopPropagation();
         evt.preventDefault();
         var files = evt.dataTransfer.files;
@@ -107,7 +107,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
     $scope.setFiles = function (element) {
         $scope.$apply(function ($scope) {
-            console.log('files:', element.files);
+            //console.log('files:', element.files);
             // Turn the FileList object into an Array
             $scope.files = [];
             for (var i = 0; i < element.files.length; i++) {
@@ -166,18 +166,10 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
         var index = $scope.droppedObjects1.indexOf(data);
         if (index == -1)
-            console.log(idEcran);
+           // console.log(idEcran);
 
         $scope.droppedObjects1[idEcran.id] = clone(data);
-        console.warn("grid is :" + ($scope.isGrid === true ? "on" : "off"));
         sockserv.send(idEcran.id, data.src, $scope.isGrid);
-        console.log($scope.isGrid);
-        console.log($scope.imageSelected);
-        if ($scope.isGrid == true) {
-            $scope.imageSelected = true;
-            console.log($scope.isGrid);
-            console.log($scope.imageSelected);
-        }
     }
     
     $scope.currentImage = {};
@@ -222,8 +214,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
         $scope.me=me;
      }
     $scope.initialise = function () {
-        console.log("Scope vaut:")
-        console.log($scope.me);
+        
         $scope.currentScreen = {};
         $scope.currentScreen.id = 0;
         if($scope.currentScreen.id == $scope.me){

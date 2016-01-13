@@ -1,14 +1,11 @@
 //Creation of an application not needed to bind it to a global variable
-angular.module('App', ['ngDraggable', 'socketService', "socketService", 'imageManagerFactory', 'gridster', 'ui.bootstrap', 'ngRoute', 'nvd3ChartDirectives', "leaflet-directive"])
+angular.module('App', ['ngRoute','ngDraggable', 'gridster','socketService'])
     .config(['$routeProvider',
 		function ($routeProvider) {
             $routeProvider
-                .when('/dashboard', {
+                .when('/', {
                     templateUrl: '../html/template/view.html',
                     controller: 'DashboardCtrl'
-                })
-                .otherwise({
-                    redirectTo: '/dashboard'
                 });
 		}
 	])

@@ -4,10 +4,10 @@
 
 angular.module('App')
 
-.controller('DashboardCtrl', ['$scope', '$timeout', '$compile', "graphService", "userService", "sockserv", //'imanagefact',
+.controller('DashboardCtrl', ['$scope', 'userService', 'sockserv',
 
 
-	function ($scope, $timeout, $compile, graphService, userService, sockserv) { //, imanagefact) {
+	function ($scope, userService, sockserv) {
         //Options for Gridster system
         $scope.gridsterOptions = {
             margins: [0, 0],
@@ -16,7 +16,7 @@ angular.module('App')
                 enabled: false
             },
             draggable: {
-                handle: 'h3'
+                handle: 'div'
             },
             serialize_params: function ($w, wgd) {
                 return {
@@ -36,13 +36,14 @@ angular.module('App')
 
         ***********************************************************/
 
-        $scope.dispTypelist = false;
+       /* $scope.dispTypelist = false;
         $scope.ContentList = graphService.RecoverData();
         $scope.typeList = [""];
 
-        $scope.graphContentList = graphService.RecoverDetailGraph();
+        $scope.graphContentList = graphService.RecoverDetailGraph();*/
 
         //For leaflet Details
+        /*
         angular.extend($scope, {
             center: {
                 lat: 45.783,
@@ -91,7 +92,7 @@ angular.module('App')
             return function (d) {
                 return d.y;
             };
-        }
+        }*/
 
 
         $scope.dashboards = userService.RecoverDashboard();
@@ -101,7 +102,7 @@ angular.module('App')
             $scope.dashboard.widgets = [];
         };
 
-        $scope.addId = function () {
+       /* $scope.addId = function () {
             var i = 0;
             var id_tmp = new Array();
             var widgetSize = $scope.dashboard.widgets.length;
@@ -178,19 +179,22 @@ angular.module('App')
             });
             console.log($scope.dashboard);
         };
-
+*/
         function callback(ret) {
 
             $scope.clear();
             var index;
-            console.warn(ret.widgets);
+           // console.warn(ret.widgets);
 
             for (index = 0; index < ret.widgets.length; index++) {
                 if (ret.widgets[index].admin === true) {
                     continue;
                 }
+                var user = detect.parse(ret.widgets[index].userAgent);
                 $scope.dashboard.widgets.push({
-                    name: "Screen " + index + "(" + ret.widgets[index].plateform + ")",
+                    name: "Screen " + ret.widgets[index].id,
+                    OS:user.os.name,
+                    browser: user.family,
                     row: ret.widgets[index].row,
                     col: ret.widgets[index].col,
                     type: 0,
@@ -254,7 +258,7 @@ angular.module('App')
         sockserv.grid.init(callback)
 
 
-        $scope.fillGrid = function () {
+      /*  $scope.fillGrid = function () {
             $scope.clear();
             var i = 0;
             var widgetId;
@@ -330,7 +334,7 @@ angular.module('App')
                 content: "image",
                 type: "whatever",
 				},
-		];
+		];*/
 
         $scope.getWidget = function () {
             console.log($scope.privategetWidget());
@@ -398,8 +402,8 @@ angular.module('App')
 }])
 
 
-.controller('CustomWidgetCtrl', ['$scope', '$modal',
-	function ($scope, $modal) {
+.controller('CustomWidgetCtrl', ['$scope',
+	function ($scope) {
 
             $scope.remove = function (widget) {
                 $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);

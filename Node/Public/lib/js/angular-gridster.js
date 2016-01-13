@@ -1448,7 +1448,7 @@
 				}
 
 				function dragStart(event) {
-					console.log("dragStart !!!!!!!!!!!!!!!!!!!!!!!!!");
+					//console.log("dragStart !!!!!!!!!!!!!!!!!!!!!!!!!");
 					$el.addClass('gridster-item-moving');
 					gridster.movingItem = item;
 
@@ -1538,7 +1538,7 @@
 				}
 
 				function dragStop(event) {
-					console.log("dragStop !!!!!!!!!!!!!!!!!!!!!!!!!");
+					//console.log("dragStop !!!!!!!!!!!!!!!!!!!!!!!!!");
 					$el.removeClass('gridster-item-moving');
 					var row = gridster.pixelsToRows(elmY);
 					var col = gridster.pixelsToColumns(elmX);

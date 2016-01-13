@@ -1,8 +1,8 @@
 angular.module('App').controller('socketController', socketCrtFnt);
 
-socketCrtFnt.$inject = ['$scope', '$log', 'sockserv', 'imanagefact'];
+socketCrtFnt.$inject = ['$scope', '$log', 'sockserv'];
 
-function socketCrtFnt($scope, $log, sockserv, imanagefact) {
+function socketCrtFnt($scope, $log, sockserv) {
 
     $scope.screenList = [];
 
@@ -160,7 +160,7 @@ function socketCrtFnt($scope, $log, sockserv, imanagefact) {
         /* if (ret.list != undefined) {
              $scope.addWatcher(ret.list);
          }*/
-        console.log($scope.list);
+      //  console.log($scope.list);
         $scope.$apply();
         //$scope.addWatcher($scope.info);
     }
