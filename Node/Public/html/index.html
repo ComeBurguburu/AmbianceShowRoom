@@ -189,9 +189,9 @@
             <div ng-controller="socketController">
                 
                 <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
-
+                {{initialiseMe(me)}}
                 <div ng-repeat="i in list">
-                    {{initialiseMe(me);}}
+                    
                     <div ng-show="i.id == currentScreen.id" ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
                             
                             <h3>Ecran {{i.id}}</h3>
