@@ -85,28 +85,24 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
         var clazz = 'not-available';
         var ok = evt.dataTransfer && evt.dataTransfer.types && evt.dataTransfer.types.indexOf('Files') >= 0;
     }, false);
-    console.log("****************************************************************************************");
-    dropbox.addEventListener("drop", function (evt) {
-            console.log('drop evt:');
+    //console.log("****************************************************************************************");
+     function ondrop (evt) {
+            console.log("****************************************************************************************");
             console.log(JSON.parse(JSON.stringify(evt.dataTransfer)));
             evt.stopPropagation();
             evt.preventDefault();
-            console.log(evt.dataTransfer.files);
             var files = evt.dataTransfer.files;
-            console.log("files : ");
-            console.log(files);
             if (files.length > 0) {
-                //$scope.$apply(function () {
-                    $scope.files = [];
-                    for (var i = 0; i < files.length; i++) {
-                        $scope.files.push(files[i]);
-                        console.log("$scope.files : ");
-                        console.log($scope.files);
-                    }
-                    $scope.uploadFile();
-                //});
+                $scope.files = [];
+                for (var i = 0; i < files.length; i++) {
+                    $scope.files.push(files[i]);
+                }
+                $scope.uploadFile();
             }
-        }, false);
+        };
+        dropbox.removeEventListener("drop", ondrop);
+        dropbox.addEventListener("drop", ondrop, false);
+
         //============== DRAG & DROP =============
 
     $scope.setFiles = function (element) {
