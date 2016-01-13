@@ -92,19 +92,7 @@
         </nav>
 
 
-        <!--   <div class="container" ng-controller="socketController">
-
-        <div class="row">
-            <div class="col-lg-3">
-                <h3 style="border:3px solid #456789;color:#456789">Liste d'images</h3></div>
-            <div class="col-lg-6 col-lg-offset-3">
-                <div class="btn btn-info rounder">{{me}}</div>
-                <div ng-hide="error===undefined || error==''" class="alert alert-danger" id="error" ng-bind="error"></div>
-                <div ng-hide="info===undefined || info==''" class="alert alert-info" ng-bind="info"></div>
-            </div>
-        </div>
-
-    </div>-->
+        <!-- Liste d'images pour gros écran -->
 
         <div id="dropbox" class="container hidden-xs dropbox" ng-class="dropClass" ng-controller="dropzoneController" droppable="true">
             <div class="row">
@@ -122,6 +110,8 @@
             </div>
 
             <hr/>
+
+        <!-- Liste d'écran pour gros écran -->
 
             <div class="row" ng-show="isGrid==false">
                 <div ng-controller="socketController" class="hidden-xs">
@@ -146,11 +136,39 @@
                     </div>
                 </div>
             </div>
+            <!-- Grid pour gros écran -->
+            <div class="row" ng-show="isGrid===true" >
+                <div ng-controller="socketController" class="hidden-xs col-lg-3">
+            
+                    <h3 style="border:3px solid #456789;color:#456789;width:100%;">Composition d'écrans</h3>
 
+                    <h3>Ecran</h3>
+
+                    <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,{id:0})" style="width:100%;">
+
+                        <ul ng-drag="true" ng-drag-data="droppedObjects1[0]" ng-center-anchor="{{centerAnchor}}">
+
+                            <li> <img ng-src="{{ droppedObjects1[0].src }}" class="img-responsive" style="padding:1%"></li>
+                        </ul>
+                     </div>
+                </div>
+
+                <div class="col-lg-9" ng-controller="RootCtrl">
+                    <div class="col-md-1"></div>
+                    <div class="container col-md-10" ng-view></div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div> 
         </div>
 
 
+
+
+
+        <!--  Liste d'images pour petit écran -->
+
         <div class="container visible-xs" ng-controller="dropzoneController">
+
             <ul class="draggable-objects">
                 <li ng-drag="true" ng-drag-data="currentImage" data-allow-transform="true">
 
@@ -163,15 +181,17 @@
                 <li class="previous" ng-click="previousImage()"><a href="#">Previous</a></li>
                 <li class="next" ng-click="nextImage()"><a href="#">Next</a></li>
             </ul>
-        </div>
+  
+            <!-- liste écran pour petit écran-->
 
-        <div class="container visible-xs" ng-controller="dropzoneController">
             <div ng-controller="socketController">
-
+                
                 <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
+
                 <div ng-repeat="i in list">
+                    {{initialiseMe(me);}}
                     <div ng-show="i.id == currentScreen.id" ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
-                        <div class="col-sm-3" ng-show="i.id != me">
+                            
                             <h3>Ecran {{i.id}}</h3>
                             <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
                                 {{droppedObjects1[i.id].id}}
@@ -181,46 +201,18 @@
                                 <li class="previous" ng-click="previousScreen(list,me)"><a href="#">Previous</a></li>
                                 <li class="next" ng-click="nextScreen(list,me)"><a href="#">Next</a></li>
                             </ul>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container hidden-xs" ng-controller="dropzoneController" ng-show="isGrid===true">
-            <div class="row">
-                <div ng-controller="socketController" class="hidden-xs col-lg-3">
-                    {{searchNoAdminWatcher(list,me);}}
-                    <h3 style="border:3px solid #456789;color:#456789;width:100%;">Composition d'écrans</h3>
-
-                    <!-- <div ng-repeat="i in list"> -->
-                    <!-- <div ng-show="idWatcher.id != me"> -->
-
-                    <h3>Ecran {{idWatcher.id}}</h3>
-
-                    <div ng-drop="true" ng-drop-success="onDropComplete1($data,$event,{id:0})" style="width:100%;">
-
-                        <ul ng-drag="true" ng-drag-data="droppedObjects1[0]" ng-center-anchor="{{centerAnchor}}">
-
-                            <li> <img ng-src="{{ droppedObjects1[0].src }}" class="img-responsive" style="padding:1%"></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- </div> -->
-
-                <div class="col-lg-9" ng-controller="RootCtrl">
-                    <div class="col-md-1"></div>
-                    <div class="container col-md-10" ng-view></div>
-                    <div class="col-md-1"></div>
-                </div>
-            </div>
-        </div>
+        
     </div>
 
 
 
     <script src="../lib/js/angular.min.js"></script>
     <script src="../lib/js/ngDraggable.js"></script>
-    <script src="../lib/js/ngInclude.js"></script>
     <script src="../js/services/SocketService.js"></script>
     <script src="../js/services/ImageManagerFactory.js"></script>
 

@@ -2,6 +2,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
     $scope.centerAnchor = true;
     $scope.imageSelected = false;
+    $scope.me=null
     $scope.toggleCenterAnchor = function () {
         $scope.centerAnchor = !$scope.centerAnchor
     }
@@ -229,32 +230,47 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
                     }*/
     }
 
-
+     $scope.initialiseMe = function (me) {
+        $scope.me=me
+     }
     $scope.initialise = function () {
+        console.log("Scope vaut:")
+        console.log($scope.me);
         $scope.currentScreen = {};
         $scope.currentScreen.id = 0;
-    }
+        if($scope.currentScreen.id == $scope.me){
+          $scope.currentScreen.id++;  
+        }
 
+    }
 
     $scope.initialise();
 
-
     $scope.nextScreen = function (list, me) {
-
-        if ($scope.currentScreen.id == list[list.length - 1].id) {
+        console.log($scope.currentScreen.id);
+        var nextScreenId=$scope.currentScreen.id+1;
+        if ($scope.nextScreenId == list[list.length - 1].id && $scope.nextScreenId == me) {
+            console.log("cas 1");
             $scope.currentScreen.id = 0;
-        } else {
-            console.log("id dif de 0");
-            $scope.currentScreen.id++;
-            if ($scope.currentScreen.id == me) {
-                if ($scope.currentScreen.id == list[list.length - 1].id) {
-                    $scope.currentScreen.id = 0;
-                } else {
-                    $scope.currentScreen.id++;
-                }
+        } 
+        else if (nextScreenId == me) {
+            console.log("cas 2");
+            $scope.currentScreen.id=$scope.currentScreen.id+2;
+        }
 
+        else if ($scope.currentScreen.id == list[list.length - 1].id){
+            console.log("cas 3");
+            if(list[0].id == me) {
+               $scope.currentScreen.id = 1; 
+            } else {
+                $scope.currentScreen.id = 0; 
             }
         }
+        else {
+            console.log("cas 4");
+            $scope.currentScreen.id++;
+        }
+
     }
 
     $scope.previousScreen = function (list, me) {
