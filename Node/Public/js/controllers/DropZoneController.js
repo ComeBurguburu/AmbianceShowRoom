@@ -87,21 +87,21 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
     }, false);
     //console.log("****************************************************************************************");
      function ondrop (evt) {
-            console.log("****************************************************************************************");
-            console.log(JSON.parse(JSON.stringify(evt.dataTransfer)));
-            evt.stopPropagation();
-            evt.preventDefault();
-            var files = evt.dataTransfer.files;
-            if (files.length > 0) {
-                $scope.files = [];
-                for (var i = 0; i < files.length; i++) {
-                    $scope.files.push(files[i]);
-                }
-                $scope.uploadFile();
+        console.log("****************************************************************************************");
+        console.log(JSON.parse(JSON.stringify(evt.dataTransfer)));
+        evt.stopPropagation();
+        evt.preventDefault();
+        var files = evt.dataTransfer.files;
+        if (files.length > 0) {
+            $scope.files = [];
+            for (var i = 0; i < files.length; i++) {
+                $scope.files.push(files[i]);
             }
-        };
-        dropbox.removeEventListener("drop", ondrop);
-        dropbox.addEventListener("drop", ondrop, false);
+            $scope.uploadFile();
+        }
+    };
+    dropbox.removeEventListener("drop", ondrop);
+    dropbox.addEventListener("drop", ondrop, false);
 
         //============== DRAG & DROP =============
 
@@ -177,10 +177,9 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
             $scope.imageSelected = true;
             console.log($scope.isGrid);
             console.log($scope.imageSelected);
-
         }
-
     }
+    
     $scope.currentImage = {};
     $scope.currentImage.id = $scope.draggableObjects[0].id;
     $scope.currentImage.src = $scope.draggableObjects[0].src;
