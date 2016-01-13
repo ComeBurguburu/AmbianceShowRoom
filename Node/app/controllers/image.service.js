@@ -21,7 +21,7 @@ image.sendImgDispositionProperties = function (screenlistfact, nbrligne, nbrcolo
                     col: screenlistfact[numberCurrentScreen].col,
                     row: screenlistfact[numberCurrentScreen].row,
                     id: screenlistfact[numberCurrentScreen].id,
-                    plateform: screenlistfact[numberCurrentScreen].plateform
+                    userAgent: screenlistfact[numberCurrentScreen].userAgent
                 };
                 widthMax = widthMax + screenlistfact[numberCurrentScreen].width;
                 numberCurrentScreen++;

@@ -20,19 +20,12 @@ function sockFnc() {
         console.log("socket ready");
         socket.on('connection', function (msg) {
 
-            ret.error = "";
-            ret.info = "";
-
             var info = {
                 width: window.innerWidth,
                 height: window.innerHeight,
-                browser: navigator.appCodeName,
-                plateform: navigator.platform,
-                version: parseInt(navigator.appVersion, 10),
                 row: -1,
                 col: -1,
-                sizeX: 1,
-                sizeY: 1,
+                userAgent: navigator.userAgent,
                 admin: true
             };
             socket.emit("register", JSON.stringify(info));

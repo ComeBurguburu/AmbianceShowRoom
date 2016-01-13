@@ -20,16 +20,18 @@
             <ul>
                 <li gridster-item="widget" ng-repeat="widget in dashboard.widgets">
                     <div class="box" ng-controller="CustomWidgetCtrl">
-                        <div class="box-header" style="height: 41px;">
+                        <div class="box-header" style="height: 80px;">
                             <h3>{{ widget.name }}</h3>
+                            <small>{{widget.OS}}-{{widget.browser}}</small>
                             <div class="box-header-btns pull-right">
                                 <!--                                 <a title="settings" ng-click="openSettings(widget)"><i class="glyphicon glyphicon-cog"></i></a> -->
                                 <a title="Remove widget" ng-click="remove(widget)"><i class="glyphicon glyphicon-trash"></i></a>
                             </div>
                         </div>
-                        <!-- <img src="../images/0.jpg" class="img-responsive" style="padding: 1%;"></img> -->
+                        <img class="ImgBoxes" ng-src="../images/0.jpg" alt="" />
+                        <!-- <img src="../images/0.jpg" class="img-responsive" style="padding: 1%;"></img>
                         <div dyn-custom class="box-content hin" content="{{widget.content}}" type="{{widget.type}}">
-                        </div>
+                        </div>-->
 
                     </div>
 

@@ -169,6 +169,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
             console.log(idEcran);
 
         $scope.droppedObjects1[idEcran.id] = clone(data);
+        console.warn("grid is :" + ($scope.isGrid === true ? "on" : "off"));
         sockserv.send(idEcran.id, data.src, $scope.isGrid);
         console.log($scope.isGrid);
         console.log($scope.imageSelected);

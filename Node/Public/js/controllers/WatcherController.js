@@ -5,6 +5,7 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
         $scope.error = ret.error;
         $scope.info = ret.info;
         $scope.list = ret.list;
+        $scope.left = undefined; //reset left parameter
 
 
         $scope.me = ret.me;
@@ -27,8 +28,6 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
         console.info($scope.width);
         $scope.height = "" + ret.img.height + (isNaN(ret.img.width) ? "" : "px")
         console.log(ret.img);
-        console.log($scope);
-
         $scope.$apply();
     }
     watcherserv.init(callback);

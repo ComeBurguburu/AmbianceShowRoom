@@ -8,6 +8,9 @@ angular.module('App')
 
 
 	function ($scope, $timeout, $compile, graphService, userService, sockserv) { //, imanagefact) {
+        console.info("initialisation du controller dashboard");
+        $scope.isGrid = true;
+
         //Options for Gridster system
         $scope.gridsterOptions = {
             margins: [0, 0],
@@ -16,7 +19,7 @@ angular.module('App')
                 enabled: false
             },
             draggable: {
-                handle: 'h3'
+                handle: 'div'
             },
             serialize_params: function ($w, wgd) {
                 return {
@@ -101,7 +104,7 @@ angular.module('App')
             $scope.dashboard.widgets = [];
         };
 
-        $scope.addId = function () {
+        /*$scope.addId = function () {
             var i = 0;
             var id_tmp = new Array();
             var widgetSize = $scope.dashboard.widgets.length;
@@ -178,8 +181,10 @@ angular.module('App')
             });
             console.log($scope.dashboard);
         };
+*/
 
         function callback(ret) {
+            console.info("appel ajax terminé")
 
             $scope.clear();
             var index;
@@ -189,12 +194,18 @@ angular.module('App')
                 if (ret.widgets[index].admin === true) {
                     continue;
                 }
+                var user = detect.parse(ret.widgets[index].userAgent);
+
                 $scope.dashboard.widgets.push({
-                    name: "Screen " + index + "(" + ret.widgets[index].plateform + ")",
+                    name: "Screen " + index,
+                    browser: user.browser.family,
+                    OS: user.os.name,
                     row: ret.widgets[index].row,
                     col: ret.widgets[index].col,
                     type: 0,
                     id: ret.widgets[index].id,
+                    sizeX: 1,
+                    sizeY: 1,
                     content: "image"
 
                 });
@@ -246,15 +257,18 @@ angular.module('App')
 
 
             //console.error($scope.dashboard.widgets);
+            console.info("rafraichissement de la grille");
+            $scope.$apply();
+            //$scope.isGrid = false;
             $scope.$apply();
 
         }
 
-        //  console.error("coucou");
+        console.info("lancement de l'appel ajax");
         sockserv.grid.init(callback)
 
 
-        $scope.fillGrid = function () {
+        /* $scope.fillGrid = function () {
             $scope.clear();
             var i = 0;
             var widgetId;
@@ -331,11 +345,9 @@ angular.module('App')
                 type: "whatever",
 				},
 		];
-
+*/
         $scope.getWidget = function () {
-            console.log($scope.privategetWidget());
-        }
-        $scope.privategetWidget = function () {
+
             var wlist = $scope.dashboard.widgets;
             var screen = {
                 col: 0,
@@ -392,6 +404,7 @@ angular.module('App')
 
             }
         });
+        console.info("10 ans apres on a tous declaré");
 
         // choose the Dashboard '1' when first load.
         $scope.selectedDashboardId = '1';

@@ -64,13 +64,12 @@
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
                             <span style="color: #9d9d9d;">Activer grid  </span>
-                            <input class="form-control" type="checkbox" ng-model="isGrid" ng-init="isGrid=false" style="width:20px;height:20px;"/>
+                            <input class="form-control" type="checkbox" ng-model="isGrid" ng-init="isGrid=true" style="width:20px;height:20px;" />
                         </div>
-                       
+
                     </form>
 
                     <ul class="nav navbar-nav navbar-right">
-                       
                         <li><a href="#">Link</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -92,7 +91,7 @@
 
         <!-- Liste d'images pour gros écran -->
 
-        <div  ng-controller="dropzoneController">
+        <div ng-controller="dropzoneController">
             <div class="container hidden-xs">
                 <div class="row">
                     <div class="col-lg-3">
@@ -112,7 +111,7 @@
 
                 <hr/>
 
-            <!-- Liste d'écran pour gros écran -->
+                <!-- Liste d'écran pour gros écran -->
 
                 <div class="row" ng-show="isGrid==false">
                     <div ng-controller="socketController" class="hidden-xs">
@@ -138,9 +137,9 @@
                     </div>
                 </div>
                 <!-- Grid pour gros écran -->
-                <div class="row" ng-show="isGrid===true" >
+                <div class="row" ng-show="isGrid===true">
                     <div ng-controller="socketController" class="hidden-xs col-lg-3">
-                
+
                         <h3 style="border:3px solid #456789;color:#456789;width:100%;">Composition d'écrans</h3>
 
                         <h3>Ecran</h3>
@@ -151,7 +150,7 @@
 
                                 <li> <img ng-src="{{ droppedObjects1[0].src }}" class="img-responsive" style="padding:1%"></li>
                             </ul>
-                         </div>
+                        </div>
                     </div>
 
                     <div class="col-lg-9" ng-controller="RootCtrl">
@@ -159,7 +158,7 @@
                         <div class="container col-md-10" ng-view></div>
                         <div class="col-md-1"></div>
                     </div>
-                </div> 
+                </div>
             </div>
 
 
@@ -182,34 +181,33 @@
                     <li class="previous" ng-click="previousImage()"><a href="#">Previous</a></li>
                     <li class="next" ng-click="nextImage()"><a href="#">Next</a></li>
                 </ul>
-      
+
                 <!-- liste écran pour petit écran-->
 
                 <div ng-controller="socketController" ng-show="isGrid===false">
-                    
-                    <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
-                    {{initialiseMe(me)}}
+
+                    <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3> {{initialiseMe(me)}}
                     <div ng-repeat="i in list">
-                        
+
                         <div ng-show="i.id == currentScreen.id" ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
-                                
-                                <h3>Ecran {{i.id}}</h3>
-                                <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
-                                    {{droppedObjects1[i.id].id}}
-                                    <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
-                                </ul>
-                                <ul class="pager">
-                                    <li class="previous" ng-click="previousScreen(list,me)"><a href="#">Previous</a></li>
-                                    <li class="next" ng-click="nextScreen(list,me)"><a href="#">Next</a></li>
-                                </ul>
-                            
+
+                            <h3>Ecran {{i.id}}</h3>
+                            <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
+                                {{droppedObjects1[i.id].id}}
+                                <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
+                            </ul>
+                            <ul class="pager">
+                                <li class="previous" ng-click="previousScreen(list,me)"><a href="#">Previous</a></li>
+                                <li class="next" ng-click="nextScreen(list,me)"><a href="#">Next</a></li>
+                            </ul>
+
                         </div>
                     </div>
                 </div>
                 <!-- Grid pour gros écran -->
-                <div class="row" ng-show="isGrid===true" >
+                <div class="row" ng-show="isGrid===true">
                     <div ng-controller="socketController" class="col-xs-3">
-                
+
                         <h3 style="border:3px solid #456789;color:#456789;width:100%;">Composition d'écrans</h3>
 
                         <h3>Ecran</h3>
@@ -220,7 +218,7 @@
 
                                 <li> <img ng-src="{{ droppedObjects1[0].src }}" class="img-responsive" style="padding:1%"></li>
                             </ul>
-                         </div>
+                        </div>
                     </div>
 
                     <div class="col-xs-9" ng-controller="RootCtrl">
@@ -228,7 +226,7 @@
                         <div class="container col-xs-10" ng-view></div>
                         <div class="col-xs-1"></div>
                     </div>
-                </div> 
+                </div>
 
 
             </div>
@@ -254,6 +252,7 @@
     <script src="../lib/js/angular-route.min.js"></script>
 
     <!-- App lib -->
+    <script src="../lib/js/detect.min.js"></script>
 
     <script src="../js/controllers/mainController.js"></script>
     <script src="../js/controllers/dashboardController.js"></script>
@@ -279,6 +278,7 @@
 
     <script src="../lib/js/jquery-1.11.1.min.js"></script>
     <script src="../lib/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+
 </body>
 
 </html>
