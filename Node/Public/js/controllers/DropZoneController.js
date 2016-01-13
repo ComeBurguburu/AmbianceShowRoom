@@ -69,17 +69,13 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
     //============== DRAG & DROP =============
     // source for drag&drop: http://www.webappers.com/2011/09/28/drag-drop-file-upload-with-html5-javascript/
+
     var dropbox = document.getElementById("dropbox");
-    $scope.dropText = 'Drop files here...';
 
     // init event handlers
     function dragEnterLeave(evt) {
         evt.stopPropagation();
         evt.preventDefault();
-        $scope.$apply(function () {
-            $scope.dropText = 'Drop files here...';
-            $scope.dropClass = '';
-        });
     }
     dropbox.addEventListener("dragenter", dragEnterLeave, false);
     dropbox.addEventListener("dragleave", dragEnterLeave, false);
@@ -88,31 +84,27 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
         evt.preventDefault();
         var clazz = 'not-available';
         var ok = evt.dataTransfer && evt.dataTransfer.types && evt.dataTransfer.types.indexOf('Files') >= 0;
-        $scope.$apply(function () {
-            $scope.dropText = ok ? 'Drop files here...' : 'Only files are allowed!';
-            $scope.dropClass = ok ? 'over' : 'not-available';
-        });
     }, false);
+    console.log("****************************************************************************************");
     dropbox.addEventListener("drop", function (evt) {
-            console.log('drop evt:', JSON.parse(JSON.stringify(evt.dataTransfer)));
+            console.log('drop evt:');
+            console.log(JSON.parse(JSON.stringify(evt.dataTransfer)));
             evt.stopPropagation();
             evt.preventDefault();
-            $scope.$apply(function () {
-                $scope.dropText = 'Drop files here...';
-                $scope.dropClass = '';
-            });
+            console.log(evt.dataTransfer.files);
             var files = evt.dataTransfer.files;
+            console.log("files : ");
+            console.log(files);
             if (files.length > 0) {
-                $scope.$apply(function () {
+                //$scope.$apply(function () {
                     $scope.files = [];
                     for (var i = 0; i < files.length; i++) {
                         $scope.files.push(files[i]);
                         console.log("$scope.files : ");
                         console.log($scope.files);
-
                     }
-                });
-                $scope.uploadFile();
+                    $scope.uploadFile();
+                //});
             }
         }, false);
         //============== DRAG & DROP =============

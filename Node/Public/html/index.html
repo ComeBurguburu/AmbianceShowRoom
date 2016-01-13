@@ -94,19 +94,21 @@
 
         <!-- Liste d'images pour gros écran -->
 
-        <div id="dropbox" class="container hidden-xs dropbox" ng-class="dropClass" ng-controller="dropzoneController" droppable="true">
+        <div class="container hidden-xs" ng-controller="dropzoneController">
             <div class="row">
                 <div class="col-lg-3">
                     <h3 style="border:3px solid #456789;color:#456789">Liste d'images</h3>
                 </div>
             </div>
 
-            <div id="scroll" class="hidden-xs">
-                <ul class="draggable-objects">
-                    <li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
-                        <img ng-src="{{ obj.src }}"> {{obj.id}}
-                    </li>
-                </ul>
+            <div id="dropbox" class="dropbox" ng-class="dropClass" droppable="true">
+                <div id="scroll" class="hidden-xs">
+                    <ul class="draggable-objects">
+                        <li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
+                            <img ng-src="{{ obj.src }}"> {{obj.id}}
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <hr/>
