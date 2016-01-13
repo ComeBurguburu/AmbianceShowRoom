@@ -411,11 +411,14 @@ angular.module('App')
 }])
 
 
-.controller('CustomWidgetCtrl', ['$scope', '$modal',
-	function ($scope, $modal) {
+.controller('CustomWidgetCtrl', ['$scope', '$modal', 'sockserv',
+
+	function ($scope, $modal, sockserv) {
 
             $scope.remove = function (widget) {
-                $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
+                var index = $scope.dashboard.widgets.indexOf(widget)
+                $scope.dashboard.widgets.splice(index, 1);
+                sockserv.grid.remove(index);
                 //console.warn("Remove Widget");
             };
             /*

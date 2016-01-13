@@ -41,6 +41,8 @@ function sockFnc() {
         socket.on('EventError', function (msg) {
             ret.error = msg;
             ret.info = "";
+            ret.list = undefined;
+            callback(ret);
             this.off("connection");
         });
         socket.on('identification', function (id) {
@@ -63,6 +65,13 @@ function sockFnc() {
             socket.emit("disconnect");
         }
         window.onresize = function () {
+            var info = {
+                width: window.innerWidth,
+                height: window.innerHeight,
+                userAgent: navigator.userAgent,
+                row: -1,
+                col: -1
+            }
             socket.emit("register", JSON.stringify(info));
         }
 

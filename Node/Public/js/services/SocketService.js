@@ -34,6 +34,13 @@ function sockFnc() {
             ret.me = id;
             callback(ret);
         });
+        socket.on("EventError", function (error_message) {
+            callback({
+                info: "",
+                error: error_message
+            });
+
+        })
 
 
         socket.on('disconnect', function () {
@@ -82,6 +89,10 @@ function sockFnc() {
         socket.emit("test", log);
     }
 
+    function remove_widget(index) {
+        socket.emit("remove", index);
+    }
+
     function emit(event, data) {
         socket.emit(event, data);
     }
@@ -101,8 +112,10 @@ function sockFnc() {
         test: test,
         emit: emit,
         send: send,
+
         grid: {
-            init: init_grid
+            init: init_grid,
+            remove: remove_widget,
         }
     };
 }
