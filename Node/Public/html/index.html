@@ -56,16 +56,17 @@
                         </li>
                         <ul class="nav navbar-nav" ng-controller="socketController">
 
-                            <li class="btn btn-info rounder"><a href="#">{{me}}</a></li>
+                            <li><a href="#">{{me}}</a></li>
                             <li ng-hide="error===undefined || error==''" style="color:red;" id="error" ng-bind="error"></li>
                             <li ng-hide="info===undefined || info==''" style="color:blue;" ng-bind="info"></li>
-
+                            <li style="color: #9d9d9d;"><a href="#">Activer grid</a></li>
                         </ul>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <span style="color: #9d9d9d;">Activer grid  </span>
-                            <input class="form-control" type="checkbox" ng-model="isGrid" ng-init="isGrid=true" style="width:20px;height:20px;" />
+                           <ul> 
+                            <li><input class="form-control" type="checkbox" ng-model="isGrid" ng-init="isGrid=true" style="width:20px;height:20px;" /></li>
+                            <ul>
                         </div>
 
                     </form>
