@@ -144,7 +144,7 @@ controller.listen = function (server) {
             }
             var dim = getLast();
 
-            var id, mapReceiver = splitImage(dim.row + 1, dim.col + 1, obj.url);
+            var id, mapReceiver = splitImage(dim.row + 1, dim.col + 1, obj);
 
             if (obj.isGrid === true) { //parametrable
 
@@ -220,13 +220,13 @@ controller.listen = function (server) {
         return mapSocket.length;
     }
 
-    function splitImage(row, col, url) {
+    function splitImage(row, col, obj) {
 
         var r = mapInfo.filter(function (a) {
             return a !== null && a.admin !== true;
         });
 
-        return image.sendImgDispositionProperties(r, row, col, url);
+        return image.sendImgDispositionProperties(r, row, col, obj);
     }
 
 

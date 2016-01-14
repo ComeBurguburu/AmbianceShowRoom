@@ -23,6 +23,9 @@ angular.module('App').controller('RootCtrl', function ($scope) {
             }
         }
     };
+     $scope.remove=function(){
+            alert("bim")
+        }
     $scope.$on('$locationChangeStart', function (e, next, current) {
         $scope.page = next.split('/').splice(-1);
     });

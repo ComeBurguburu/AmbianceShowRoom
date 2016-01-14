@@ -2,71 +2,84 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
 
     $scope.centerAnchor = true;
     $scope.imageSelected = false;
-    $scope.me=null
+    $scope.me = null
     $scope.toggleCenterAnchor = function () {
         $scope.centerAnchor = !$scope.centerAnchor
     }
     $scope.draggableObjects = [{
-        id: 0,
-        src: '../images/0.jpg',
-        type: "image"
+            id: 0,
+            src: '../images/0.jpg',
+            type: 'image'
     }, {
-        id: 1,
-        src: '../images/1.jpg',
-        type: "image"
+            id: 1,
+            src: '../images/1.jpg',
+            type: 'image'
     }, {
-        id: 2,
-        src: '../images/2.jpg',
-        type: "image"
+            id: 2,
+            src: '../images/2.jpg',
+            type: 'image'
     }, {
-        id: 3,
-        src: '../images/3.jpg',
-        type: "image"
+            id: 3,
+            src: '../images/3.jpg',
+            type: 'image'
+    },
+        /* {
+                    id: 4,
+                    src: '../images/4.jpg',
+                type: 'image'
+            }, {
+                    id: 5,
+                    src: '../images/5.jpg',
+                type: 'image'
+            }, {
+                    id: 6,
+                    src: '../images/6.jpg'
+            }, {
+                    id: 7,
+                    src: '../images/7.jpg'
+            }, {
+                    id: 8,
+                    src: '../images/8.jpg'
+            }, {
+                    id: 9,
+                    src: '../images/9.jpg'
+            }, {
+                    id: 10,
+                    src: '../images/10.jpg'
+            }, {
+                    id: 11,
+                    src: '../images/11.jpg'
+            }, {
+                    id: 12,
+                    src: '../images/12.jpg'
+            }, {
+                    id: 13,
+                    src: '../images/13.jpg'
+            }, {
+                    id: 14,
+                    src: '../images/14.jpg'
+            }, */
+        {
+            id: 15,
+            src: "../images/facebook.png",
+            type: "flux-facebook"
+
     }, {
-        id: 4,
-        src: '../images/4.jpg',
-        type: "image"
-    }, {
-        id: 5,
-        src: '../images/5.jpg',
-        type: "image"
-    }, {
-        id: 6,
-        src: '../images/6.jpg',
-        type: "image"
-    }, {
-        id: 7,
-        src: '../images/7.jpg',
-        type: "image"
-    }, {
-        id: 8,
-        src: '../images/8.jpg',
-        type: "image"
-    }, {
-        id: 9,
-        src: '../images/9.jpg',
-        type: "image"
-    }, {
-        id: 10,
-        src: '../images/10.jpg',
-        type: "image"
-    }, {
-        id: 11,
-        src: '../images/11.jpg',
-        type: "image"
-    }, {
-        id: 12,
-        src: '../images/12.jpg',
-        type: "image"
-    }, {
-        id: 13,
-        src: '../images/13.jpg',
-        type: "image"
-    }, {
-        id: 14,
-        src: '../images/14.jpg',
-        type: "image"
-    }];
+            id: 16,
+            src: "../images/twitter.png",
+            type: "flux-twitter"
+
+    },
+        {
+            id: 17,
+            src: "../images/video.png",
+            type: "video",
+            video: {
+                type: "video/mp4",
+                src: "../videos/Star Wars - Le Réveil de la Force - Bande-annonce finale (VOST) (1).mp4"
+            }
+        }
+    ];
     $scope.droppedObjects1 = [];
 
     function clone(obj) {
@@ -101,9 +114,9 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
         var ok = evt.dataTransfer && evt.dataTransfer.types && evt.dataTransfer.types.indexOf('Files') >= 0;
     }, false);
     //console.log("****************************************************************************************");
-     function ondrop (evt) {
-       // console.log("****************************************************************************************");
-      //  console.log(JSON.parse(JSON.stringify(evt.dataTransfer)));
+    function ondrop(evt) {
+        // console.log("****************************************************************************************");
+        //  console.log(JSON.parse(JSON.stringify(evt.dataTransfer)));
         evt.stopPropagation();
         evt.preventDefault();
         var files = evt.dataTransfer.files;
@@ -118,7 +131,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
     dropbox.removeEventListener("drop", ondrop);
     dropbox.addEventListener("drop", ondrop, false);
 
-        //============== DRAG & DROP =============
+    //============== DRAG & DROP =============
 
     $scope.setFiles = function (element) {
         $scope.$apply(function ($scope) {
@@ -134,9 +147,9 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
 
     $scope.uploadFile = function () {
         var fd = new FormData();
-            // for (var i in $scope.files) {
-            //     fd.append("uploadedFile", $scope.files[i])
-            // }
+        // for (var i in $scope.files) {
+        //     fd.append("uploadedFile", $scope.files[i])
+        // }
         fd.append("file", $scope.files[0]);
         var xhr = new XMLHttpRequest();
         xhr.upload.addEventListener("progress", uploadProgress, false);
@@ -179,16 +192,15 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
 
     $scope.onDropComplete1 = function (data, evt, idEcran) {
 
-        var index = $scope.droppedObjects1.indexOf(data);
-
         $scope.droppedObjects1[idEcran.id] = clone(data);
-        sockserv.send(idEcran.id, data.src, $scope.isGrid, $scope.droppedObjects1[idEcran.id].type);
+        sockserv.send(idEcran.id, data.src, $scope.isGrid, $scope.droppedObjects1[idEcran.id].type,$scope.droppedObjects1[idEcran.id].video);
     }
-    
+
     $scope.currentImage = {};
     $scope.currentImage.id = $scope.draggableObjects[0].id;
     $scope.currentImage.src = $scope.draggableObjects[0].src;
-    $scope.currentImage.type = $scope.draggableObjects[0].type;    
+    $scope.currentImage.type = $scope.draggableObjects[0].type;
+    $scope.currentImage.video = $scope.draggableObjects[0].video;
 
     $scope.nextImage = function () {
 
@@ -200,6 +212,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
 
         $scope.currentImage.src = $scope.draggableObjects[$scope.currentImage.id].src;
         $scope.currentImage.type = $scope.draggableObjects[$scope.currentImage.id].type;
+        $scope.currentImage.video = $scope.draggableObjects[$scope.currentImage.id].video;
     }
 
     $scope.previousImage = function () {
@@ -216,24 +229,24 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
 
     $scope.searchNoAdminWatcher = function (list, me) {
         $scope.idWatcher = 0;
-            /* {};
-                    for (i = 0; i < $scope.list.length; i++) {
-                        if (list[i].id != me) {
-                            $scope.idWatcher.id = $scope.list[i].id;
-                            break;
-                        }
-                    }*/
+        /* {};
+                for (i = 0; i < $scope.list.length; i++) {
+                    if (list[i].id != me) {
+                        $scope.idWatcher.id = $scope.list[i].id;
+                        break;
+                    }
+                }*/
     }
 
-     $scope.initialiseMe = function (me) {
-        $scope.me=me;
-     }
+    $scope.initialiseMe = function (me) {
+        $scope.me = me;
+    }
     $scope.initialise = function () {
-        
+
         $scope.currentScreen = {};
         $scope.currentScreen.id = 0;
-        if($scope.currentScreen.id == $scope.me){
-          $scope.currentScreen.id++;  
+        if ($scope.currentScreen.id == $scope.me) {
+            $scope.currentScreen.id++;
         }
 
     }
@@ -241,27 +254,23 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
     $scope.initialise();
 
     $scope.nextScreen = function (list, me) {
-        
-        var nextScreenId=$scope.currentScreen.id+1;
-        if (nextScreenId == list[list.length - 1].id && nextScreenId == me) {
-            
-            $scope.currentScreen.id = 0;
-        } 
-        else if (nextScreenId == me) {
-           
-            $scope.currentScreen.id=$scope.currentScreen.id+2;
-        }
 
-        else if ($scope.currentScreen.id == list[list.length - 1].id){
-           
-            if(list[0].id == me) {
-               $scope.currentScreen.id = 1; 
+        var nextScreenId = $scope.currentScreen.id + 1;
+        if (nextScreenId == list[list.length - 1].id && nextScreenId == me) {
+
+            $scope.currentScreen.id = 0;
+        } else if (nextScreenId == me) {
+
+            $scope.currentScreen.id = $scope.currentScreen.id + 2;
+        } else if ($scope.currentScreen.id == list[list.length - 1].id) {
+
+            if (list[0].id == me) {
+                $scope.currentScreen.id = 1;
             } else {
-                $scope.currentScreen.id = 0; 
+                $scope.currentScreen.id = 0;
             }
-        }
-        else {
-           
+        } else {
+
             $scope.currentScreen.id++;
         }
 
@@ -269,28 +278,20 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
 
     $scope.previousScreen = function (list, me) {
 
-        var beforeScreenId=$scope.currentScreen.id-1;
+        var beforeScreenId = $scope.currentScreen.id - 1;
         if (beforeScreenId == 0 && beforeScreenId == me) {
             $scope.currentScreen.id = list[list.length - 1].id;
-        } 
-        else if (beforeScreenId == me) {
-            $scope.currentScreen.id=$scope.currentScreen.id-2;
-        }
-
-        else if ($scope.currentScreen.id == list[0].id){
-            if(list[list.length - 1].id == me) {
-                $scope.currentScreen.id = list[list.length - 2].id; 
+        } else if (beforeScreenId == me) {
+            $scope.currentScreen.id = $scope.currentScreen.id - 2;
+        } else if ($scope.currentScreen.id == list[0].id) {
+            if (list[list.length - 1].id == me) {
+                $scope.currentScreen.id = list[list.length - 2].id;
             } else {
                 $scope.currentScreen.id = list[list.length - 1].id;
             }
-        }
-        else {
+        } else {
             $scope.currentScreen.id--;
         }
     }
 
-
-    var inArray = function (array, obj) {
-        var index = array.indexOf(obj);
-    }
   }]);

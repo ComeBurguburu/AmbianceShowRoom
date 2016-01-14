@@ -107,7 +107,7 @@
                     <div id="scroll" class="hidden-xs">
                         <ul class="draggable-objects">
                             <li ng-repeat="obj in draggableObjects" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
-                                <img ng-src="{{ obj.src }}"> {{obj.id}}
+                                <img ng-src="{{ obj.src }}" data-type="{{obj.type}}"> {{obj.id}}
                             </li>
                         </ul>
                     </div>
@@ -187,7 +187,7 @@
 
                     <ul class="pager">
                         <li class="previous btn btn-default" ng-click="previousImage()">Previous</li>
-                        <li class="next btn btn-default" ng-click="nextImage()"><a href="#">Next</a></li>
+                        <li class="next btn btn-default" ng-click="nextImage()">Next</li>
                     </ul>
                 </div>
 

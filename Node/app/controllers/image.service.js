@@ -1,6 +1,7 @@
 var image = function () {};
+var extend = require('extend');
 
-image.sendImgDispositionProperties = function (screenlistfact, nbrligne, nbrcolonne, srcImg) {
+image.sendImgDispositionProperties = function (screenlistfact, nbrligne, nbrcolonne, obj) {
     var imgDisposition = [];
     var numberCurrentScreen = 0;
     var heightMax = 0;
@@ -10,19 +11,17 @@ image.sendImgDispositionProperties = function (screenlistfact, nbrligne, nbrcolo
 
     for (ligne = 0; ligne < nbrligne; ligne++) {
         for (colonne = 0; colonne < nbrcolonne; colonne++) {
+            
 
             if (screenlistfact[numberCurrentScreen] != undefined) {
-                imgDisposition[numberCurrentScreen] = {
+                
+                imgDisposition[numberCurrentScreen]= extend({},screenlistfact[numberCurrentScreen],obj, {
                     left: -(widthMax),
                     top: -heightMax,
-                    url: srcImg,
                     width: screenlistfact[numberCurrentScreen].width * nbrcolonne,
                     height: screenlistfact[numberCurrentScreen].height * nbrligne,
-                    col: screenlistfact[numberCurrentScreen].col,
-                    row: screenlistfact[numberCurrentScreen].row,
                     id: screenlistfact[numberCurrentScreen].id,
-                    userAgent: screenlistfact[numberCurrentScreen].userAgent
-                };
+                });
                 widthMax = widthMax + screenlistfact[numberCurrentScreen].width;
                 numberCurrentScreen++;
             }

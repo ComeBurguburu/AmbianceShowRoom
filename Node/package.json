@@ -9,6 +9,7 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
+    "extend": "^3.0.0",
     "multer": "^1.1.0",
     "socket.io": "^1.3.7"
   },

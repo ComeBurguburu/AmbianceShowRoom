@@ -181,6 +181,7 @@ angular.module('App')
             console.log($scope.dashboard);
         };
 */
+       
         function callback(ret) {
 
             $scope.clear();
@@ -403,12 +404,13 @@ angular.module('App')
 }])
 
 
-.controller('CustomWidgetCtrl', ['$scope',
-	function ($scope) {
+.controller('CustomWidgetCtrl', ['$scope','sockserv',
+	function ($scope,sockserv) {
 
             $scope.remove = function (widget) {
-                $scope.dashboard.widgets.splice($scope.dashboard.widgets.indexOf(widget), 1);
-                //console.warn("Remove Widget");
+                var index = $scope.dashboard.widgets.indexOf(widget);
+                $scope.dashboard.widgets.splice(index, 1);
+                sockserv.grid.remove(widget.id);
             };
             /*
             ******************************************************************************************

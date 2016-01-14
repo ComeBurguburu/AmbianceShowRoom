@@ -68,7 +68,26 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <img data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" data-ng-src="{{src}}" data-ng-show="left!==undefined" title="fullsreen" alt="fullscreen" ondblclick="FullScreen()" />
+    <img 
+         data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" 
+         data-ng-src="{{src}}" 
+         data-ng-show="type==='image' && left!==undefined"
+         title="fullsreen" alt="fullscreen" 
+         ondblclick="FullScreen()" />
+<div data-ng-show="type==='video' && left!==undefined"  
+     data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}">
+    <video width="{{width}}" height="{{height}}"
+           
+           controls
+           autoplay
+          
+           data-ng-src="{{video.src}}"
+           title="video"
+           >
+                    Your browser does not support the video tag.
+                </video>
+    </div>
+    
 
     <div class="container" data-ng-show="left===undefined">
         <h3>My Controller</h3>
@@ -77,9 +96,17 @@
 
         <p>URL:{{src}}</p>
         <div class="btn btn-info rounder">{{me}}</div>
-        <div class="row">
+        <h4>{{type}}</h4>
+        <div class="row" data-ng-show="type==='image'">
             <div class="col-xs-12 col-lg-12">
                 <img data-ng-src="{{src}}" title="real size" alt="real size" style="width: 100%;height: auto;" />
+            </div>
+        </div>
+        <div class="row" data-ng-show="type==='video'">
+            <div class="col-xs-12 col-lg-12">
+                <video width="600" height="400" controls autoplay ng-src="{{video.src}}">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </div>
     </div>

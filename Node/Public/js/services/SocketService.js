@@ -29,6 +29,7 @@ function sockFnc() {
                 admin: true
             };
             socket.emit("register", JSON.stringify(info));
+            callback({error:"",info:""});
         });
         socket.on('identification', function (id) {
             ret.me = id;
@@ -52,6 +53,7 @@ function sockFnc() {
 
         socket.on("update", function (data) {
             ret.update = data;
+           // alert(JSON.stringify(data));
         });
 
 
@@ -74,9 +76,9 @@ function sockFnc() {
 
     }
 
-    function send(id, url, isGrid, typeOfData) {
+    function send(id, url, isGrid, typeOfData, video) {
         // typeOfData means the type of file (image, video, feed ...)
-        console.log("Entree dans le send");
+        console.log("Send");
         var obj = {};
         obj.id = id;
         obj.url = url;
@@ -84,6 +86,8 @@ function sockFnc() {
         obj.col = 2;
         obj.row = 2;
         obj.type = typeOfData;
+        obj.video = video;
+        console.log(obj);
         socket.emit("image", obj);
     }
 

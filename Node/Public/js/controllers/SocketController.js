@@ -64,7 +64,7 @@ function socketCrtFnt($scope, $log, sockserv) {
            }
            //$scope.fillScreenList();*/
 
-    $scope.fillImgSrcList = function () {
+    /*$scope.fillImgSrcList = function () {
         $scope.imgSrcList[0] = {
             src: "../images/0.jpg"
         };
@@ -107,8 +107,17 @@ function socketCrtFnt($scope, $log, sockserv) {
         $scope.imgSrcList[13] = {
             src: "../images/whatever.jpg"
         };
+        $scope.imgSrcList[14]={
+            src:"../images/facebook.png"
+        };
+          $scope.imgSrcList[15]={
+            src:"../images/facebook.png"
+        };
+          $scope.imgSrcList[16]={
+            src:"../images/facebook.png"
+        };
     }
-    $scope.fillImgSrcList();
+    $scope.fillImgSrcList();*/
 
     /* $scope.addWatcher = function (information) {
 
