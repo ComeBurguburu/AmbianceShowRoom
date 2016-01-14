@@ -45,6 +45,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="facebookFeed.html">Go to Facebook Feed</a></li>
                                 <li><a href="twitterFeed.html">Go to Twitter Feed</a></li>
+                                <li><a href="googleFeed.html">Go to Google + Feed</a></li>
                                 <li><a href="#">Action</a></li>
                                 <li><a href="#">Another action</a></li>
                                 <li><a href="#">Something else here</a></li>
@@ -135,7 +136,7 @@
 
                                             <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
                                                 {{droppedObjects1[i.id].id}}
-                                                <li> <img id="imagedropped" ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" data-type="pokemon" style="padding:1%"></li>
+                                                <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -261,6 +262,35 @@
                 </div>
             </div>
         </div>
+
+
+
+
+    <div ng-controller="SocialNetworkController">
+      <div style="width: 420px;">
+         <div class="fb-page" data-href={{facebookLink}} data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+            <div class="fb-xfbml-parse-ignore">
+               <blockquote cite={{facebookLink}}>
+                  <a href={{facebookLink}}>Facebook</a>
+               </blockquote>
+            </div>
+         </div>
+         <div id="fb-root"></div>
+      </div>
+
+
+      <a id="timeline" class="twitter-timeline"
+         data-widget-id={{twitterId}}
+         href={{twitterLink}}
+         width="300"
+         height="300">
+      Tweets by @{{twitterFeed}}
+      </a>
+    </div>
+
+
+
+
     </div>
     <!-- angular and dependency -->
     <script src="../lib/js/angular.min.js"></script>
@@ -273,6 +303,7 @@
     <script src="../js/application/app.js"></script>
    
     <!-- angular controller -->
+    <script src="../js/controllers/SocialNetworkController.js"></script>
     <script src="../js/controllers/DropZoneController.js"></script>
     <script src="../js/controllers/rootController.js"></script>
     <script src="../js/controllers/dashboardController.js"></script>
