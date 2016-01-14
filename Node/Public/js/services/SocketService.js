@@ -74,7 +74,8 @@ function sockFnc() {
 
     }
 
-    function send(id, url, isGrid) {
+    function send(id, url, isGrid, typeOfData) {
+        // typeOfData means the type of file (image, video, feed ...)
         console.log("Entree dans le send");
         var obj = {};
         obj.id = id;
@@ -82,6 +83,7 @@ function sockFnc() {
         obj.isGrid = isGrid;
         obj.col = 2;
         obj.row = 2;
+        obj.type = typeOfData;
         socket.emit("image", obj);
     }
 

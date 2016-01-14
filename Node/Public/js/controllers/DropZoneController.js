@@ -8,49 +8,64 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
     }
     $scope.draggableObjects = [{
         id: 0,
-        src: '../images/0.jpg'
+        src: '../images/0.jpg',
+        type: "image"
     }, {
         id: 1,
-        src: '../images/1.jpg'
+        src: '../images/1.jpg',
+        type: "image"
     }, {
         id: 2,
-        src: '../images/2.jpg'
+        src: '../images/2.jpg',
+        type: "image"
     }, {
         id: 3,
-        src: '../images/3.jpg'
+        src: '../images/3.jpg',
+        type: "image"
     }, {
         id: 4,
-        src: '../images/4.jpg'
+        src: '../images/4.jpg',
+        type: "image"
     }, {
         id: 5,
-        src: '../images/5.jpg'
+        src: '../images/5.jpg',
+        type: "image"
     }, {
         id: 6,
-        src: '../images/6.jpg'
+        src: '../images/6.jpg',
+        type: "image"
     }, {
         id: 7,
-        src: '../images/7.jpg'
+        src: '../images/7.jpg',
+        type: "image"
     }, {
         id: 8,
-        src: '../images/8.jpg'
+        src: '../images/8.jpg',
+        type: "image"
     }, {
         id: 9,
-        src: '../images/9.jpg'
+        src: '../images/9.jpg',
+        type: "image"
     }, {
         id: 10,
-        src: '../images/10.jpg'
+        src: '../images/10.jpg',
+        type: "image"
     }, {
         id: 11,
-        src: '../images/11.jpg'
+        src: '../images/11.jpg',
+        type: "image"
     }, {
         id: 12,
-        src: '../images/12.jpg'
+        src: '../images/12.jpg',
+        type: "image"
     }, {
         id: 13,
-        src: '../images/13.jpg'
+        src: '../images/13.jpg',
+        type: "image"
     }, {
         id: 14,
-        src: '../images/14.jpg'
+        src: '../images/14.jpg',
+        type: "image"
     }];
     $scope.droppedObjects1 = [];
 
@@ -165,16 +180,15 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
     $scope.onDropComplete1 = function (data, evt, idEcran) {
 
         var index = $scope.droppedObjects1.indexOf(data);
-        if (index == -1)
-           // console.log(idEcran);
 
         $scope.droppedObjects1[idEcran.id] = clone(data);
-        sockserv.send(idEcran.id, data.src, $scope.isGrid);
+        sockserv.send(idEcran.id, data.src, $scope.isGrid, $scope.droppedObjects1[idEcran.id].type);
     }
     
     $scope.currentImage = {};
     $scope.currentImage.id = $scope.draggableObjects[0].id;
     $scope.currentImage.src = $scope.draggableObjects[0].src;
+    $scope.currentImage.type = $scope.draggableObjects[0].type;    
 
     $scope.nextImage = function () {
 
@@ -185,7 +199,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
         }
 
         $scope.currentImage.src = $scope.draggableObjects[$scope.currentImage.id].src;
-
+        $scope.currentImage.type = $scope.draggableObjects[$scope.currentImage.id].type;
     }
 
     $scope.previousImage = function () {
@@ -196,6 +210,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
         }
 
         $scope.currentImage.src = $scope.draggableObjects[$scope.currentImage.id].src;
+        $scope.currentImage.type = $scope.draggableObjects[$scope.currentImage.id].type;
 
     }
 
