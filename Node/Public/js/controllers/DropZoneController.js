@@ -22,6 +22,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
             id: 3,
             src: '../images/3.jpg',
             type: 'image'
+
     },
         /* {
                     id: 4,
@@ -80,6 +81,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
             }
         }
     ];
+
     $scope.droppedObjects1 = [];
 
     function clone(obj) {
@@ -260,7 +262,6 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
 
             $scope.currentScreen.id = 0;
         } else if (nextScreenId == me) {
-
             $scope.currentScreen.id = $scope.currentScreen.id + 2;
         } else if ($scope.currentScreen.id == list[list.length - 1].id) {
 
