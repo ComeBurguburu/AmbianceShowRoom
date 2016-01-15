@@ -59,6 +59,7 @@ function sockFnc() {
 
         socket.on("list", function (data) {
             console.log("event list trig");
+         //   console.error(new Date().getTime());
             var i, json = JSON.parse(data);
             ret.list = [];
             //console.info(json);

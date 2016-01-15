@@ -2,11 +2,21 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
 
     function callback(ret) {
 
+        if (ret.videostate === "play") {
+            play();
+            $scope.$apply();
+            return;
+        }
+        if (ret.videostate === "pause") {
+            pause();
+            $scope.$apply();
+            return;
+        }
+
         $scope.error = ret.error;
         $scope.info = ret.info;
         $scope.list = ret.list;
         $scope.left = undefined; //reset left parameter
-
 
         $scope.me = ret.me;
 
@@ -17,15 +27,15 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
 
         $scope.src = ret.img.url;
         $scope.type = ret.img.type;
-        $scope.video = ret.img.video;
-        //$scope.left = 0;
-        //console.log(ret.img);
-        //alert(JSON.stringify(ret.img));
 
-        if (ret.img.type === "video") {
+        if (ret.img.video !== undefined) {
+            $scope.videoSources = [];
+            $scope.videoSources.push(ret.img.video);
+        }
 
-            ret.img.left = ret.img.left - 15 / 100 * ret.img.width;
-
+        //crop video
+        if (ret.img.type === "video" && ret.img.left !== undefined) {
+            ret.img.left = ret.img.left + 8 / 100 * ret.img.width;
         }
 
 
@@ -35,17 +45,33 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
             $scope.top = ret.img.top + (isNaN(ret.img.top) ? "" : "px");
         }
 
-
-
-
-        //  console.info(ret.img.width);
         $scope.width = "" + ret.img.width + (isNaN(ret.img.width) ? "" : "px");
-        // console.info($scope.width);
         $scope.height = "" + ret.img.height + (isNaN(ret.img.width) ? "" : "px")
-            // console.log(ret.img);
         $scope.$apply();
     }
     watcherserv.init(callback);
+
+    $scope.video = function (e) {
+        var videoElements = angular.element(e.srcElement);
+        if (videoElements[0].paused) {
+            videoElements[0].play();
+            watcherserv.play();
+        } else {
+            videoElements[0].pause();
+            watcherserv.pause();
+        }
+    }
+
+
+    function play() {
+        var videos = document.getElementsByTagName("video");
+        videos[0].play();
+    }
+
+    function pause() {
+        var videos = document.getElementsByTagName("video");
+        videos[0].pause();
+    }
 
 
     /*$("#identify").click(function () {

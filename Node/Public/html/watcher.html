@@ -7,7 +7,7 @@
       <link href="../css/accueil.css" rel="stylesheet" type="text/css">
       <link href="../lib/bootstrap-3.3.6-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
    </head>
-   <body data-ng-app="AppWatcher" data-ng-controller="watcherController" style="padding-top: 50px;overflow: hidden">
+   <body data-ng-app="AppWatcher" data-ng-controller="watcherController" ng-style="{'padding-top': '50px','overflow': left === undefined ? 'visible':'hidden'}">
       <nav class="navbar navbar-inverse navbar-fixed-top" data-ng-show="left===undefined">
          <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -62,48 +62,31 @@
          </div>
          <!-- /.container-fluid -->
       </nav>
+       
+       
+       <!--                  Image fullscreen     -->
       <img 
          data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" 
          data-ng-src="{{src}}" 
          data-ng-show="type==='image' && left!==undefined"
          title="fullsreen" alt="fullscreen" 
          ondblclick="FullScreen()" />
+       
+       <!--                                     -->
+       <!--            Video fullscreen         -->
 
-      <div data-ng-show="type==='video' && left!==undefined"  
-         data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}">
-         <video width="{{width}}" height="{{height}}"
-            controls
-            autoplay
-            data-ng-src="{{video.src}}"
-            title="video"
-            >
-            Your browser does not support the video tag.
-         </video>
-      </div>
+<div data-ng-show="type==='video' && left!==undefined"  >
+    <div width="{{width}}" height="{{height}}" data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}"
+           title="video"
+             html5-video='{{ videoSources }}'
+        autoplay='true' controls='true'
+           ng-click="video($event)"           
+           >
+    </div>
+    </div>
+       <!--             container normal / simple  screen  -->
 
-<!--       <div data-ng-show="type==='flux-facebook'"
-         data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" ng-controller="SocialNetworkController">
-            <div class="fb-page" data-href="{{facebookLink}}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" width="{{width}}" height="{{height}}">
-              <div class="fb-xfbml-parse-ignore">
-                 <blockquote cite="{{facebookLink}}">
-                    <a href="{{facebookLink}}">Facebook</a>
-                 </blockquote>
-              </div>
-           </div>
-           <div id="fb-root"></div>
-      </div> -->
-
- <!--      <div data-ng-show="type==='flux-twitter'"
-         data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" ng-controller="SocialNetworkController">
-               <a id="timeline" class="twitter-timeline"
-                  data-widget-id="{{twitterId}}"
-                  href="{{twitterLink}}"
-                  width="{{width}}" height="{{height}}">
-               Tweets by @{{twitterFeed}}
-               </a>
-      </div> -->
-
-      <div class="container" data-ng-show="left===undefined">
+      <div class="container" data-ng-show="left===undefined && type!== 'facebook' ">
          <h3>My Controller</h3>
          <div data-ng-hide="error===undefined || error==''" class="alert alert-danger" data-ng-bind="error"></div>
          <div data-ng-hide="info===undefined || info==''" class="alert alert-info" data-ng-bind="info"></div>
@@ -119,9 +102,12 @@
 
          <div class="row" data-ng-show="type==='video'">
             <div class="col-xs-12 col-lg-12">
-               <video width="600" height="400" controls autoplay ng-src="{{video.src}}">
-                  Your browser does not support the video tag.
-               </video>
+               <div width="600" height="400" 
+                      title="video"
+             html5-video='{{ videoSources }}'
+        autoplay='true' controls='true'
+                    ng-click="video($event)"></div>
+                 
             </div>
          </div>
          <div class="row" data-ng-show="type=='flux-facebook'">
@@ -155,14 +141,16 @@
 
       <script src="../js/application/appWatcher.js "></script>
 
-      <script src="../js/controllers/SocialNetworkController.js"></script>
-      <script src="../js/controllers/WatcherController.js "></script>
+<script src="../js/controllers/SocialNetworkController.js"></script>
+   <script src="../js/controllers/WatcherController.js"></script>
+    <script src="../js/services/WatcherService.js "></script>
+    <script src="../lib/js/fullscreen.js"></script>
+    <script src="../lib/js/ng-media.js"></script>
 
       <script src="../js/services/WatcherService.js "></script>
 
-      <script src="/socket.io/socket.io.js "></script>
+      <script src="/socket.io/socket.io.js"></script>
       <script src="../lib/js/jquery-1.11.1.min.js "></script>
       <script src="../lib/bootstrap-3.3.6-dist/js/bootstrap.js "></script>
    </body>
 </html>
-

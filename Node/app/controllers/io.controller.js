@@ -41,6 +41,19 @@ controller.listen = function (server) {
             }
         });
 
+        socket.on("video", function (state) {
+            if (state !== "play" && state !== "pause") {
+                return;
+            }
+            console.log(state);
+            var i = 0;
+            for (i = 0; i < mapSocket.length; i++) {
+                if (mapSocket[i] !== null) {
+                    mapSocket[i].emit(state, null);
+                }
+            }
+        });
+
         socket.on('identification', function () {
             this.emit("identification", mapSocket.indexOf(this));
         });
@@ -97,8 +110,8 @@ controller.listen = function (server) {
         socket.on("configuration", function (conf) {
 
             console.log("--conf--");
-            console.log(":before");
-            console.log(mapInfo);
+            // console.log(":before");
+            // console.log(mapInfo);
 
             for (var i = 0; i < conf.screenlist.length; i++) {
                 for (var j = 0; j < mapInfo.length; j++) {
@@ -114,11 +127,11 @@ controller.listen = function (server) {
 
                 }
             }
-            console.log(":after");
-            console.log(mapInfo);
-            console.log("--end--");
-            updateList();
-            console.log(getLast());
+            /*  console.log(":after");
+              console.log(mapInfo);
+              console.log("--end--");
+              updateList();
+              console.log(getLast());*/
         });
         socket.on("list", function () {
             updateList();
@@ -126,7 +139,6 @@ controller.listen = function (server) {
 
         socket.on("remove", function (number) {
             if (isNaN(number) || mapSocket[number] === undefined || mapSocket[number] === null) {
-                console.log(number);
                 return;
             }
             mapSocket[number].emit("EventError", "you have been disconnected");
@@ -136,9 +148,7 @@ controller.listen = function (server) {
         });
 
         socket.on("image", function (obj) {
-            console.log("lien image reçu");
-            console.log(obj);
-            //console.log(obj);
+
             if (mapSocket[obj.id] === undefined || mapSocket[obj.id] === null) {
                 console.log("error " + obj.id);
                 return;
@@ -152,10 +162,10 @@ controller.listen = function (server) {
                 for (id = 0; id < mapSocket.length; id++) {
                     if (mapSocket[id] !== undefined && mapSocket[id] !== null) {
 
-                        if (obj.type === "image" || obj.type === "video"){
+                        if (obj.type === "image" || obj.type === "video") {
                             mapSocket[id].emit("image", search(mapReceiver, id));
-                            mapSocket[id].emit("update", mapReceiver);  
-                        }else{
+                            mapSocket[id].emit("update", mapReceiver);
+                        } else {
                             mapSocket[id].emit("image", obj);
                             // mapSocket[id].emit("update", mapReceiver);  
                         }
@@ -176,6 +186,12 @@ controller.listen = function (server) {
             return x.id === id;
         });
         if (result.length === 0) {
+
+            console.info(map.map(function (a) {
+                return a.id;
+            }));
+            console.info(id)
+
             return {
                 error: "error",
                 id: id

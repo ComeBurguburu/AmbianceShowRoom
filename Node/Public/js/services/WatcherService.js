@@ -47,6 +47,7 @@ function sockFnc() {
         });
         socket.on('identification', function (id) {
             ret.me = id;
+            ret.error="";
             callback(ret);
         });
 
@@ -55,6 +56,14 @@ function sockFnc() {
             console.log(obj);
             callback(ret);
         });
+        
+        socket.on("pause",function(){
+            callback({videostate:"pause",info:"someone pause the video"})
+        });
+        
+        socket.on("play",function(){
+            callback({videostate:"play",info:"someone play the video"})
+        })
 
 
         socket.on("test", function (log) {
@@ -77,8 +86,16 @@ function sockFnc() {
 
 
     }
+    function pause(){
+        socket.emit("video","pause");
+    }
+    function play(){
+        socket.emit("video","play")
+    }
 
     return {
-        init: init
+        init: init,
+        play:play,
+        pause:pause
     }
 }
