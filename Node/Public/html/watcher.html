@@ -103,7 +103,7 @@
                </a>
       </div>
 
-      <div class="container" data-ng-show="left===undefined && type==='image' && type==='video'">
+      <div class="container" data-ng-show="left===undefined && (type==='image' || type==='video')">
          <h3>My Controller</h3>
          <div data-ng-hide="error===undefined || error==''" class="alert alert-danger" data-ng-bind="error"></div>
          <div data-ng-hide="info===undefined || info==''" class="alert alert-info" data-ng-bind="info"></div>
