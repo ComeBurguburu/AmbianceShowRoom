@@ -144,7 +144,13 @@ controller.listen = function (server) {
             }
             var dim = getLast();
 
-            var id, mapReceiver = splitImage(dim.row + 1, dim.col + 1, obj);
+            var id, mapReceiver;
+            // if(obj.type === "image" || obj.type === "video"){
+                mapReceiver = splitImage(dim.row + 1, dim.col + 1, obj);
+            // }
+            // else{
+            //     // TODO Come
+            // }
 
             if (obj.isGrid === true) { //parametrable
 

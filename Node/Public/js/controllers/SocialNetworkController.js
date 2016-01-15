@@ -1,4 +1,4 @@
-angular.module('App').controller('SocialNetworkController', socialNetworkFnt);
+angular.module('AppWatcher').controller('SocialNetworkController', socialNetworkFnt);
 
 socialNetworkFnt.$inject = ['$scope', '$log'];
 
