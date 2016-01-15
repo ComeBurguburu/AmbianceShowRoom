@@ -79,6 +79,15 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
                 type: "video/mp4",
                 src: "../videos/Star Wars - Le Réveil de la Force - Bande-annonce finale (VOST) (1).mp4"
             }
+        },
+        {
+            id: 18,
+            src: "../images/PixarBall.jpg",
+            type: "video",
+            video: {
+                type: "video/mp4",
+                src: "../videos/Bouncing_Balls.mp4"
+            }
         }
     ];
 
