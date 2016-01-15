@@ -137,6 +137,7 @@ controller.listen = function (server) {
 
         socket.on("image", function (obj) {
             console.log("lien image reçu");
+            console.log(obj);
             //console.log(obj);
             if (mapSocket[obj.id] === undefined || mapSocket[obj.id] === null) {
                 console.log("error " + obj.id);
@@ -144,26 +145,26 @@ controller.listen = function (server) {
             }
             var dim = getLast();
 
-            var id, mapReceiver;
-            // if(obj.type === "image" || obj.type === "video"){
-                mapReceiver = splitImage(dim.row + 1, dim.col + 1, obj);
-            // }
-            // else{
-            //     // TODO Come
-            // }
-
             if (obj.isGrid === true) { //parametrable
+                var id, mapReceiver;
+                mapReceiver = splitImage(dim.row + 1, dim.col + 1, obj);
 
                 for (id = 0; id < mapSocket.length; id++) {
                     if (mapSocket[id] !== undefined && mapSocket[id] !== null) {
-                        mapSocket[id].emit("image", search(mapReceiver, id));
-                        mapSocket[id].emit("update", mapReceiver);
+
+                        if (obj.type === "image" || obj.type === "video"){
+                            mapSocket[id].emit("image", search(mapReceiver, id));
+                            mapSocket[id].emit("update", mapReceiver);  
+                        }else{
+                            mapSocket[id].emit("image", obj);
+                            // mapSocket[id].emit("update", mapReceiver);  
+                        }
+
                     }
                 }
             } else {
                 mapSocket[obj.id].emit("image", obj);
                 mapSocket[obj.id].emit("update", mapReceiver);
-
             }
 
         })
