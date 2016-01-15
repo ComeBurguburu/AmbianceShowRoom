@@ -81,7 +81,7 @@
          </video>
       </div>
 
-      <div data-ng-show="type==='flux-facebook'"
+<!--       <div data-ng-show="type==='flux-facebook'"
          data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" ng-controller="SocialNetworkController">
             <div class="fb-page" data-href="{{facebookLink}}" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" width="{{width}}" height="{{height}}">
               <div class="fb-xfbml-parse-ignore">
@@ -91,9 +91,9 @@
               </div>
            </div>
            <div id="fb-root"></div>
-      </div>
+      </div> -->
 
-      <div data-ng-show="type==='flux-twitter'"
+ <!--      <div data-ng-show="type==='flux-twitter'"
          data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" ng-controller="SocialNetworkController">
                <a id="timeline" class="twitter-timeline"
                   data-widget-id="{{twitterId}}"
@@ -101,9 +101,9 @@
                   width="{{width}}" height="{{height}}">
                Tweets by @{{twitterFeed}}
                </a>
-      </div>
+      </div> -->
 
-      <div class="container" data-ng-show="left===undefined && (type==='image' || type==='video')">
+      <div class="container" data-ng-show="left===undefined">
          <h3>My Controller</h3>
          <div data-ng-hide="error===undefined || error==''" class="alert alert-danger" data-ng-bind="error"></div>
          <div data-ng-hide="info===undefined || info==''" class="alert alert-info" data-ng-bind="info"></div>
@@ -124,7 +124,6 @@
                </video>
             </div>
          </div>
-
          <div class="row" data-ng-show="type=='flux-facebook'">
             <div class="col-xs-12 col-lg-12" ng-controller="SocialNetworkController">
                <div class="fb-page" data-href={{facebookLink}} data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" width="600" height="400">
