@@ -5,7 +5,7 @@ angular.module('App', ['ngRoute', 'ngDraggable', 'gridster', 'socketService', 'c
 		function ($routeProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: '../html/template/view.html',
+                    templateUrl: 'view.html',
                     controller: 'DashboardCtrl'
                 }).otherwise({
                     redirectTo: '/'
