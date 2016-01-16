@@ -8,7 +8,10 @@
     <link href="../css/accueil.css" rel="stylesheet" type="text/css">
     <link href="../css/ScrollBar.css" rel="stylesheet" type="text/css">
     <link href="../lib/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+      
+  <link rel="stylesheet" href="../css/select.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width" />
 
@@ -224,16 +227,70 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row col-xs-12">
-                        <div ng-controller="RootCtrl">
-                            <div></div>
-                            <div ng-view></div>
-                            <div></div>
-                        </div>
+                   <div ng-controller="DemoCtrl">
+                        <form>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h3>Sélectionner le nombre de lignes:</h3>
+                                    <select ng-model="selectedLine" ng-change="updateLine(selectedLine)">
+                                    <option ng-repeat="k in possibilityLine" value="{{k}}">{{k}}</option>
+                                    </select>
+                                    {{selectedLine}}
+                                </div>
+                                <div class="col-xs-6">
+                                    <h3>Sélectionner le nombre de colonnes:</h3>
+                                    <select ng-model="selectedColumn" ng-change="updateColumn(selectedColumn)">
+                                    <option ng-repeat="m in possibilityColumn" value="{{m}}">{{m}}</option>
+                                    </select>
+                                   {{selectedColumn}}
+                                </div>
+                            </div>    
+                       
+                            <h3>Sélectionner le numéro de vos watcher</h3>
+                            <div ng-controller="socketController">
+                                <div  ng-repeat="j in lineList">
+                                    <div class="container row">
+                                        <div  class="col-xs-{{12/selectedColumn}}" ng-repeat="i in columnList">
+                                            <select ng-model="selectedScreen" ng-change="updateGrid(i,j,selectedScreen)">
+                                            <option ng-repeat="k in list" ng-if="k.id!=me" value="{{k.id}}"> {{k.id}}</option>
+                                            </select>
+                                            {{selectedScreen}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input  type="submit" ng-click="submitData()"></input >
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+
+
+      <!--   <div ng-controller="SocialNetworkController">
+          <div style="width: 420px;">
+             <div class="fb-page" data-href={{facebookLink}} data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                <div class="fb-xfbml-parse-ignore">
+                   <blockquote cite={{facebookLink}}>
+                      <a href={{facebookLink}}>Facebook</a>
+                   </blockquote>
+                </div>
+             </div>
+             <div id="fb-root"></div>
+          </div>
+
+
+          <a id="timeline" class="twitter-timeline"
+             data-widget-id={{twitterId}}
+             href={{twitterLink}}
+             width="300"
+             height="300">
+          Tweets by @{{twitterFeed}}
+          </a>
+        </div> -->
+
+
+
 
     </div>
     <footer class="footer">
@@ -253,12 +310,14 @@
 
     <!-- angular app -->
     <script src="../js/application/app.js"></script>
+    <script src="../lib/js/select.js"></script>
    
     <!-- angular controller -->
     <script src="../js/controllers/DropZoneController.js"></script>
     <script src="../js/controllers/rootController.js"></script>
     <script src="../js/controllers/dashboardController.js"></script>
     <script src="../js/controllers/SocketController.js"></script>
+    <script src="../js/controllers/demoCtrl.js"></script>
 
     <!-- anguar service -->
     <script src="../js/services/SocketService.js"></script>

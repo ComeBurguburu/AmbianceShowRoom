@@ -26,6 +26,8 @@ function confFnc(sockserv) {
             }
         }
         sockserv.emit("configuration", screen);
+        console.log("Un petit connard");
+        console.log(screen);
         return screen;
     }
 
