@@ -45,7 +45,7 @@ controller.listen = function (server) {
             if (state !== "play" && state !== "pause") {
                 return;
             }
-            console.log(state);
+            // //console.log(state);
             var i = 0;
             for (i = 0; i < mapSocket.length; i++) {
                 if (mapSocket[i] !== null) {
@@ -86,7 +86,7 @@ controller.listen = function (server) {
             mapInfo[index] = json;
             mapInfo[index].id = index;
 
-            console.log('connect client ' + mapSocket.indexOf(this));
+            //console.log('connect client ' + mapSocket.indexOf(this));
             this.emit("identification", mapSocket.indexOf(this));
             updateList();
 
@@ -102,16 +102,16 @@ controller.listen = function (server) {
         });
 
         socket.on("test", function (log) {
-            console.log("-------------------------------------");
-            console.log(log);
-            console.log("-------------------------------------");
+            //console.log("-------------------------------------");
+            //console.log(log);
+            //console.log("-------------------------------------");
         });
 
         socket.on("configuration", function (conf) {
 
-            console.log("--conf--");
-            // console.log(":before");
-            // console.log(mapInfo);
+            //console.log("--conf--");
+            // //console.log(":before");
+            // //console.log(mapInfo);
 
             for (var i = 0; i < conf.screenlist.length; i++) {
                 for (var j = 0; j < mapInfo.length; j++) {
@@ -121,17 +121,19 @@ controller.listen = function (server) {
                             mapInfo[j].col = conf.screenlist[i].col;
                             mapInfo[j].sizeX = 1;
                             mapInfo[j].sizeY = 1;
-                            console.info(mapInfo[j].id);
+                            //console.info(mapInfo[j].id);
                         }
                     }
 
                 }
             }
-            /*  console.log(":after");
-              console.log(mapInfo);
-              console.log("--end--");
+            console.log("************************************************************");
+            log(mapInfo);
+            /*  //console.log(":after");
+              //console.log(mapInfo);
+              //console.log("--end--");
               updateList();
-              console.log(getLast());*/
+              //console.log(getLast());*/
         });
         socket.on("list", function () {
             updateList();
@@ -150,7 +152,7 @@ controller.listen = function (server) {
         socket.on("image", function (obj) {
 
             if (mapSocket[obj.id] === undefined || mapSocket[obj.id] === null) {
-                console.log("error " + obj.id);
+                //console.log("error " + obj.id);
                 return;
             }
             var dim = getLast();
@@ -181,16 +183,28 @@ controller.listen = function (server) {
 
     });
 
+    function log(map) {
+        var i;
+        for (i = 0; i < map.length; i++) {
+            if (map[i] !== null) {
+                console.log("{row: " + map[i].row + " ,col: " + map[i].col + ", id: " + map[i].id + " ,admin :" + (map[i].admin === true) + "}");
+            }
+        }
+        console.log("------------------");
+
+    }
+
     function search(map, id) {
+        
         var result = map.filter(function (x) {
             return x.id === id;
         });
         if (result.length === 0) {
 
-            console.info(map.map(function (a) {
+            /*console.info(map.map(function (a) {
                 return a.id;
-            }));
-            console.info(id)
+            }));*/
+            //console.info(id)
 
             return {
                 error: "error",
@@ -211,6 +225,8 @@ controller.listen = function (server) {
                 mapSocket[s].emit("list", JSON.stringify(map));
             }
         }
+        log(mapInfo);
+
     }
 
     function getLast() {
@@ -251,8 +267,6 @@ controller.listen = function (server) {
 
         return image.sendImgDispositionProperties(r, row, col, obj);
     }
-
-
 
 };
 module.exports = controller;

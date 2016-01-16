@@ -109,6 +109,7 @@ function sockFnc() {
             c({
                 widgets: JSON.parse(list)
             });
+            
         })
 
 
