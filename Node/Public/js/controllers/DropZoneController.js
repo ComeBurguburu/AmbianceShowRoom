@@ -204,7 +204,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
     $scope.onDropComplete1 = function (data, evt, idEcran) {
 
         $scope.droppedObjects1[idEcran.id] = clone(data);
-        sockserv.send(idEcran.id, data.src, $scope.isGrid, $scope.droppedObjects1[idEcran.id].type,$scope.droppedObjects1[idEcran.id].video);
+        sockserv.send(idEcran.id, data.src, $scope.isGrid, data.type,data.video,$scope.video);
     }
 
     $scope.currentImage = {};

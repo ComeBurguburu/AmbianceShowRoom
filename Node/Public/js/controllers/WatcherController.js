@@ -1,5 +1,7 @@
 angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcherserv', function ($scope, watcherserv) {
 
+    $scope.autoplay = true;
+
     function callback(ret) {
 
         if (ret.videostate === "play") {
@@ -15,7 +17,6 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
 
         $scope.error = ret.error;
         $scope.info = ret.info;
-        $scope.list = ret.list;
         $scope.left = undefined; //reset left parameter
 
         $scope.me = ret.me;
@@ -29,8 +30,11 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
         $scope.type = ret.img.type;
 
         if (ret.img.video !== undefined) {
+            //$scope.autoplay = ret.isPlay;
+
             $scope.videoSources = [];
             $scope.videoSources.push(ret.img.video);
+
         }
 
         //crop video
@@ -65,20 +69,18 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
 
     function play() {
         var videos = document.getElementsByTagName("video");
-        videos[0].play();
+
+        if ($scope.left !== undefined) {
+            videos[0].play();
+        } else {
+            videos[1].play();
+        }
     }
 
     function pause() {
         var videos = document.getElementsByTagName("video");
         videos[0].pause();
+        videos[1].pause();
     }
 
-
-    /*$("#identify").click(function () {
-    		socket.emit("identification", JSON.stringify())
-    	});*/
-    /*
-    	$("#disconnect").click(function () {
-    		socket.emit("remove", $("#number").val());
-    	});*/
-		}]);
+}]);

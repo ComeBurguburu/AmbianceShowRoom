@@ -74,7 +74,7 @@
     <!--            Video fullscreen         -->
 
     <div data-ng-show="type==='video' && left!==undefined">
-        <div width="{{width}}" height="{{height}}" data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" title="video" html5-video='{{ videoSources }}' autoplay='true' controls='true' ng-click="video($event)">
+        <div width="{{width}}" height="{{height}}" data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" title="video" html5-video='{{ videoSources }}' autoplay='{{autoplay}}' controls='true' ng-click="video($event)">
         </div>
     </div>
     <!--             container normal / simple  screen  -->
@@ -95,7 +95,7 @@
 
         <div class="row" data-ng-show="type==='video'">
             <div class="col-xs-12 col-lg-12">
-                <div width="600" height="400" title="video" html5-video='{{ videoSources }}' autoplay='true' controls='true' ng-click="video($event)"></div>
+                <div width="600" height="400" title="video" html5-video='{{ videoSources }}' autoplay='{{autoplay}}' controls='true' ng-click="video($event)"></div>
 
             </div>
         </div>

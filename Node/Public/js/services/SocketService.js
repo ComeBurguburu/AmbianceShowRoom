@@ -77,7 +77,7 @@ function sockFnc() {
 
     }
 
-    function send(id, url, isGrid, typeOfData, video) {
+    function send(id, url, isGrid, typeOfData, video, isPlay) {
         // typeOfData means the type of file (image, video, feed ...)
         console.log("Send");
         var obj = {};
@@ -88,6 +88,7 @@ function sockFnc() {
         obj.row = 2;
         obj.type = typeOfData;
         obj.video = video;
+        obj.isPlay = isPlay;
         console.log(obj);
         socket.emit("image", obj);
     }
@@ -114,12 +115,20 @@ function sockFnc() {
 
 
     }
+    function pause(){
+        socket.emit("video","pause");
+    }
+    function play(){
+        socket.emit("video","play")
+    }
 
     return {
         init: init,
         test: test,
         emit: emit,
         send: send,
+        pause: pause,
+        play: play,
 
         grid: {
             init: init_grid,

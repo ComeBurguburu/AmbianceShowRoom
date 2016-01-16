@@ -41,8 +41,8 @@ function sockFnc() {
         socket.on('EventError', function (msg) {
             ret.error = msg;
             ret.info = "";
-            ret.list = undefined;
             callback(ret);
+            window.close();
             this.off("connection");
         });
         socket.on('identification', function (id) {

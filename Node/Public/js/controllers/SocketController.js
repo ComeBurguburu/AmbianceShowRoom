@@ -8,15 +8,21 @@ function socketCrtFnt($scope, $log, sockserv) {
 
     $scope.imgSrcList = [];
 
+    $scope.video = false;
+
+
+    $scope.video_action = function () {
+        $scope.video === true ? sockserv.play() : sockserv.pause();
+        $scope.video = !$scope.video;
+    }
+
+
+
     function callback(ret) {
         $scope.error = ret.error;
         $scope.info = ret.info;
-
         $scope.list = ret.list;
         $scope.me = ret.me;
-        /* if (ret.list != undefined) {
-             $scope.addWatcher(ret.list);
-         }*/
         $scope.$apply();
     }
     sockserv.init(callback);
