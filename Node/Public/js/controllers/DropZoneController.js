@@ -1,4 +1,4 @@
-angular.module('App').controller('dropzoneController', ['$scope', 'sockserv','$q','$http', function ($scope, sockserv,$q,$http) {
+angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$q', '$http', function ($scope, sockserv, $q, $http) {
 
     $scope.centerAnchor = true;
     $scope.imageSelected = false;
@@ -6,118 +6,61 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv','$q
     $scope.toggleCenterAnchor = function () {
         $scope.centerAnchor = !$scope.centerAnchor
     }
-    
-    $scope.test=function(){
-        
-        var c = load().then(function(data){
-            var json="";
-            try{
-                json=JSON.parse(data);
-            }catch(e){
-                
-            }
-            $scope.draggableObjects = json;
-          //  $scope.$apply();
-        },function(err){
+
+    $scope.test = function () {
+ 
+        var c = load().then(function (data) {
+           $scope.draggableObjects = data.concat($scope.default);
+        }, function (err) {
             console.error("error");
         })
-        
+
     }
-    function load(){
-        var deferred= $q.defer();
+
+    function load() {
+        var deferred = $q.defer();
         //Processing data take time
-$http.get('/files').
-            success(function(data, status, headers ,config){           //Set resolve in case of success 
-deferred.resolve(data); 
-          }).
-           error(function(data, status, headers, config){                     //OR set reject in case of failure
-deferred.reject(status);              }); 
+        $http.get('/files').
+        success(function (data, status, headers, config) { //Set resolve in case of success 
+            deferred.resolve(data);
+        }).
+        error(function (data, status, headers, config) { //OR set reject in case of failure
+            deferred.reject(status);
+        });
         //Return container that will be fill later 
         return deferred.promise;
     }
+    $scope.test();
 
-    
-    
-    
+
     $scope.draggableObjects = [{
             id: 0,
             src: '../images/0.jpg',
             type: 'image'
-    }, {
-            id: 1,
-            src: '../images/1.jpg',
-            type: 'image'
-    }, {
-            id: 2,
-            src: '../images/2.jpg',
-            type: 'image'
-    }, {
-            id: 3,
-            src: '../images/3.jpg',
-            type: 'image'
+    }];
 
-    },{
-            id:4,
-            src: '../images/flag.png',
-            type: 'image'
-    },
-        /* {
-                    id: 4,
-                    src: '../images/4.jpg',
-                type: 'image'
-            }, {
-                    id: 5,
-                    src: '../images/5.jpg',
-                type: 'image'
-            }, {
-                    id: 6,
-                    src: '../images/6.jpg'
-            }, {
-                    id: 7,
-                    src: '../images/7.jpg'
-            }, {
-                    id: 8,
-                    src: '../images/8.jpg'
-            }, {
-                    id: 9,
-                    src: '../images/9.jpg'
-            }, {
-                    id: 10,
-                    src: '../images/10.jpg'
-            }, {
-                    id: 11,
-                    src: '../images/11.jpg'
-            }, {
-                    id: 12,
-                    src: '../images/12.jpg'
-            }, {
-                    id: 13,
-                    src: '../images/13.jpg'
-            }, {
-                    id: 14,
-                    src: '../images/14.jpg'
-            }, */
+    $scope.default = [
         {
             id: 15,
-            src: "../images/facebook.png",
+            src: "../icon/facebook.png",
             type: "flux-facebook"
 
     }, {
             id: 16,
-            src: "../images/twitter.png",
+            src: "../icon/twitter.png",
             type: "flux-twitter"
 
-    },  { 
+    }, {
             id: 17,
-            src: "../images/video.png",
+            src: "../icon/video.png",
             type: "video",
             video: {
                 type: "video/mp4",
                 src: "../videos/Star Wars - Le Réveil de la Force - Bande-annonce finale (VOST) (1).mp4"
-    }
-    },  {
+            }
+    }, {
             id: 18,
-            src: "../images/PixarBall.jpg",
+            src: "../icon/PixarBall.jpg",
             type: "video",
             video: {
                 type: "video/mp4",
@@ -202,8 +145,8 @@ deferred.reject(status);              });
         xhr.addEventListener("load", uploadComplete, false);
         xhr.addEventListener("error", uploadFailed, false);
         xhr.addEventListener("abort", uploadCanceled, false);
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState===4 && xhr.status===200){
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
                 test();
             }
         }
@@ -211,7 +154,7 @@ deferred.reject(status);              });
         // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         $scope.progressVisible = true;
         xhr.send(fd);
-        
+
         console.log("bien envoyé");
     }
 
@@ -247,7 +190,7 @@ deferred.reject(status);              });
 
         $scope.droppedObjects1[idEcran.id] = clone(data);
         new Audio("lightsaber.wav").play();
-        sockserv.send(idEcran.id, data.src, $scope.isGrid, data.type,data.video,$scope.video);
+        sockserv.send(idEcran.id, data.src, $scope.isGrid, data.type, data.video, $scope.video);
     }
 
     $scope.currentImage = {};

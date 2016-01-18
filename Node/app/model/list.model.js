@@ -327,7 +327,8 @@ FileData.pict = function (response, callback) {
 			
 			//json = JSON.parse(data.toString());
 			json.id = j;
-			json.filename = process.env.ADDRESS + "images/" + data_dir[i];
+			json.src = process.env.ADDRESS + "images/" + data_dir[i];
+            json.type = 'image';
 			obj.push(json);
 			//obj[j] = json;
 			j = j + 1;
