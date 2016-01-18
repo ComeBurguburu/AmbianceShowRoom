@@ -12,8 +12,7 @@ angular.module('App').service('userService',['$http','$q', function ($http,$q) {
                 id: '1',
                 name: 'dashboard 1',
                 widgets: [
-                    {col: 0,row: 0,sizeY: 1,sizeX: 1,name: "Widget 1",id:0,content:""}, 
-                    {col: 2,row: 0,sizeY: 1, sizeX: 1,name: "Widget 2",id:1,content:''}
+                
                 ]
             }
         };
