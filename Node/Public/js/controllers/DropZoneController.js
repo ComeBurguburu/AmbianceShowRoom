@@ -23,6 +23,10 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
             src: '../images/3.jpg',
             type: 'image'
 
+    },{
+        id:4,
+        src: '../images/flag.png',
+        type: 'image'
     },
         /* {
                     id: 4,

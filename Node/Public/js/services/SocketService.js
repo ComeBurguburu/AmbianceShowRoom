@@ -84,8 +84,8 @@ function sockFnc() {
         obj.id = id;
         obj.url = url;
         obj.isGrid = isGrid;
-        obj.col = 2;
-        obj.row = 2;
+        obj.col = -1;
+        obj.row = -1;
         obj.type = typeOfData;
         obj.video = video;
         obj.isPlay = isPlay;

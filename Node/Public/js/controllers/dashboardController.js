@@ -18,7 +18,7 @@ angular.module('App')
             draggable: {
                 handle: 'div'
             },
-            widget_base_dimensions: [100, 140],
+            widget_base_dimensions: [100, 100],
             serialize_params: function ($w, wgd) {
                 return {
                     id: $w.prop("id"),

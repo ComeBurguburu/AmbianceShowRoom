@@ -4,7 +4,7 @@
 
 angular.module('App').controller('RootCtrl', function ($scope) {
     $scope.gridsterOptions = {
-        margins: [20, 20],
+        margins: [0, 0],
         columns: 5,
         resize: {
             enabled: false

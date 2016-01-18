@@ -2,6 +2,11 @@ var image = function () {};
 var extend = require('extend');
 
 image.sendImgDispositionProperties = function (screenlistfact, nbrligne, nbrcolonne, obj) {
+    
+    screenlistfact = screenlistfact.sort(function(a,b){
+        if (a.row == b.row) return a.col - b.col;
+        return a.row - b.row;
+    })
     var imgDisposition = [];
     var numberCurrentScreen = 0;
     var heightMax = 0;
