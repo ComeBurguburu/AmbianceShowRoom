@@ -1,13 +1,13 @@
 "use strict";
 angular.module('App').controller('socketController', socketCrtFnt);
 
-socketCrtFnt.$inject = ['$scope', '$log', 'sockserv'];
+socketCrtFnt.$inject = ['$scope', '$log', 'sockserv','$q','$http'];
 
-function socketCrtFnt($scope, $log, sockserv) {
-
-    $scope.screenList = [];
-
-    $scope.imgSrcList = [];
+function socketCrtFnt($scope, $log, sockserv,$q,$http) {
+    
+    
+    
+   
 
     $scope.video = false;
 

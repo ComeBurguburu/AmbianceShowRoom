@@ -1,4 +1,4 @@
-angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', function ($scope, sockserv) {
+angular.module('App').controller('dropzoneController', ['$scope', 'sockserv','$q','$http', function ($scope, sockserv,$q,$http) {
 
     $scope.centerAnchor = true;
     $scope.imageSelected = false;
@@ -6,6 +6,39 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
     $scope.toggleCenterAnchor = function () {
         $scope.centerAnchor = !$scope.centerAnchor
     }
+    
+    $scope.test=function(){
+        
+        var c = load().then(function(data){
+            var json="";
+            try{
+                json=JSON.parse(data);
+            }catch(e){
+                
+            }
+            $scope.draggableObjects = json;
+          //  $scope.$apply();
+        },function(err){
+            console.error("error");
+        })
+        
+    }
+    function load(){
+        var deferred= $q.defer();
+        //Processing data take time
+$http.get('/files').
+            success(function(data, status, headers ,config){           //Set resolve in case of success 
+deferred.resolve(data); 
+          }).
+           error(function(data, status, headers, config){                     //OR set reject in case of failure
+deferred.reject(status);              }); 
+        //Return container that will be fill later 
+        return deferred.promise;
+    }
+
+    
+    
+    
     $scope.draggableObjects = [{
             id: 0,
             src: '../images/0.jpg',
@@ -169,10 +202,16 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
         xhr.addEventListener("load", uploadComplete, false);
         xhr.addEventListener("error", uploadFailed, false);
         xhr.addEventListener("abort", uploadCanceled, false);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState===4 && xhr.status===200){
+                test();
+            }
+        }
         xhr.open("POST", "/file-upload");
         // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         $scope.progressVisible = true;
         xhr.send(fd);
+        
         console.log("bien envoyé");
     }
 
@@ -207,6 +246,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
     $scope.onDropComplete1 = function (data, evt, idEcran) {
 
         $scope.droppedObjects1[idEcran.id] = clone(data);
+        new Audio("lightsaber.wav").play();
         sockserv.send(idEcran.id, data.src, $scope.isGrid, data.type,data.video,$scope.video);
     }
 

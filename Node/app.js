@@ -31,8 +31,6 @@ var multerMiddleware = multer({
 	"dest": "tmp/"
 });
 
-var CurrentFolder;
-
 app.use(uploadRoute);
 app.use(listRoute);
 app.use("/", express.static(path.join(__dirname, "Public")));
