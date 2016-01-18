@@ -6,14 +6,20 @@ angular.module('App').controller('DemoCtrl', ['$scope', 'sockserv', function($sc
   $scope.lineList= [];
   $scope.columnList= [];
 
-
-
-
   $scope.updateLine = function(selectedLine){
-    // console.log(selectedLine);
+    
     $scope.lineList=[];
     for(i=0;i<selectedLine;i++){
       $scope.lineList[i]=i;
+    }
+    if( !($scope.valuesScreen[0].length == 0 && $scope.valuesScreen[1].length == 0 && $scope.valuesScreen[2].length == 0)){
+      console.log("on rentre dans ligne");
+      console.log($scope.valuesScreen);
+      for(i=selectedLine;i<3;i++){
+          for(j=0;j<3;j++){
+            $scope.valuesScreen[i][j] = null;
+          }
+      }
     }
   }
 
@@ -21,6 +27,14 @@ angular.module('App').controller('DemoCtrl', ['$scope', 'sockserv', function($sc
     $scope.columnList=[];
     for(i=0;i<selectedColumn;i++){
       $scope.columnList[i]=i;
+    }
+    if( !($scope.valuesScreen[0].length == 0 && $scope.valuesScreen[1].length == 0 && $scope.valuesScreen[2].length == 0)){
+      console.log("on rentre dans column");
+      for(i=selectedColumn;i<3;i++){
+          for(j=0;j<3;j++){
+            $scope.valuesScreen[j][i] = null;
+          }
+      }
     }
   }
 
