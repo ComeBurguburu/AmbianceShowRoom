@@ -177,7 +177,7 @@ FileData.update = function (fileList, callback) {
 		});
 	}
 }
-FileData.list = function (response, callback) {
+FileData.list = function (response,adress, callback) {
 	var i, fileArray = [],
 		cpt = 0;
 	fs.readdir(CONFIG.contentDirectory, function (error, data_dir) {
@@ -327,7 +327,7 @@ FileData.pict = function (response, callback) {
 			
 			//json = JSON.parse(data.toString());
 			json.id = j;
-			json.filename = file;
+			json.filename = process.env.ADDRESS + "images/" + data_dir[i];
 			obj.push(json);
 			//obj[j] = json;
 			j = j + 1;

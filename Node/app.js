@@ -21,7 +21,10 @@ var FileData = require("./app/model/list.model.js");
 // init server
 var  server  = http.createServer(app);
 server.listen(1337);
-//server.listen(80);
+
+process.env.ADDRESS = "http://127.0.0.1:1337/";
+console.log(process.env.ADDRESS);
+
 IOController.listen(server);
 
 var multerMiddleware = multer({
@@ -33,4 +36,3 @@ var CurrentFolder;
 app.use(uploadRoute);
 app.use(listRoute);
 app.use("/", express.static(path.join(__dirname, "Public")));
-app.use("/socket", express.static(path.join(__dirname, "Public/socket")));
