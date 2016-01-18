@@ -16,7 +16,7 @@ function sockFnc() {
             list: []
         };
 
-        socket = io.connect();
+        socket = io.connect("http://ambiance.herokuapp.com/");
         console.log("socket ready");
         socket.on('connection', function (msg) {
 
