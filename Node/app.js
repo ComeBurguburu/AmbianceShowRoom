@@ -42,22 +42,22 @@ app.post("/file-upload", multerMiddleware.single("file"), function (request, res
 
 		request.file.destination = "Public/videos";
 		destination = request.file.destination;
-		console.log(destination);
+		// console.log(destination);
 
 		request.file.path = 'tmp/' + filename;;
 		_path = request.file.path;
-		console.log(_path);
+		// console.log(_path);
 
 		target_path = 'Public/videos/' + originalname;
 	}else{
 
 		request.file.destination = "Public/images";
 		destination = request.file.destination;
-		console.log(destination);
+		// console.log(destination);
 
 		request.file.path = 'tmp/' + filename;;
 		_path = request.file.path;
-		console.log(_path);
+		// console.log(_path);
 
 		target_path = 'Public/images/' + originalname;
 	}

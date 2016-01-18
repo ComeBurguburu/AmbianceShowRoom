@@ -24,9 +24,9 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
             type: 'image'
 
     },{
-        id:4,
-        src: '../images/flag.png',
-        type: 'image'
+            id:4,
+            src: '../images/flag.png',
+            type: 'image'
     },
         /* {
                     id: 4,
@@ -74,17 +74,15 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
             src: "../images/twitter.png",
             type: "flux-twitter"
 
-    },
-        {
+    },  { 
             id: 17,
             src: "../images/video.png",
             type: "video",
             video: {
                 type: "video/mp4",
                 src: "../videos/Star Wars - Le Réveil de la Force - Bande-annonce finale (VOST) (1).mp4"
-            }
-        },
-        {
+    }
+    },  {
             id: 18,
             src: "../images/PixarBall.jpg",
             type: "video",
@@ -174,7 +172,6 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
         xhr.open("POST", "/file-upload");
         // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         $scope.progressVisible = true;
-        console.log($scope.files[0]);
         xhr.send(fd);
         console.log("bien envoyé");
     }
