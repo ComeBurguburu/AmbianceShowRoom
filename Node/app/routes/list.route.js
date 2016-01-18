@@ -26,12 +26,14 @@ var CurrentFolder;
 
 router2.get("/files",function(request,response){
 
-	var CONFIG = {
-					contentDirectory:"Public/images/"
-				 };
-	FileData.pict(response,function(err,a){
+	var configPath = [{	
+						contentDirectory:"Public/images/"
+					 },{
+					 	contentDirectory:"Public/videos/"
+					 }];
+	FileData.pict(response,function(err,a,configPath){
 		response.send(a);
-	});
+	},configPath);
 
 	/*
 	var myFile = new FileData(JSON.stringify({
@@ -54,13 +56,12 @@ router2.get("/files",function(request,response){
 });
 
 
-
-router2.get("/slids/:slidId", function (request, response) {
-	var id = request.params.slidId;
-	console.log(id);
-	SlidController.read(id, function (erreur, data) {
-		response.send(data);
-		console.log(data);
-		console.log(erreur);
-	}, request.query.json);
-});
+// router2.get("/slids/:slidId", function (request, response) {
+// 	var id = request.params.slidId;
+// 	console.log(id);
+// 	SlidController.read(id, function (erreur, data) {
+// 		response.send(data);
+// 		console.log(data);
+// 		console.log(erreur);
+// 	}, request.query.json);
+// });

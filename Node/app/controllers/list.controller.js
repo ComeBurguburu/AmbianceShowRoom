@@ -40,9 +40,10 @@ FileListController.loadPres = function (request, response, callback) {
 		response.send(data);
 	});
 }
+
 FileListController.pict = function (request, response, callback) {
 
-		FileListModel.pict(response, function (err, data) {
+		FileListModel.pict(response, function (err, data, filePath) {
 			if (err) {
 				console.error(err)
 				callback(err);
@@ -50,7 +51,7 @@ FileListController.pict = function (request, response, callback) {
 			}
 			response.send(data);
 		});
-	}
+}
 	//SlidController.getData = function(){return FileListModel.getData();};
 
 FileListController.create = function (request, response) {

@@ -302,12 +302,17 @@ FileData.savePres = function (request, response) {
 
 	});
 };
-FileData.pict = function (response, callback) {
+FileData.pict = function (response, callback, filePath) {
 	var i, obj = [],
 		cpt = 0;
-	fs.readdir(CONFIG.contentDirectory, function (error, data_dir) {
+		console.log(filePath);
+		//console.log(response);
+	fs.readdir(filePath[0].contentDirectory, function (error, data_dir) {
 
-		var dir = CONFIG.contentDirectory; // your directory
+		console.log("filepath[0]");
+		console.log(filePath[0]);
+
+		var dir = filePath[0].contentDirectory; // your directory
 		data_dir = data_dir.sort(function (a, b) {
 			return fs.statSync(path.join(dir, a)).mtime.getTime() -
 				fs.statSync(path.join(dir, b)).mtime.getTime();
@@ -319,7 +324,7 @@ FileData.pict = function (response, callback) {
 		}
 
 		for (i = 0; i < data_dir.length; i++) {
-			var file = path.join(CONFIG.contentDirectory, data_dir[i]);
+			var file = path.join(dir, data_dir[i]);
 			console.log(file);
 			var data = fs.readFileSync(file, "utf-8");
 
@@ -336,9 +341,50 @@ FileData.pict = function (response, callback) {
 			cpt++;
 
 		}; //loop end	
+
+		//callback(null, JSON.stringify(obj));
+		//return;
+
+	//});
+
+
+	fs.readdir(filePath[1].contentDirectory, function (error, data_dir) {
+
+		console.log("filepath[1]");
+		console.log(filePath[1]);
+		var dir = filePath[1].contentDirectory; // your directory
+		data_dir = data_dir.sort(function (a, b) {
+			return fs.statSync(path.join(dir, a)).mtime.getTime() -
+				fs.statSync(path.join(dir, b)).mtime.getTime();
+		});
+
+		var j = 0;
+		if (error) {
+			return console.error(error);
+		}
+
+		for (i = 0; i < data_dir.length; i++) {
+			var file = path.join(dir, data_dir[i]);
+			console.log(file);
+			var data = fs.readFileSync(file, "utf-8");
+
+			var json = {};
+			
+			//json = JSON.parse(data.toString());
+			json.id = j;
+			json.filename = process.env.ADDRESS + "videos/" + data_dir[i];
+			obj.push(json);
+			//obj[j] = json;
+			j = j + 1;
+		
+			cpt++;
+
+		}; //loop end	
+
 		callback(null, JSON.stringify(obj));
 		return;
 
+	});
 	});
 }
 
