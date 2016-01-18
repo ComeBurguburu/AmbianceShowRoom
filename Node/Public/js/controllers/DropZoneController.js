@@ -8,9 +8,9 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
     }
 
     $scope.test = function () {
- 
+
         var c = load().then(function (data) {
-           $scope.draggableObjects = data.concat($scope.default);
+            $scope.draggableObjects = data.concat($scope.default);
         }, function (err) {
             console.error("error");
         })
@@ -34,9 +34,9 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
 
     $scope.draggableObjects = [{
-            id: 0,
-            src: '../images/0.jpg',
-            type: 'image'
+        id: 0,
+        src: '../images/0.jpg',
+        type: 'image'
     }];
 
     $scope.default = [
@@ -50,24 +50,8 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
             src: "../icon/twitter.png",
             type: "flux-twitter"
 
-    }, {
-            id: 17,
-            src: "../icon/video.png",
-            type: "video",
-            video: {
-                type: "video/mp4",
-                src: "../videos/Star Wars - Le Réveil de la Force - Bande-annonce finale (VOST) (1).mp4"
-            }
-    }, {
-            id: 18,
-            src: "../icon/PixarBall.jpg",
-            type: "video",
-            video: {
-                type: "video/mp4",
-                src: "../videos/Bouncing_Balls.mp4"
-            }
-        }
-    ];
+    }
+];
 
     $scope.droppedObjects1 = [];
 
