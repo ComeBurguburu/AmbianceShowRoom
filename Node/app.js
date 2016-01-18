@@ -6,9 +6,8 @@ var http = require("http");
 var path = require("path");
 var multer = require("multer");
 
-//var defaultRoute = require("./app/routes/route.js");
 var IOController = require("./app/controllers/io.controller.js");
-var bodyParser = require("body-parser");
+// var bodyParser = require("body-parser");
 var fs = require("fs");
 var path = require("path");
 var app = express();
@@ -20,7 +19,7 @@ server.listen(1337);
 IOController.listen(server);
 
 var multerMiddleware = multer({
-	"dest": "Public/images/"
+	"dest": "tmp/"
 });
 
 app.post("/file-upload", multerMiddleware.single("file"), function (request, response) {
@@ -37,7 +36,31 @@ app.post("/file-upload", multerMiddleware.single("file"), function (request, res
 	var _path = request.file.path;
 	var size = request.file.size;
 
-	var target_path = 'Public/images/' + originalname;
+	var target_path;
+
+	if (mimetype == 'video/mp4'){
+
+		request.file.destination = "Public/videos";
+		destination = request.file.destination;
+		console.log(destination);
+
+		request.file.path = 'tmp/' + filename;;
+		_path = request.file.path;
+		console.log(_path);
+
+		target_path = 'Public/videos/' + originalname;
+	}else{
+
+		request.file.destination = "Public/images";
+		destination = request.file.destination;
+		console.log(destination);
+
+		request.file.path = 'tmp/' + filename;;
+		_path = request.file.path;
+		console.log(_path);
+
+		target_path = 'Public/images/' + originalname;
+	}
 
 	var src = fs.createReadStream(_path);
 	var dest = fs.createWriteStream(target_path); //target_path);
@@ -49,11 +72,12 @@ app.post("/file-upload", multerMiddleware.single("file"), function (request, res
 	src.on('error', function (err) {
 		console.error(err);
 	});
+
 });
 
 
 app.use("/", express.static(path.join(__dirname, "Public")));
 app.use("/socket", express.static(path.join(__dirname, "Public/socket")));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());

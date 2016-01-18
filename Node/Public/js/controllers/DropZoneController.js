@@ -172,19 +172,21 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', fu
         xhr.addEventListener("error", uploadFailed, false);
         xhr.addEventListener("abort", uploadCanceled, false);
         xhr.open("POST", "/file-upload");
+        // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         $scope.progressVisible = true;
+        console.log($scope.files[0]);
         xhr.send(fd);
         console.log("bien envoyé");
     }
 
     function uploadProgress(evt) {
-        $scope.$apply(function () {
-            if (evt.lengthComputable) {
-                $scope.progress = Math.round(evt.loaded * 100 / evt.total);
-            } else {
-                $scope.progress = 'unable to compute';
-            }
-        });
+        // $scope.$apply(function () {
+        //     if (evt.lengthComputable) {
+        //         $scope.progress = Math.round(evt.loaded * 100 / evt.total);
+        //     } else {
+        //         $scope.progress = 'unable to compute';
+        //     }
+        // });
     }
 
     function uploadComplete(evt) {
