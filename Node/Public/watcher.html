@@ -74,7 +74,7 @@
     <!--            Video fullscreen         -->
 
     <div data-ng-show="type==='video' && left!==undefined">
-        <div width="{{width}}" height="{{height}}" data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" title="video" html5-video='{{ videoSources }}' autoplay='{{autoplay}}' controls='true' ng-click="video($event)">
+        <div width="{{width}}" height="{{height}}" data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" title="video" html5-video='{{ videoSources }}' autoplay='{{autoplay}}' controls='true' ng-click="video($event)"  ondblclick="FullScreen()">
         </div>
     </div>
     <!--             container normal / simple  screen  -->
@@ -89,18 +89,18 @@
 
         <div class="row" data-ng-show="type==='image'">
             <div class="col-xs-12 col-lg-12">
-                <img data-ng-src="{{src}}" title="real size" alt="real size" style="width: 100%;height: auto;" />
+                <img data-ng-src="{{src}}" title="real size" alt="real size" style="width: 100%;height: auto;"  ondblclick="FullScreen()"/>
             </div>
         </div>
 
         <div class="row" data-ng-show="type==='video'">
             <div class="col-xs-12 col-lg-12">
-                <div width="600" height="400" title="video" html5-video='{{ videoSources }}' autoplay='{{autoplay}}' controls='true' ng-click="video($event)"></div>
+                <div width="600" height="400" title="video" html5-video='{{ videoSources }}' autoplay='{{autoplay}}' controls='true' ng-click="video($event)"  ondblclick="FullScreen()"></div>
 
             </div>
         </div>
         <div class="row" data-ng-show="type=='flux-facebook'">
-            <div class="col-xs-12 col-lg-12" ng-controller="SocialNetworkController">
+            <div class="col-xs-12 col-lg-12" ng-controller="SocialNetworkController"  ondblclick="FullScreen()">
                 <div class="fb-page" data-href={{facebookLink}} data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" width="600" height="400">
                     <div class="fb-xfbml-parse-ignore">
                         <blockquote cite={{facebookLink}}>
@@ -112,7 +112,7 @@
             </div>
         </div>
 
-        <div class="row" data-ng-show="type=='flux-twitter'">
+        <div class="row" data-ng-show="type=='flux-twitter'"  ondblclick="FullScreen()">
             <div class="col-xs-12 col-lg-12" ng-controller="SocialNetworkController">
                 <a id="timeline" class="twitter-timeline" data-widget-id={{twitterId}} href={{twitterLink}} width="600" height="400">
                Tweets by @{{twitterFeed}}
