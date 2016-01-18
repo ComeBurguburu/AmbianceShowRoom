@@ -7,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/accueil.css" rel="stylesheet" type="text/css">
     <link href="css/ScrollBar.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="vador.ico" />
     <link href="lib/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
       
-  <link rel="stylesheet" href="css/select.css">
+    <link rel="stylesheet" href="css/select.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width" />
 
@@ -165,8 +166,8 @@
 
 
                     <ul class="pager">
-                        <li class="previous btn btn-default" ng-click="previousImage()">Previous</li>
-                        <li class="next btn btn-default" ng-click="nextImage()">Next</li>
+                        <li class="previous btn btn-info" ng-click="previousImage()">Previous</li>
+                        <li class="next btn btn-info" ng-click="nextImage()">Next</li>
                     </ul>
                 </div>
 
@@ -185,8 +186,8 @@
                                 <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
                             </ul>
                             <ul class="pager">
-                                <li class="previous btn btn-default" ng-click="previousScreen(list,me)">Previous</li>
-                                <li class="next btn btn-default" ng-click="nextScreen(list,me)">Next</li>
+                                <li class="previous btn btn-info" ng-click="previousScreen(list,me)">Previous</li>
+                                <li class="next btn btn btn-info" ng-click="nextScreen(list,me)">Next</li>
                             </ul>
 
                         </div>
@@ -238,14 +239,12 @@
                                     <select ng-model="selectedLine" ng-change="updateLine(selectedLine)">
                                     <option ng-repeat="k in possibilityLine" value="{{k}}">{{k}}</option>
                                     </select>
-                                    {{selectedLine}}
                                 </div>
                                 <div class="col-xs-6">
                                     <h3>Sélectionner le nombre de colonnes:</h3>
                                     <select ng-model="selectedColumn" ng-change="updateColumn(selectedColumn)">
                                     <option ng-repeat="m in possibilityColumn" value="{{m}}">{{m}}</option>
                                     </select>
-                                   {{selectedColumn}}
                                 </div>
                             </div>    
                        
@@ -257,7 +256,6 @@
                                             <select ng-model="selectedScreen" ng-change="updateGrid(i,j,selectedScreen)">
                                             <option ng-repeat="k in list" ng-if="k.id!=me" value="{{k.id}}"> {{k.id}}</option>
                                             </select>
-                                            {{selectedScreen}}
                                         </div>
                                     </div>
                                 </div>
