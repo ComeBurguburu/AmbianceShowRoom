@@ -39,7 +39,7 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
 
         //crop video
         if (ret.img.type === "video" && ret.img.left !== undefined) {
-            ret.img.left = ret.img.left + 8 / 100 * ret.img.width;
+            ret.img.left = ret.img.left + 15 / 100 * ret.img.width;
         }
 
 

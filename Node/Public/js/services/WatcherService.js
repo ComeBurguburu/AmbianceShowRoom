@@ -48,11 +48,13 @@ function sockFnc() {
         socket.on('identification', function (id) {
             ret.me = id;
             ret.error="";
+            ret.list=[];
             callback(ret);
         });
 
         socket.on("image", function (obj) {
             ret.img = obj;
+           // ret.list=[]
             console.log(obj);
             callback(ret);
         });

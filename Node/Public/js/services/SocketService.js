@@ -2,6 +2,7 @@
 "use strict";
 angular.module('socketService', []).service('sockserv', sockFnc);
 var socket;
+var callback_widgets = undefined;
 
 function sockFnc() {
     function init(callback) {
@@ -23,25 +24,25 @@ function sockFnc() {
             var info = {
                 width: window.innerWidth,
                 height: window.innerHeight,
-                row: -1,
-                col: -1,
+                row: 2,
+                col: 2,
                 userAgent: navigator.userAgent,
                 admin: true
             };
             socket.emit("register", JSON.stringify(info));
-            callback({error:"",info:""});
+            callback({error: "", info: ""});
         });
         socket.on('identification', function (id) {
             ret.me = id;
             callback(ret);
         });
         socket.on("EventError", function (error_message) {
-            callback({
+           callback({
                 info: "",
                 error: error_message
             });
 
-        })
+        });
 
 
         socket.on('disconnect', function () {
@@ -59,16 +60,25 @@ function sockFnc() {
 
         socket.on("list", function (data) {
             console.log("event list trig");
-         //   console.error(new Date().getTime());
-            var i, json = JSON.parse(data);
+            var i, json="";
+            try{
+                json= JSON.parse(data);
+            }catch(e){
+                alert(e);    
+            }
+            
             ret.list = [];
-            //console.info(json);
 
             for (i = 0; i < json.length; i++) {
                 ret.list.push(json[i]);
             }
 
             callback(ret);
+            console.info({list:json})
+            if (callback_widgets !== undefined) {
+              callback_widgets({ widgets: json});
+            }
+            
         });
 
         window.onbeforeunload = function () {
@@ -84,8 +94,8 @@ function sockFnc() {
         obj.id = id;
         obj.url = url;
         obj.isGrid = isGrid;
-        obj.col = -1;
-        obj.row = -1;
+        obj.col = 2;
+        obj.row = 2;
         obj.type = typeOfData;
         obj.video = video;
         obj.isPlay = isPlay;
@@ -106,20 +116,21 @@ function sockFnc() {
     }
 
     function init_grid(c) {
-        socket.on("list", function (list) {
+       /* socket.on("list", function (list) {
             c({
                 widgets: JSON.parse(list)
             });
             
-        })
+        })*/
+        callback_widgets = c;
 
 
     }
-    function pause(){
-        socket.emit("video","pause");
+    function pause() {
+        socket.emit("video", "pause");
     }
-    function play(){
-        socket.emit("video","play")
+    function play() {
+        socket.emit("video", "play");
     }
 
     return {
@@ -132,7 +143,7 @@ function sockFnc() {
 
         grid: {
             init: init_grid,
-            remove: remove_widget,
+            remove: remove_widget
         }
     };
 }

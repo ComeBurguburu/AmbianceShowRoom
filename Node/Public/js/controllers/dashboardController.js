@@ -53,7 +53,7 @@ angular.module('App')
                 $scope.dashboard.widgets.push({
                     name: "Screen " + ret.widgets[index].id,
                     OS: user.os.name,
-                    browser: user.family,
+                    browser: user.browser.family,
                     row: ret.widgets[index].row,
                     col: ret.widgets[index].col,
                     type: 0,

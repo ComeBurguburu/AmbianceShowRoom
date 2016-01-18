@@ -12,6 +12,7 @@
 </head>
 
 <body data-ng-app="AppWatcher" data-ng-controller="watcherController" ng-style="{'padding-top': '50px','overflow': left === undefined ? 'visible':'hidden'}">
+
     <nav class="navbar navbar-inverse navbar-fixed-top" data-ng-show="left===undefined">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -22,51 +23,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Brand</a>
+                <a class="navbar-brand" href="">Ambiance</a>
             </div>
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="">{{me}}</a></li>
+                        <li ng-hide="error===undefined || error==''" style="color:red;" id="error" ng-bind="error"></li>
+                        <li ng-hide="info===undefined || info==''" style="color:blue;" ng-bind="info"></li>
+                    </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
-
 
     <!--                  Image fullscreen     -->
     <img data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" data-ng-src="{{src}}" data-ng-show="type==='image' && left!==undefined" title="fullsreen" alt="fullscreen" ondblclick="FullScreen()" />
@@ -75,33 +46,31 @@
     <!--            Video fullscreen         -->
 
     <div data-ng-show="type==='video' && left!==undefined">
-        <div width="{{width}}" height="{{height}}" data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" title="video" html5-video='{{ videoSources }}' autoplay='{{autoplay}}' controls='true' ng-click="video($event)"  ondblclick="FullScreen()">
+        <div width="{{width}}" height="{{height}}" data-ng-style="{'width': width===undefined ? 'auto':width,'height':height===undefined?'auto':height,'position':left===undefined?'static':'absolute','left':left===undefined?'auto':left,'top':top===undefined?'auto':top}" title="video" html5-video='{{ videoSources }}' autoplay='{{autoplay}}' controls='true' ng-click="video($event)" ondblclick="FullScreen()">
         </div>
     </div>
     <!--             container normal / simple  screen  -->
 
     <div class="container" data-ng-show="left===undefined && type!== 'facebook' ">
         <h3>My Controller</h3>
-        <div data-ng-hide="error===undefined || error==''" class="alert alert-danger" data-ng-bind="error"></div>
-        <div data-ng-hide="info===undefined || info==''" class="alert alert-info" data-ng-bind="info"></div>
         <p>URL:{{src}}</p>
         <div class="btn btn-info rounder">{{me}}</div>
         <h4>{{type}}</h4>
 
         <div class="row" data-ng-show="type==='image'">
             <div class="col-xs-12 col-lg-12">
-                <img data-ng-src="{{src}}" title="real size" alt="real size" style="width: 100%;height: auto;"  ondblclick="FullScreen()"/>
+                <img data-ng-src="{{src}}" title="real size" alt="real size" style="width: 100%;height: auto;" ondblclick="FullScreen()" />
             </div>
         </div>
 
         <div class="row" data-ng-show="type==='video'">
             <div class="col-xs-12 col-lg-12">
-                <div width="600" height="400" title="video" html5-video='{{ videoSources }}' autoplay='{{autoplay}}' controls='true' ng-click="video($event)"  ondblclick="FullScreen()"></div>
+                <div width="600" height="400" title="video" html5-video='{{ videoSources }}' autoplay='{{autoplay}}' controls='true' ng-click="video($event)" ondblclick="FullScreen()"></div>
 
             </div>
         </div>
         <div class="row" data-ng-show="type=='flux-facebook'">
-            <div class="col-xs-12 col-lg-12" ng-controller="SocialNetworkController"  ondblclick="FullScreen()">
+            <div class="col-xs-12 col-lg-12" ng-controller="SocialNetworkController" ondblclick="FullScreen()">
                 <div class="fb-page" data-href={{facebookLink}} data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" width="600" height="400">
                     <div class="fb-xfbml-parse-ignore">
                         <blockquote cite={{facebookLink}}>
@@ -113,7 +82,7 @@
             </div>
         </div>
 
-        <div class="row" data-ng-show="type=='flux-twitter'"  ondblclick="FullScreen()">
+        <div class="row" data-ng-show="type=='flux-twitter'" ondblclick="FullScreen()">
             <div class="col-xs-12 col-lg-12" ng-controller="SocialNetworkController">
                 <a id="timeline" class="twitter-timeline" data-widget-id={{twitterId}} href={{twitterLink}} width="600" height="400">
                Tweets by @{{twitterFeed}}

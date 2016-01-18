@@ -1,3 +1,4 @@
+"use strict";
 angular.module('App').controller('socketController', socketCrtFnt);
 
 socketCrtFnt.$inject = ['$scope', '$log', 'sockserv'];
@@ -10,7 +11,6 @@ function socketCrtFnt($scope, $log, sockserv) {
 
     $scope.video = false;
 
-
     $scope.video_action = function () {
         $scope.video === true ? sockserv.play() : sockserv.pause();
         $scope.video = !$scope.video;
@@ -21,10 +21,16 @@ function socketCrtFnt($scope, $log, sockserv) {
     function callback(ret) {
         $scope.error = ret.error;
         $scope.info = ret.info;
-        $scope.list = ret.list;
-        $scope.me = ret.me;
+
+        if (ret.list !== undefined && ret.list.length !== 0) {
+            $scope.list = ret.list;
+        }
+
+        if (ret.me !== undefined) {
+            $scope.me = ret.me;
+        }
         $scope.$apply();
     }
+    
     sockserv.init(callback);
-
 }
