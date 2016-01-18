@@ -1,5 +1,6 @@
 "use strict";
 
+var CONFIG = {contentDirectory:"Public/images/"};
 var path = require("path");
 var fs = require("fs");
 var utils = require("../utils/utils.js");
@@ -11,7 +12,6 @@ var FileData = function FileData(json) {
 	this.id = null;
 	this.src = null;
 	this.type = null;
-	this.title = null;
 	this.fileName = null;
 	this.videoType = null;
 	this.videoSrc = null;
@@ -58,31 +58,31 @@ var FileData = function FileData(json) {
 	} else {
 		console.error("no type");
 	}
-	if (json.title) {
-		this.title = json.title;
-	} else {
-		console.error("no title");
-	}
+
 	if (json.fileName) {
 		this.fileName = json.fileName;
 	} else {
 		console.error("no fileName");
 	}
+
 	if (json.videoType) {
 		this.videoType = json.videoType;
 	} else {
 		console.error("no videoType");
 	}
+
 	if (json.videoSrc) {
 		this.videoSrc = json.videoSrc;
 	} else {
 		console.error("no videoSrc");
 	}
+
 	if (json.data) {
 		this.setData(json.data);
 	} else {
 		this.setData(null);
 	}
+
 	if (json.src) {
 		this.src = json.src;
 	}
@@ -303,7 +303,7 @@ FileData.savePres = function (request, response) {
 	});
 };
 FileData.pict = function (response, callback) {
-	var i, obj = {},
+	var i, obj = [],
 		cpt = 0;
 	fs.readdir(CONFIG.contentDirectory, function (error, data_dir) {
 
@@ -313,10 +313,6 @@ FileData.pict = function (response, callback) {
 				fs.statSync(path.join(dir, b)).mtime.getTime();
 		});
 
-		/*	data_dir.map(function (a) {
-				console.log(a + " " + fs.statSync(path.join(dir, a)).mtime.getTime());
-			})*/
-
 		var j = 0;
 		if (error) {
 			return console.error(error);
@@ -324,20 +320,19 @@ FileData.pict = function (response, callback) {
 
 		for (i = 0; i < data_dir.length; i++) {
 			var file = path.join(CONFIG.contentDirectory, data_dir[i]);
+			console.log(file);
 			var data = fs.readFileSync(file, "utf-8");
 
-			var json = "";
-			try {
-				json = JSON.parse(data.toString());
-				json.id = j;
-				obj[j] = json;
-				j = j + 1;
-			} catch (e) {
-
-			}
-
+			var json = {};
+			
+			//json = JSON.parse(data.toString());
+			json.id = j;
+			json.filename = file;
+			obj.push(json);
+			//obj[j] = json;
+			j = j + 1;
+		
 			cpt++;
-
 
 		}; //loop end	
 		callback(null, JSON.stringify(obj));
@@ -382,3 +377,5 @@ FileData.delete = function (id, callback) {
 		})
 	})
 }
+//
+module.exports = FileData;

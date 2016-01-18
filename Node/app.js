@@ -7,10 +7,15 @@ var path = require("path");
 var multer = require("multer");
 
 var IOController = require("./app/controllers/io.controller.js");
-// var bodyParser = require("body-parser");
+var FileListController = require("./app/controllers/list.controller.js");
+
 var fs = require("fs");
 var path = require("path");
 var app = express();
+
+var utils = require("./app/utils/utils.js");
+var FileData = require("./app/model/list.model.js");
+
 
 // init server
 var  server  = http.createServer(app);
@@ -22,6 +27,8 @@ var multerMiddleware = multer({
 	"dest": "tmp/"
 });
 
+var CurrentFolder;
+
 app.post("/file-upload", multerMiddleware.single("file"), function (request, response) {
 
 	console.log("(request.file) : ");
@@ -29,7 +36,7 @@ app.post("/file-upload", multerMiddleware.single("file"), function (request, res
 
 	var fieldname = request.file.fieldname;
 	var originalname = request.file.originalname;
-	var encoding = request.file.encoding;
+	// var encoding = request.file.encoding;
 	var mimetype = request.file.mimetype;
 	var destination = request.file.destination;
 	var filename = request.file.filename;
@@ -37,6 +44,10 @@ app.post("/file-upload", multerMiddleware.single("file"), function (request, res
 	var size = request.file.size;
 
 	var target_path;
+	var videoType = null;
+	var videoSrc = null;
+	var fileType = mimetype.substring(0, mimetype.indexOf('/'));
+	console.log(fileType);
 
 	if (mimetype == 'video/mp4'){
 
@@ -48,7 +59,11 @@ app.post("/file-upload", multerMiddleware.single("file"), function (request, res
 		_path = request.file.path;
 		// console.log(_path);
 
+		CurrentFolder = 'Public/videos';
 		target_path = 'Public/videos/' + originalname;
+
+		videoType = mimetype.substring(0, mimetype.indexOf('/'));
+		videoSrc = target_path;
 	}else{
 
 		request.file.destination = "Public/images";
@@ -59,6 +74,7 @@ app.post("/file-upload", multerMiddleware.single("file"), function (request, res
 		_path = request.file.path;
 		// console.log(_path);
 
+		CurrentFolder = 'Public/images';
 		target_path = 'Public/images/' + originalname;
 	}
 
@@ -72,12 +88,49 @@ app.post("/file-upload", multerMiddleware.single("file"), function (request, res
 	src.on('error', function (err) {
 		console.error(err);
 	});
-
 });
+
+
+app.get("/files",function(request,response){
+
+	var CONFIG = {
+					contentDirectory:"Public/images/"
+				 };
+	FileData.pict(response,function(err,a){
+		response.send(a);
+	});
+
+	/*
+	var myFile = new FileData(JSON.stringify({
+		id: filename,
+		src: target_path,
+		type: fileType,
+		fileName: originalname,
+		videoType: mimetype,
+		videoSrc: target_path
+	}));
+
+	FileData.create(myFile, function (err, data) {
+		if (err) {
+			console.error(err);
+			response.send(err);
+		} else {
+			response.send("file uploaded");
+		}
+	});*/
+});
+
 
 
 app.use("/", express.static(path.join(__dirname, "Public")));
 app.use("/socket", express.static(path.join(__dirname, "Public/socket")));
 
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+app.get("/slids/:slidId", function (request, response) {
+	var id = request.params.slidId;
+	console.log(id);
+	SlidController.read(id, function (erreur, data) {
+		response.send(data);
+		console.log(data);
+		console.log(erreur);
+	}, request.query.json);
+});

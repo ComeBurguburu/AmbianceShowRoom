@@ -1,5 +1,5 @@
 "use strict";
-var CONFIG = JSON.parse(process.env.CONFIG);
+var CONFIG = "Public/";
 
 var path = require("path");
 var fs = require("fs");

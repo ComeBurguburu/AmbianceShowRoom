@@ -2,7 +2,7 @@
 
 var fs = require("fs");
 var path = require("path");
-var CONFIG = JSON.parse(process.env.CONFIG);
+var CONFIG = "Public/";
 
 module.exports = this;
 
