@@ -7,7 +7,6 @@ var path = require("path");
 var multer = require("multer");
 
 var IOController = require("./app/controllers/io.controller.js");
-var FileListController = require("./app/controllers/list.controller.js");
 
 var fs = require("fs");
 var path = require("path");
