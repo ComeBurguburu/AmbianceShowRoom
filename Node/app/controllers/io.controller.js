@@ -13,7 +13,6 @@ controller.listen = function (server) {
 
 
     var obj, ioServer = io.listen(server);
-    ioServer.set("origins","*");
     ioServer.set('log level', 1);
 
     ioServer.on('connection', function (socket) {

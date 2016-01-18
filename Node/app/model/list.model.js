@@ -144,7 +144,11 @@ FileData.pict = function (response, callback, filePath) {
 			
 			//json = JSON.parse(data.toString());
 			json.id = j;
-			json.filename = process.env.ADDRESS + "videos/" + data_dir[i];
+            json.src = process.env.ADDRESS + "icon/video.png";
+            json.type="video";
+            json.video={};
+            json.video.type = "video/mp4"
+			json.video.src = process.env.ADDRESS + "videos/" + data_dir[i];
 			obj.push(json);
 			//obj[j] = json;
 			j = j + 1;

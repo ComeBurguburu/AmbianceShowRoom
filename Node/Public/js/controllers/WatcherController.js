@@ -30,14 +30,15 @@ angular.module('AppWatcher').controller('watcherController', ['$scope', 'watcher
         $scope.type = ret.img.type;
 
         if (ret.img.video !== undefined) {
+
             if(ret.img.isPlay){
                 pause();
             }
-           // alert(ret.img.isPlay);
-
+           
             $scope.videoSources = [];
             $scope.videoSources.push(ret.img.video);
-            if(!ret.img.isPlay){
+            
+            if(ret.img.isPlay){
                 pause();
             }
 
