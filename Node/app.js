@@ -15,7 +15,6 @@ var app = express();
 
 var uploadRoute = require("./app/routes/upload.route.js");
 var listRoute = require("./app/routes/list.route.js");
-var utils = require("./app/utils/utils.js");
 var FileData = require("./app/model/list.model.js");
 
 // init server

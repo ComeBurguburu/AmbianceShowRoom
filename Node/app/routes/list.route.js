@@ -13,7 +13,6 @@ var path = require("path");
 var router2 = express.Router();
 
 var listRoute = require("./../routes/list.route.js");
-var utils = require("./../utils/utils.js");
 var FileData = require("./../model/list.model.js");
 
 module.exports = router2;
@@ -54,14 +53,3 @@ router2.get("/files",function(request,response){
 		}
 	});*/
 });
-
-
-// router2.get("/slids/:slidId", function (request, response) {
-// 	var id = request.params.slidId;
-// 	console.log(id);
-// 	SlidController.read(id, function (erreur, data) {
-// 		response.send(data);
-// 		console.log(data);
-// 		console.log(erreur);
-// 	}, request.query.json);
-// });

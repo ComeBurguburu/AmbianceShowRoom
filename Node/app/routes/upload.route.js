@@ -13,7 +13,6 @@ var fs = require("fs");
 var path = require("path");
 var router = express.Router();
 
-var utils = require("./../utils/utils.js");
 
 module.exports = router;
 
@@ -47,11 +46,9 @@ router.post("/file-upload", multerMiddleware.single("file"), function (request, 
 
 		request.file.destination = "Public/videos";
 		destination = request.file.destination;
-		// console.log(destination);
 
 		request.file.path = 'tmp/' + filename;;
 		_path = request.file.path;
-		// console.log(_path);
 
 		CurrentFolder = 'Public/videos';
 		target_path = 'Public/videos/' + originalname;
@@ -62,11 +59,9 @@ router.post("/file-upload", multerMiddleware.single("file"), function (request, 
 
 		request.file.destination = "Public/images";
 		destination = request.file.destination;
-		// console.log(destination);
 
 		request.file.path = 'tmp/' + filename;;
 		_path = request.file.path;
-		// console.log(_path);
 
 		CurrentFolder = 'Public/images';
 		target_path = 'Public/images/' + originalname;
