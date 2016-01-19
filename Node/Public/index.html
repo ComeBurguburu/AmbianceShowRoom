@@ -97,7 +97,7 @@
                 <hr/>
 
                 <!-- Liste d'écran pour gros écran -->
-                {{me===undefined}} {{me}}
+               
                 <div ng-show="isGrid==false">
                     <div class="hidden-xs">
                         <div class="row">
@@ -260,7 +260,6 @@
                                             <select ng-model="selectedScreen" ng-change="updateGrid(i,j,selectedScreen)">
                                                 <option ng-repeat="k in list" ng-if="k.id!=me2" value="{{k.id}}"> {{k.id}}</option>
                                             </select>
-                                            {{me}}
                                         </div>
                                     </div>
                                 </div>
