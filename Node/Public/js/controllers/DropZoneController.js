@@ -227,7 +227,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
         $scope.currentScreen = {};
         $scope.currentScreen.id = 0;
         if ($scope.currentScreen.id == $scope.me) {
-            $scope.currentScreen.id++;
+            $scope.currentScreen.id=1;
         }
 
     }
@@ -238,19 +238,22 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
         var nextScreenId = $scope.currentScreen.id + 1;
         if (nextScreenId == list[list.length - 1].id && nextScreenId == me) {
-
-            $scope.currentScreen.id = 0;
+            console.log("cas 1");
+            $scope.currentScreen.id = list[0].id;
         } else if (nextScreenId == me) {
+            console.log("cas 2");
             $scope.currentScreen.id = $scope.currentScreen.id + 2;
         } else if ($scope.currentScreen.id == list[list.length - 1].id) {
-
+            console.log("cas 3");
             if (list[0].id == me) {
-                $scope.currentScreen.id = 1;
+                $scope.currentScreen.id = list[1].id;
             } else {
-                $scope.currentScreen.id = 0;
+                $scope.currentScreen.id = list[0].id;
             }
         } else {
-
+            console.log("cas 4");
+            console.log($scope.currentScreen);
+            console.log(list);
             $scope.currentScreen.id++;
         }
 

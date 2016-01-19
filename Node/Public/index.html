@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <ul>
                                 <li>
-                                    <input class="form-control" type="checkbox" ng-model="isGrid" ng-init="isGrid=true" style="width:20px;height:20px;" />
+                                    <input class="form-control" type="checkbox" ng-model="isGrid" ng-init="isGrid=false" style="width:20px;height:20px;" />
                                 </li>
                                 <ul>
                         </div>
@@ -179,7 +179,7 @@
                     <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3> {{initialiseMe(me)}}
                     <div ng-repeat="i in list">
 
-                        <div ng-show="i.id == currentScreen.id" ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
+                        <div ng-show="i.id == list[currentScreen.id].id" ng-drop="true" ng-drop-success="onDropComplete1($data,$event,i)">
 
                             <h3>Ecran {{i.id}}</h3>
                             <ul ng-drag="true" ng-drag-data="droppedObjects1[i.id]" ng-center-anchor="{{centerAnchor}}">
