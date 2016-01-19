@@ -1,9 +1,12 @@
 package comeb.com.ambiance;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -24,7 +27,7 @@ import io.socket.emitter.Emitter;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tv;
-    private final String mURL = "http://ambiance.herokuapp.com/";
+    public static final String mURL = "http://ambiance.herokuapp.com/";
     private io.socket.client.Socket mSocket;
     private ImageView viewimage;
     private String url;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private String src;
     private String warning;
     private TextView text_error;
+    private boolean isPlay=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         idview = (TextView) findViewById(R.id.id);
         viewimage = (ImageView) findViewById(R.id.image);
         text_error = (TextView) findViewById(R.id.text_error);
+
+
         idview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,9 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             mSocket = IO.socket(mURL);
-            tv.setText("solved");
         } catch (URISyntaxException e) {
-            tv.setText("failed");
+
             throw new RuntimeException(e);
         }
 
@@ -139,8 +145,9 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     url = (String) obj.get("url");
                     type = (String) obj.get("type");
-                    if (obj.has("video")) {
+                    if (obj.has("video")&& !obj.isNull("video")) {
                         JSONObject video = (JSONObject) obj.get("video");
+
                         if (video.has("src")) {
                             src = video.get("src").toString();
 
@@ -157,12 +164,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         text_error.setVisibility(View.GONE);
-                        tv.setText(message);
+                        //tv.setText(message);
                         if ("image".equals(type)) {
                             Picasso.with(getBaseContext()).load(url).into(viewimage);
                         }
                         if ("video".equals(type)) {
-                            Log.d("encode", src);
+//                            Log.d("encode", src);
+                            if(src.isEmpty()){
+                                return;
+                            }
                             Uri video = Uri.parse(src);
                             videoView.setVideoURI(video);
                             videoView.requestFocus();
@@ -187,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     info.put("width", "100");
                     info.put("height", "100");
-                    info.put("userAgent", "Mozilla/5.0 (Linux; Android 4.3; Nexus 4 Build/JWR66Y) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.82 Mobile Safari/537.36\n");
+                    info.put("userAgent", "Mozilla/5.0 (Linux; Android 5.1; Nexus 4 Build/JWR66Y) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.82 Mobile Safari/537.36\n");
                     info.put("row", -1);
                     info.put("col", -1);
                 } catch (Exception e) {
@@ -217,25 +227,10 @@ public class MainActivity extends AppCompatActivity {
         mSocket.on("EventError", onError);
 
     }
-    public String myEncodeURI(String str) {
-        StringBuffer ostr = new StringBuffer();
-        for(int i=0; i<str.length(); i++) {
-            char ch = str.charAt(i);
-            if ((ch >= 0x0020) && (ch <= 0x007e))
-                ostr.append(ch); // Pas besoin de convertir
-            else {
-                // conversion en HEX
-                String hex = Integer.toHexString(str.charAt(i) & 0xFFFF);
-                ostr.append("%"+hex.toUpperCase());
-            }
-        }
-        return ostr.toString();
-    }
 
     public void connect() {
         mSocket.connect();
         text_error.setVisibility(View.GONE);
-
     }
 
     @Override
@@ -245,9 +240,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume(){
+        super.onResume();
+        connect();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mSocket.emit("disconnect");
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                this.startActivity(new Intent(this,comeb.com.ambiance.MainActivity.class));
+                return true;
+            case R.id.action_admin:
+                this.startActivity(new Intent(this,comeb.com.ambiance.AdminActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+            // Comportement du bouton "A Propos"
+
+        }
     }
 
 }

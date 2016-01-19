@@ -20,6 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AdminActivity"
+            android:label="@string/admin"
+            android:theme="@style/AppTheme"
+           android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>

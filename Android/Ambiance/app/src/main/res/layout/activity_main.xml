@@ -17,7 +17,8 @@
         android:textSize="50dp"
         android:text="N"
         android:textColor="@color/white"
-        android:background="@color/cyan"/>
+        android:background="@color/cyan"
+        />
        <TextView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
@@ -34,9 +35,9 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/image"
-        android:src="@drawable/ic_action_name"/>
+        android:src="@drawable/ic_action_name" />
     <VideoView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/video"/>
+        android:id="@+id/video" />
    </LinearLayout>
