@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <ul>
                                 <li>
-                                    <input class="form-control" type="checkbox" ng-model="isGrid" ng-init="isGrid=false" style="width:20px;height:20px;" />
+                                    <input class="form-control" type="checkbox" ng-model="isGrid" ng-init="isGrid=true" style="width:20px;height:20px;" />
                                 </li>
                                 <ul>
                         </div>
@@ -97,15 +97,17 @@
                 <hr/>
 
                 <!-- Liste d'écran pour gros écran -->
-
+                {{me===undefined}} {{me}}
                 <div ng-show="isGrid==false">
                     <div class="hidden-xs">
                         <div class="row">
                             <div class="col-lg-3">
-                                <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans</h3>
+                                <h3 style="border:3px solid #456789;color:#456789">Liste d'écrans
+                                </h3>
                             </div>
                         </div>
                         <div id="scroll">
+                            
                             <div class="row">
                                 <div ng-repeat="i in list">
                                     <div class="col-sm-3" ng-show="i.id != me">
@@ -187,8 +189,8 @@
                                 <li> <img ng-src="{{ droppedObjects1[i.id].src }}" class="img-responsive" style="padding:1%"></li>
                             </ul>
                             <ul class="pager">
-                                <li class="previous btn btn-info" ng-click="previousScreen(list,me)">Previous</li>
-                                <li class="next btn btn btn-info" ng-click="nextScreen(list,me)">Next</li>
+                                <li class="previous btn btn-info" ng-click="previousScreen(list)">Previous</li>
+                                <li class="next btn btn btn-info" ng-click="nextScreen(list)">Next</li>
                             </ul>
 
                         </div>
@@ -256,8 +258,9 @@
                                     <div class="container row">
                                         <div class="col-xs-{{12/selectedColumn}}" ng-repeat="i in columnList">
                                             <select ng-model="selectedScreen" ng-change="updateGrid(i,j,selectedScreen)">
-                                                <option ng-repeat="k in list" ng-if="k.id!=me" value="{{k.id}}"> {{k.id}}</option>
+                                                <option ng-repeat="k in list" ng-if="k.id!=me2" value="{{k.id}}"> {{k.id}}</option>
                                             </select>
+                                            {{me}}
                                         </div>
                                     </div>
                                 </div>

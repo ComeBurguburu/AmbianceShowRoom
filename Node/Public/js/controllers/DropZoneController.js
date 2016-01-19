@@ -2,7 +2,7 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
     $scope.centerAnchor = true;
     $scope.imageSelected = false;
-    $scope.me = null
+     $scope.me2 = "null"
     $scope.toggleCenterAnchor = function () {
         $scope.centerAnchor = !$scope.centerAnchor
     }
@@ -220,13 +220,14 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
     }
 
     $scope.initialiseMe = function (me) {
-        $scope.me = me;
+        console.log("Fonction me");
+        $scope.me2 = me;
     }
     $scope.initialise = function () {
 
         $scope.currentScreen = {};
         $scope.currentScreen.id = 0;
-        if ($scope.currentScreen.id == $scope.me) {
+        if ($scope.currentScreen.id == $scope.me2) {
             $scope.currentScreen.id=1;
         }
 
@@ -234,18 +235,18 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
     $scope.initialise();
 
-    $scope.nextScreen = function (list, me) {
+    $scope.nextScreen = function (list) {
 
         var nextScreenId = $scope.currentScreen.id + 1;
-        if (nextScreenId == list[list.length - 1].id && nextScreenId == me) {
+        if (nextScreenId == list[list.length - 1].id && nextScreenId == $scope.me2) {
             console.log("cas 1");
             $scope.currentScreen.id = list[0].id;
-        } else if (nextScreenId == me) {
+        } else if (nextScreenId == $scope.me2) {
             console.log("cas 2");
             $scope.currentScreen.id = $scope.currentScreen.id + 2;
         } else if ($scope.currentScreen.id == list[list.length - 1].id) {
             console.log("cas 3");
-            if (list[0].id == me) {
+            if (list[0].id == $scope.me2) {
                 $scope.currentScreen.id = list[1].id;
             } else {
                 $scope.currentScreen.id = list[0].id;
@@ -259,15 +260,15 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
 
     }
 
-    $scope.previousScreen = function (list, me) {
+    $scope.previousScreen = function (list) {
 
         var beforeScreenId = $scope.currentScreen.id - 1;
-        if (beforeScreenId == 0 && beforeScreenId == me) {
+        if (beforeScreenId == 0 && beforeScreenId == $scope.me2) {
             $scope.currentScreen.id = list[list.length - 1].id;
-        } else if (beforeScreenId == me) {
+        } else if (beforeScreenId == $scope.me2) {
             $scope.currentScreen.id = $scope.currentScreen.id - 2;
         } else if ($scope.currentScreen.id == list[0].id) {
-            if (list[list.length - 1].id == me) {
+            if (list[list.length - 1].id == $scope.me2) {
                 $scope.currentScreen.id = list[list.length - 2].id;
             } else {
                 $scope.currentScreen.id = list[list.length - 1].id;
