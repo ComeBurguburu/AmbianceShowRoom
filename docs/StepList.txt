@@ -1,0 +1,10 @@
+Step 1 : identifier + lister des watchers
+Step 2 : transférer une image sur le watcher de notre choix
+Step 3 : Diffuser une image découpée sur plusieurs écrans
+Step 4 : Configurer la grille des écrans depuis l'administrateur
+Step 5 : Pouvoir transmettre des flux facebook et Twitter
+Step 6 : Pouvoir transférer une vidéo
+Step 7 : Découper une vidéo
+Step 8 : Synchroniser la lecture d'une vidéo
+Step 9 : Avoir une version plateforme mobile
+Step 10 : Pouvoir supprimer des watchers depuis l'admin
