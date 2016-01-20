@@ -1,10 +1,7 @@
 package comeb.com.ambiance;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -25,30 +23,35 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import io.socket.client.IO;
+import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
 /**
  * Created by côme on 19/01/2016.
  */
-public class AdminActivity extends AppCompatActivity implements Communication,AdapterView.OnItemSelectedListener {
-    private ArrayList<String> list;
+public class AdminActivity extends TemplateActivity implements Communication,AdapterView.OnItemSelectedListener {
+    private ArrayList<Model> list;
     private ImageView image;
     private int index=0;
-    private io.socket.client.Socket mSocket;
+    private Socket mSocket;
     private ArrayList<String> watchers;
     private ArrayAdapter<String> dataAdapter;
-    private boolean isPlay=false;
+    private boolean isPlay=true;
+    private TextView legend;
+    private TextView idview;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_layout);
-        list=new ArrayList<String>();
-        new Sync(this,this,list).execute();
+        list=new ArrayList<Model>();
+        new Sync(this,list).execute();
         Button prev = (Button)findViewById(R.id.prev);
         Button next = (Button)findViewById(R.id.next);
         image = (ImageView)findViewById(R.id.imageslide);
+        legend =(TextView)findViewById(R.id.legend);
+        idview = (TextView)findViewById(R.id.id);
 
         ImageButton play = (ImageButton)findViewById(R.id.play);
 
@@ -90,7 +93,22 @@ public class AdminActivity extends AppCompatActivity implements Communication,Ad
                 });
             }
         };
+        Emitter.Listener onId = new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                Log.d("ide", args[0].toString());
 
+                final String id = args[0].toString();
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        idview.setText(id);
+                    }
+                });
+            }
+        };
 
         Emitter.Listener onList = new Emitter.Listener() {
             @Override
@@ -122,14 +140,18 @@ public class AdminActivity extends AppCompatActivity implements Communication,Ad
             throw new RuntimeException(e);
         }
         mSocket.connect();
-        mSocket.on("connexion",onConnection);
+        mSocket.on("connexion", onConnection);
         mSocket.on("list",onList);
+        mSocket.on("identification",onId);
         
         prev.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 index--;
+                if(index==-1){
+                    index=list.size();
+                }
                 image(index);
             }
         });
@@ -150,7 +172,7 @@ public class AdminActivity extends AppCompatActivity implements Communication,Ad
         spinner.setOnItemSelectedListener(this);
 
         // Spinner Drop down elements
-        String watch[]={"0","1","2","3","4"};
+        String watch[]={"0","1","2","3","4","5","6","7","8","9","10"};
         watchers = new ArrayList(Arrays.asList(watch));
         // Creating adapter for spinner
         dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, watchers);
@@ -161,28 +183,7 @@ public class AdminActivity extends AppCompatActivity implements Communication,Ad
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                this.startActivity(new Intent(this,comeb.com.ambiance.MainActivity.class));
-                return true;
-            case R.id.action_admin:
-                this.startActivity(new Intent(this,comeb.com.ambiance.AdminActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-
-            // Comportement du bouton "A Propos"
-
-        }
-    }
 
     @Override
     public void show(String s) {
@@ -191,26 +192,23 @@ public class AdminActivity extends AppCompatActivity implements Communication,Ad
 
     @Override
     public void image(int index) {
-        Picasso.with(getBaseContext()).load(list.get(index%list.size())).into(image);
+        Model m =list.get(index % list.size());
+        Picasso.with(getBaseContext()).load(m.getImageSrc()).into(image);
+        legend.setText(m.getId());
     }
-    public String getCurrentImage(){
-        return list.get(index%list.size());
+    public JSONObject getCurrentObject(){
+        return list.get(index%list.size()).getObject();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        choose(i);
+        if(list.size()!=0){choose(i);}
     }
     private void choose(int i){
-        JSONObject json=new JSONObject();
+        JSONObject json= getCurrentObject();
+
         try {
             json.put("id", watchers.get(i));
-            json.put("url", getCurrentImage());
-            json.put("isGrid", false);
-            json.put("col", 0);
-            json.put("row", 0);
-            json.put("type", "image");
-            json.put("isPlay", false);
             mSocket.emit("image",json);
         }catch(Exception e){
             e.printStackTrace();

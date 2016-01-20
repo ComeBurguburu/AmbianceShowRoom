@@ -1,12 +1,8 @@
 package comeb.com.ambiance;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -24,9 +20,9 @@ import java.net.URISyntaxException;
 import io.socket.client.IO;
 import io.socket.emitter.Emitter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends TemplateActivity {
 
-    private TextView tv;
+
     public static final String mURL = "http://ambiance.herokuapp.com/";
     private io.socket.client.Socket mSocket;
     private ImageView viewimage;
@@ -42,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.watcher_layout);
 
-        tv = (TextView) findViewById(R.id.tv);
+        //tv = (TextView) findViewById(R.id.tv);
         idview = (TextView) findViewById(R.id.id);
         viewimage = (ImageView) findViewById(R.id.image);
         text_error = (TextView) findViewById(R.id.text_error);
@@ -75,10 +71,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void call(Object... args) {
                 Log.d("ide", args[0].toString());
-
                 final String id = args[0].toString();
-
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -145,10 +138,10 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     url = (String) obj.get("url");
                     type = (String) obj.get("type");
-                    if (obj.has("video")&& !obj.isNull("video")) {
+                    if (obj.has("video") && obj.get("type").toString().equals("video")) {
                         JSONObject video = (JSONObject) obj.get("video");
 
-                        if (video.has("src")) {
+                        if (video!=null && video.has("src")) {
                             src = video.get("src").toString();
 
                         } else {
@@ -229,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void connect() {
+        idview.setText("");
         mSocket.connect();
         text_error.setVisibility(View.GONE);
     }
@@ -249,28 +243,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mSocket.emit("disconnect");
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                this.startActivity(new Intent(this,comeb.com.ambiance.MainActivity.class));
-                return true;
-            case R.id.action_admin:
-                this.startActivity(new Intent(this,comeb.com.ambiance.AdminActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-
-            // Comportement du bouton "A Propos"
-
-        }
     }
 
 }

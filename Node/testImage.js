@@ -15,7 +15,8 @@ var screen = [
         col: 1,
         width: 10,
         height: 10
-    }, {
+    }
+	/*, {
         id: 3,
         row: 1,
         col: 0,
@@ -27,10 +28,10 @@ var screen = [
         col: 1,
         width: 10,
         height: 10
-    }
+    }*/
 ]
 
-var nbrligne = 2,
+var nbrligne = 1,
     nbrcolonne = 2;
 
 var obj = {
@@ -40,4 +41,4 @@ var obj = {
 
 var rep = image.sendImgDispositionProperties(screen, nbrligne, nbrcolonne, obj);
 console.log(rep);
-console.log(JSON.stringify(rep))
+//console.log(JSON.stringify(rep))
