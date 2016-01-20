@@ -239,21 +239,21 @@
                         <form>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <h3>Sélectionner le nombre de lignes:</h3>
+                                    <h3 style="border:3px solid #456789;color:#456789;">Sélectionnez le nombre de lignes:</h3>
                                     <select ng-model="selectedLine" ng-change="updateLine(selectedLine)">
                                         <option ng-repeat="k in possibilityLine" value="{{k}}">{{k}}</option>
                                     </select>
                                 </div>
                                 <div class="col-xs-6">
-                                    <h3>Sélectionner le nombre de colonnes:</h3>
+                                    <h3 style="border:3px solid #456789;color:#456789;">Sélectionnez le nombre de colonnes:</h3>
                                     <select ng-model="selectedColumn" ng-change="updateColumn(selectedColumn)">
                                         <option ng-repeat="m in possibilityColumn" value="{{m}}">{{m}}</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <h3>Sélectionner le numéro de vos watcher</h3>
-                            <div>
+                            <h3 style="border:3px solid #456789;color:#456789;">Sélectionnez le numéro de vos watchers</h3>
+                            <div></br>
                                 <div ng-repeat="j in lineList">
                                     <div class="container row">
                                         <div class="col-xs-{{12/selectedColumn}}" ng-repeat="i in columnList">
@@ -263,7 +263,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div></br>
                             <input class="btn btn-info" type="submit" ng-click="submitData()"></input>
                         </form>
                     </div>
