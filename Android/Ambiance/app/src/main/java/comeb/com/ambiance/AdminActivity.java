@@ -1,6 +1,7 @@
 package comeb.com.ambiance;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +30,7 @@ import io.socket.emitter.Emitter;
 /**
  * Created by côme on 19/01/2016.
  */
-public class AdminActivity extends TemplateActivity implements Communication,AdapterView.OnItemSelectedListener {
+public class AdminActivity extends AppCompatActivity implements Communication,AdapterView.OnItemSelectedListener {
     private ArrayList<Model> list;
     private ImageView image;
     private int index=0;
@@ -135,7 +136,7 @@ public class AdminActivity extends TemplateActivity implements Communication,Ada
         };
 
         try {
-            mSocket = IO.socket(MainActivity.mURL);
+            mSocket = IO.socket(WatcherActivity.mURL);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -184,10 +185,9 @@ public class AdminActivity extends TemplateActivity implements Communication,Ada
         spinner.setAdapter(dataAdapter);
     }
 
-
     @Override
-    public void show(String s) {
-        //text.setText(s);
+    public void show(String error) {
+
     }
 
     @Override
@@ -208,11 +208,14 @@ public class AdminActivity extends TemplateActivity implements Communication,Ada
         JSONObject json= getCurrentObject();
 
         try {
-            json.put("id", watchers.get(i));
+            json.put("id",i);
+            json.put("url",json.get("src"));
             mSocket.emit("image",json);
+            Log.d("emit",json.toString());
         }catch(Exception e){
             e.printStackTrace();
         }
+
 
     }
     private void play(){

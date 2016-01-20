@@ -21,8 +21,8 @@ public class Sync extends AsyncTask<String, Integer, String> {
 
 
     private final String mURL_files = "http://ambiance.herokuapp.com/files";
-    private Communication MyInterface;
     private ArrayList<Model> list;
+    Communication MyInterface;
 
     public Sync(Communication c, ArrayList<Model> list) {
         super();

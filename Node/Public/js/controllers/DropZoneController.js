@@ -220,7 +220,6 @@ angular.module('App').controller('dropzoneController', ['$scope', 'sockserv', '$
     }
 
     $scope.initialiseMe = function (me) {
-        console.log("Fonction me");
         $scope.me2 = me;
     }
     $scope.initialise = function () {

@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
-    tools:context="comeb.com.ambiance.MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_gravity="center"
-        android:id="@+id/id"
-        android:textSize="50dp"
-        android:text="N"
-        android:textColor="@color/white"
-        android:background="@color/cyan"
-        />
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:id="@+id/tv"
-           android:text="tttt"
-           />
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/text_error"
-        android:visibility="gone"
-        />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/image"
-        android:src="@drawable/ic_action_name" />
-    <VideoView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/video" />
-   </LinearLayout>
+        android:orientation="vertical"
+        android:id="@+id/admin">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_vader"
+            android:layout_weight="1"/>
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/admin"
+            android:textSize="40sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:id="@+id/watcher">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@mipmap/ic_clone"
+                />
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/watcher"
+                android:textSize="40sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
